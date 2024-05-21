@@ -1,0 +1,132 @@
+/* Styling for the donation page */
+.donation-page {
+  background: #f4f6f9;
+  color: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  padding: 40px 20px;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.main-title {
+  text-align: center;
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  color: #333;
+}
+
+.intro-text {
+  margin-bottom: 40px;
+  text-align: center;
+  font-size: 18px;
+  line-height: 1.6;
+  color: #555;
+}
+
+.continue-button {
+  margin-top: 30px;
+  background-color: #0069d9;
+  color: #fff;
+  border: none;
+  padding: 14px 28px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: 600;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.continue-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.donation-amount button {
+  margin-right: 10px;
+  background-color: #0069d9;
+  color: #fff;
+  border: none;
+  padding: 14px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 18px;
+  transition: background-color 0.3s, transform 0.3s;
+  margin-top: 20px;
+}
+
+.donation-amount button.selected {
+  outline: 2px solid #333;
+}
+
+.donation-amount button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.donation-amount button:active {
+  background-color: #004494;
+}
+
+.white-tableau {
+  background-color: #fff;
+  padding: 50px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+}
+
+.white-tableau h2 {
+  margin-bottom: 25px;
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+}
+
+.select-container {
+  position: relative;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.select-container select {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+}
+
+.error-message {
+  color: red;
+  margin-top: 15px;
+  font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .white-tableau {
+    padding: 30px;
+  }
+
+  .main-title {
+    font-size: 28px;
+  }
+
+  .intro-text {
+    font-size: 16px;
+  }
+
+  .donation-amount button {
+    padding: 12px 16px;
+    font-size: 16px;
+  }
+}
