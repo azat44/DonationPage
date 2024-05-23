@@ -22,7 +22,7 @@ function DonationPage() {
     const value = event.target.value;
     if (/^\d*$/.test(value) && value.length <= 25) { // Added character limit
       setCustomAmount(value);
-      setSelectedAmount('Other');
+      setSelectedAmount('General Support');
     }
   };
 
@@ -36,7 +36,7 @@ function DonationPage() {
 
   const handleContinue = () => {
     if ((selectedAmount === null || selectedCause === '') ||
-        (selectedAmount === 'Other' && customAmount === '')) {
+        (selectedAmount === 'General Support' && customAmount === '')) {
       setErrorMessage('Please select a cause and a donation amount.');
     } else {
       console.log(`Continue with a donation of $${selectedAmount === 'General Support' ? customAmount : selectedAmount} for the cause: ${selectedCause}`);
@@ -57,7 +57,7 @@ function DonationPage() {
 
       {isPaymentStep ? (
         <DonationForm
-          amount={selectedAmount === 'Other' ? customAmount : selectedAmount}
+          amount={selectedAmount === 'General Support' ? customAmount : selectedAmount}
           cause={selectedCause}
           isMonthly={isMonthly}
           onSubmit={handleSubmit}
@@ -86,7 +86,7 @@ function DonationPage() {
                 <option value="Women Economic Empowerment">Women Economic Empowerment</option>
                 <option value="Refugee Women Empowerment">Refugee Women Empowerment</option>
                 <option value="Digital Literacy">Digital Literacy</option>
-                <option value="Other">Other</option>
+                <option value="General Support">General Support</option>
               </select>
             </div>
             <div className="donation-amount">
@@ -104,7 +104,7 @@ function DonationPage() {
                 onClick={() => handleSelectAmount('General Support')}
                 className={selectedAmount === 'General Support' ? "selected" : ""}
               >
-                Other
+                General Support
                 {selectedAmount === 'General Support' && (
                   <input
                     type="text"
