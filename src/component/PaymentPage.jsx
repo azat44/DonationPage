@@ -16,8 +16,8 @@ function PaymentPage() {
   return (
     <div className="payment-page">
       <div className="payment-container">
-        <h1>Donate to Arev Society Today!</h1>
-        <p>Transforming lives by giving hope, guidance, and empowerment to woman in need.</p>
+        <h1>Donate to Charity today!</h1>
+        <p>Transforming lives by giving hope, guidance, and empowerment to needy people.</p>
         
         <div className="payment-details">
           <h2>Payment Details</h2>

@@ -1,4 +1,3 @@
-/* Styling for the donation page */
 .donation-page {
   background: #f4f6f9;
   color: #1a1a1a;
@@ -46,8 +45,15 @@
   transform: translateY(-2px);
 }
 
+.donation-amount {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
 .donation-amount button {
-  margin-right: 10px;
   background-color: #0069d9;
   color: #fff;
   border: none;
@@ -56,7 +62,7 @@
   border-radius: 5px;
   font-size: 18px;
   transition: background-color 0.3s, transform 0.3s;
-  margin-top: 20px;
+  position: relative;
 }
 
 .donation-amount button.selected {
@@ -70,6 +76,25 @@
 
 .donation-amount button:active {
   background-color: #004494;
+}
+
+.custom-amount-input {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  text-align: center;
+  -moz-appearance: textfield;
+}
+
+.custom-amount-input::-webkit-outer-spin-button,
+.custom-amount-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .white-tableau {
@@ -105,6 +130,37 @@
   cursor: pointer;
 }
 
+.donation-type {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.donation-type button {
+  flex: 1;
+  padding: 12px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  background: #f0f0f0;
+  text-align: center;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.donation-type button:not(:last-child) {
+  margin-right: 10px;
+}
+
+.donation-type button.selected {
+  background-color: #007bff;
+  color: white;
+}
+
+.donation-type button:hover {
+  background-color: #007bff;
+  color: white;
+}
+
 .error-message {
   color: red;
   margin-top: 15px;
@@ -128,5 +184,10 @@
   .donation-amount button {
     padding: 12px 16px;
     font-size: 16px;
+  }
+
+  .custom-amount-input {
+    width: 60px;
+    padding: 4px;
   }
 }

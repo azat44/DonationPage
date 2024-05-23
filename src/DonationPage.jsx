@@ -7,23 +7,39 @@ import './App.css';
 function DonationPage() {
   const navigate = useNavigate();
   const [selectedAmount, setSelectedAmount] = useState(null);
+  const [customAmount, setCustomAmount] = useState('');
   const [selectedCause, setSelectedCause] = useState('');
+  const [isMonthly, setIsMonthly] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [isPaymentStep, setIsPaymentStep] = useState(false);
 
   const handleSelectAmount = (amount) => {
-    setSelectedAmount(amount);  
+    setSelectedAmount(amount);
+    setCustomAmount(''); // Clear custom amount if a predefined amount is selected
+  };
+
+  const handleCustomAmountChange = (event) => {
+    const value = event.target.value;
+    if (/^\d*$/.test(value)) {
+      setCustomAmount(value);
+      setSelectedAmount('Other');
+    }
   };
 
   const handleSelectCause = (event) => {
     setSelectedCause(event.target.value);
   };
 
+  const handleToggleDonationType = (type) => {
+    setIsMonthly(type === 'monthly');
+  };
+
   const handleContinue = () => {
-    if (selectedAmount === null || selectedCause === '') {
+    if ((selectedAmount === null || selectedCause === '') ||
+        (selectedAmount === 'Other' && customAmount === '')) {
       setErrorMessage('Veuillez sélectionner un montant de don et une cause.');
     } else {
-      console.log(`Continuer avec un don de $${selectedAmount} pour la cause suivante: ${selectedCause}`);
+      console.log(`Continuer avec un don de $${selectedAmount === 'Other' ? customAmount : selectedAmount} pour la cause suivante: ${selectedCause}`);
       setErrorMessage('');
       setIsPaymentStep(true);
     }
@@ -31,8 +47,7 @@ function DonationPage() {
 
   const handleSubmit = (formData) => {
     console.log(formData);
-    // Vous pouvez effectuer d'autres opérations ici, comme enregistrer les données dans une base de données
-    navigate('/payment', { state: { amount: selectedAmount, cause: selectedCause } });
+    navigate('/payment', { state: { amount: selectedAmount === 'Other' ? customAmount : selectedAmount, cause: selectedCause, isMonthly } });
   };
 
   return (
@@ -41,27 +56,41 @@ function DonationPage() {
 
       {isPaymentStep ? (
         <DonationForm
-          amount={selectedAmount}
+          amount={selectedAmount === 'Other' ? customAmount : selectedAmount}
           cause={selectedCause}
+          isMonthly={isMonthly}
           onSubmit={handleSubmit}
         />
       ) : (
         <>
           <div className='white-tableau'>
             <h2>Choose Your Gift</h2>
+            <div className="donation-type">
+              <button 
+                className={!isMonthly ? "selected" : ""} 
+                onClick={() => handleToggleDonationType('once')}
+              >
+                Give Once
+              </button>
+              <button 
+                className={isMonthly ? "selected" : ""} 
+                onClick={() => handleToggleDonationType('monthly')}
+              >
+                Give Monthly
+              </button>
+            </div>
             <div className="select-container">
               <select id="cause" value={selectedCause} onChange={handleSelectCause}>
                 <option value="" disabled>Select a cause</option>
-                <option value="Artsakh">Artsakh</option>
+                <option value="Women Economic Empowerment">Women Economic Empowerment</option>
                 <option value="GTech">GTech</option>
-                <option value="Educating Programs">Educating Programs</option>
-                <option value="Healthcare Programs">Healthcare Programs</option>
-                <option value="Where the need is greatest">Where the need is greatest</option>
+                <option value="Refugee Women Empowerment">Refugee Women Empowerment</option>
+                <option value="Digital Literacy ">Digital Literacy </option>
                 <option value="Other">Other</option>
               </select>
             </div>
             <div className="donation-amount">
-              {[10, 25, 50, 75, 100].map(value => (
+              {[25, 50, 75, 100, 200].map(value => (
                 <button
                   key={value}
                   onClick={() => handleSelectAmount(value)}
@@ -70,11 +99,27 @@ function DonationPage() {
                   ${value}
                 </button>
               ))}
+              <button
+                key="other"
+                onClick={() => handleSelectAmount('Other')}
+                className={selectedAmount === 'Other' ? "selected" : ""}
+              >
+                Other
+                {selectedAmount === 'Other' && (
+                  <input
+                    type="text"
+                    value={customAmount}
+                    onChange={handleCustomAmountChange}
+                    className="custom-amount-input"
+                    placeholder="Enter amount"
+                  />
+                )}
+              </button>
             </div>
             {errorMessage && <div className="error-message">{errorMessage}</div>}
           </div>
           <button onClick={handleContinue} className="continue-button">
-            Continue {selectedAmount !== null ? `$${selectedAmount}` : ''}
+            Continue {selectedAmount !== null ? `$${selectedAmount === 'Other' ? customAmount : selectedAmount}` : ''}
           </button>
         </>
       )}
