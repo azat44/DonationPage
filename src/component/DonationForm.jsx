@@ -56,7 +56,7 @@ function DonationForm({ amount, cause, isMonthly, onSubmit }) {
 
   return (
     <div className="donation-form">
-      <h1>Billing Information (test)</h1>
+      <h1>Billing Information</h1>
       <p>Don’t enter your real name and card information</p>
       <form onSubmit={handleSubmit}>
         <div className="input-group">

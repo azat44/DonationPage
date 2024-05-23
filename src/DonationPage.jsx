@@ -39,7 +39,7 @@ function DonationPage() {
         (selectedAmount === 'Other' && customAmount === '')) {
       setErrorMessage('Please select a cause and a donation amount.');
     } else {
-      console.log(`Continue with a donation of $${selectedAmount === 'Other' ? customAmount : selectedAmount} for the cause: ${selectedCause}`);
+      console.log(`Continue with a donation of $${selectedAmount === 'General Support' ? customAmount : selectedAmount} for the cause: ${selectedCause}`);
       setErrorMessage('');
       setIsPaymentStep(true);
     }
@@ -47,7 +47,7 @@ function DonationPage() {
 
   const handleSubmit = (formData) => {
     console.log(formData);
-    navigate('/payment', { state: { amount: selectedAmount === 'Other' ? customAmount : selectedAmount, cause: selectedCause, isMonthly } });
+    navigate('/payment', { state: { amount: selectedAmount === 'General Support' ? customAmount : selectedAmount, cause: selectedCause, isMonthly } });
   };
 
   return (
@@ -100,12 +100,12 @@ function DonationPage() {
                 </button>
               ))}
               <button
-                key="other"
-                onClick={() => handleSelectAmount('Other')}
-                className={selectedAmount === 'Other' ? "selected" : ""}
+                key="general support"
+                onClick={() => handleSelectAmount('General Support')}
+                className={selectedAmount === 'General Support' ? "selected" : ""}
               >
                 Other
-                {selectedAmount === 'Other' && (
+                {selectedAmount === 'General Support' && (
                   <input
                     type="text"
                     value={customAmount}
@@ -119,7 +119,7 @@ function DonationPage() {
             {errorMessage && <div className="error-message">{errorMessage}</div>}
           </div>
           <button onClick={handleContinue} className="continue-button">
-            Continue {selectedAmount !== null ? `$${selectedAmount === 'Other' ? customAmount : selectedAmount}` : ''}
+            Continue {selectedAmount !== null ? `$${selectedAmount === 'General Support' ? customAmount : selectedAmount}` : ''}
           </button>
         </>
       )}
