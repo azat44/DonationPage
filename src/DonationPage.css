@@ -20,11 +20,11 @@
 }
 
 .intro-text {
+  color: red; /* Set the text color to red */
   margin-bottom: 40px;
   text-align: center;
   font-size: 18px;
   line-height: 1.6;
-  color: #555;
 }
 
 .continue-button {
