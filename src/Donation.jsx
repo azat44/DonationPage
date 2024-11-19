@@ -16,7 +16,7 @@ const Donation = () => {
   };
 
   const handleCustomAmountChange = (e) => {
-    const amount = e.target.value.replace(/[^\d]/g, ""); // Empêcher la saisie de lettres
+    const amount = e.target.value.replace(/[^\d]/g, "");
     setSelectedAmount(amount);
   };
 
@@ -47,7 +47,7 @@ const Donation = () => {
           </p>
         </div>
         <div className="donation-form">
-          <h3 className="secure-title">Secure donation</h3>
+        <h3 className="secure-title">Secure donation</h3>
 
           <div className="donation-tabs">
             <button
@@ -77,7 +77,9 @@ const Donation = () => {
               </button>
             ))}
             <div className="donation-custom-amount-container">
+              
               <span className="currency-symbol">{currency === "USD" ? "$" : currency === "GBP" ? "£" : "€"}</span>
+              
               <input
                 type="text"
                 className="donation-custom-amount"
@@ -85,7 +87,7 @@ const Donation = () => {
                 value={selectedAmount}
                 onChange={handleCustomAmountChange}
               />
-                          <select
+              <select
               className="currency-select"
               value={currency}
               onChange={handleCurrencyChange}
