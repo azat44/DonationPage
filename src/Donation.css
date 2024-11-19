@@ -189,3 +189,26 @@ body {
   background: #0056b3;
   transform: scale(1.0);
 }
+
+.donation-custom-amount-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  grid-column: span 3;
+}
+
+.currency-symbol {
+  position: absolute;
+  left: 10px;
+  font-size: 1rem;
+  color: gray;
+}
+
+.donation-custom-amount {
+  width: 100%;
+  padding: 10px 10px 10px 30px; 
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  font-size: 1rem;
+  color: black;
+}
