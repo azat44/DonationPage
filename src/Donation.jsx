@@ -1,24 +1,50 @@
 import React, { useState } from "react";
 import "./Donation.css";
+import { GrSecure } from "react-icons/gr";
 
 const Donation = () => {
   const [isMonthly, setIsMonthly] = useState(false);
-  const [selectedAmount, setSelectedAmount] = useState("75");
+  const [selectedAmount, setSelectedAmount] = useState(75); 
   const [currency, setCurrency] = useState("EUR");
 
-  const handleTabClick = (isMonthlyDonation) => {
-    setIsMonthly(isMonthlyDonation);
+  const conversionRates = {
+    USD: 1.1, 
+    GBP: 0.85, 
+    EUR: 1, 
+  };
+
+  const minimumAmounts = {
+    USD: 5,
+    GBP: 5,
+    EUR: 5,
+  };
+
+  const donationOptions = [400, 200, 120, 75, 55, 35];
+
+
+  const getRoundedAmount = (amount, currency) => {
+    const converted = amount * conversionRates[currency];
+    if (currency === "USD") return Math.round(converted / 5) * 5; 
+    if (currency === "GBP") return Math.round(converted / 5) * 5; 
+    return Math.round(converted); 
   };
 
   const handleCurrencyChange = (e) => {
     const newCurrency = e.target.value;
+    const convertedAmount = getRoundedAmount(
+      selectedAmount / conversionRates[currency],
+      newCurrency
+    ); 
     setCurrency(newCurrency);
+    setSelectedAmount(convertedAmount);
   };
 
   const handleCustomAmountChange = (e) => {
-    const amount = e.target.value.replace(/[^\d]/g, "");
+    const amount = parseInt(e.target.value.replace(/[^\d]/g, ""), 10) || 0;
     setSelectedAmount(amount);
   };
+
+  const isValidAmount = selectedAmount >= minimumAmounts[currency];
 
   return (
     <div className="donation-page">
@@ -47,59 +73,86 @@ const Donation = () => {
           </p>
         </div>
         <div className="donation-form">
-        <h3 className="secure-title">Secure donation</h3>
+          <div className="secure-title-container">
+            <GrSecure className="secure-icon" />
+            <h3 className="secure-title">Secure donation</h3>
+          </div>
 
           <div className="donation-tabs">
             <button
               className={`donation-tab ${!isMonthly ? "active" : ""}`}
-              onClick={() => handleTabClick(false)}
+              onClick={() => setIsMonthly(false)}
             >
               Give once
             </button>
             <button
               className={`donation-tab ${isMonthly ? "active" : ""}`}
-              onClick={() => handleTabClick(true)}
+              onClick={() => setIsMonthly(true)}
             >
               Monthly
             </button>
           </div>
 
           <div className="donation-options">
-            {["400", "200", "120", "75", "55", "35"].map((amount) => (
+            {donationOptions.map((amount) => (
               <button
                 key={amount}
                 className={`donation-option ${
-                  selectedAmount === amount ? "selected" : ""
+                  selectedAmount === getRoundedAmount(amount, currency)
+                    ? "selected"
+                    : ""
                 }`}
-                onClick={() => setSelectedAmount(amount)}
+                onClick={() => setSelectedAmount(getRoundedAmount(amount, currency))}
               >
-                €{amount}
+                {currency === "USD"
+                  ? `$${getRoundedAmount(amount, "USD")}`
+                  : currency === "GBP"
+                  ? `£${getRoundedAmount(amount, "GBP")}`
+                  : `€${getRoundedAmount(amount, "EUR")}`}
               </button>
             ))}
             <div className="donation-custom-amount-container">
-              
-              <span className="currency-symbol">{currency === "USD" ? "$" : currency === "GBP" ? "£" : "€"}</span>
-              
+              <span className="currency-symbol">
+                {currency === "USD"
+                  ? "$"
+                  : currency === "GBP"
+                  ? "£"
+                  : "€"}
+              </span>
               <input
                 type="text"
-                className="donation-custom-amount"
+                className={`donation-custom-amount ${
+                  !isValidAmount ? "invalid" : ""
+                }`}
                 placeholder="Other amount"
-                value={selectedAmount}
+                value={selectedAmount || ""}
                 onChange={handleCustomAmountChange}
               />
               <select
-              className="currency-select"
-              value={currency}
-              onChange={handleCurrencyChange}
-            >
-              <option value="EUR">EUR</option>
-              <option value="USD">USD</option>
-              <option value="GBP">GBP</option>
-            </select>
+                className="currency-select"
+                value={currency}
+                onChange={handleCurrencyChange}
+              >
+                <option value="EUR">EUR</option>
+                <option value="USD">USD</option>
+                <option value="GBP">GBP</option>
+              </select>
             </div>
-
+            {!isValidAmount && (
+              <p className="error-message">
+                
+                The minimum donation amount is {currency === "USD"
+                  ? `$${minimumAmounts.USD}`
+                  : currency === "GBP"
+                  ? `£${minimumAmounts.GBP}`
+                  : `€${minimumAmounts.EUR}`}.
+              </p>
+            )}
           </div>
-          <button className="donate-button">
+          <button
+            className="donate-button"
+            disabled={!isValidAmount}
+          >
             {isMonthly ? "Donate Monthly" : "Donate Once"}
           </button>
         </div>

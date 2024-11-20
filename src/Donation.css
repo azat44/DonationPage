@@ -21,9 +21,10 @@ body {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   width: 1000px;
-  max-width: 90%; 
-  margin: auto; 
+  max-width: 90%;
+  margin: auto;
 }
+
 .donation-info {
   flex: 1;
   padding: 30px;
@@ -86,13 +87,14 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center; 
+  text-align: center;
 }
 
 .secure-title {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   margin-bottom: 20px;
   text-align: center;
+  color: blue;
 }
 
 .donation-tabs {
@@ -103,7 +105,7 @@ body {
 
 .donation-tab {
   flex: 1;
-  max-width: 100px;
+  max-width: 300px;
   padding: 10px;
   background: #f1f1f1;
   border: none;
@@ -113,7 +115,8 @@ body {
   border-radius: 5px;
   text-align: center;
   margin-right: 5px;
-  width:120px
+  width: 150px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .donation-tab:last-child {
@@ -121,8 +124,10 @@ body {
 }
 
 .donation-tab.active {
-  background: blue;
-  color: white;
+  background: rgba(0, 123, 255, 0.1);
+  border: 2px solid blue;
+  color: black;
+  font-weight: 600;
 }
 
 .donation-options {
@@ -140,17 +145,16 @@ body {
   justify-content: center;
   padding: 10px;
   background: white;
-  border: 1px solid lightgray;
+  border: 2px solid lightgray;
   cursor: pointer;
   text-align: center;
   border-radius: 5px;
   font-size: 1rem;
   color: black;
-}
-
-.donation-option,
-.donation-tab {
-  min-height: 50px; 
+  transition: all 0.2s ease;
+  min-width: 80px;
+  min-height: 50px;
+  box-sizing: border-box;
 }
 
 .donation-option.selected {
@@ -158,6 +162,11 @@ body {
   color: black;
   border: 2px solid blue;
   font-weight: bold;
+}
+
+.donation-option,
+.donation-tab {
+  min-height: 20px;
 }
 
 .donation-custom-amount-container {
@@ -182,6 +191,7 @@ body {
   border-radius: 5px;
   font-size: 1rem;
   color: black;
+  transition: border-color 0.5s ease, box-shadow 0.2s ease;
 }
 
 .currency-select {
@@ -191,6 +201,20 @@ body {
   background: #fff;
   font-size: 1rem;
   max-width: 350px;
+  cursor: pointer;
+  transition: border-color 0.5s ease, box-shadow 0.2s ease;
+}
+
+.currency-select:hover,
+.currency-select:focus,
+.donation-custom-amount:hover,
+.donation-custom-amount:focus,
+.donation-tab:hover,
+.donation-tab:focus,
+.donation-option:hover,
+.donation-option:focus {
+  box-shadow: 0 0 5px blue;
+  outline: none;
 }
 
 .donate-button {
@@ -209,4 +233,25 @@ body {
 
 .donate-button:hover {
   background: #0056b3;
+}
+
+.secure-title-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.secure-icon {
+  font-size: 1.8rem;
+  color: orange;
+  padding-top: 5px;
+}
+
+.error-message {
+  font-size: 0.9rem;
+  color: #ff4d4d;
+  margin-top: 5px;
+  text-align: left;
 }
