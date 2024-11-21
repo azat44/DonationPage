@@ -255,3 +255,45 @@ body {
   margin-top: 5px;
   text-align: left;
 }
+
+.questions-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 60px;
+  text-align: center;
+}
+
+.question {
+  font-size: 0.85rem;
+  color: #007bff;
+  cursor: pointer;
+  text-decoration: underline;
+  margin: 0;
+}
+
+.tooltip {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.85);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  z-index: 1000;
+  max-width: 300px;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.tooltip::after {
+  content: "";
+  position: absolute;
+  bottom: 100%; /* Place la flèche au-dessus du tooltip */
+  left: 50%; /* Centre horizontalement la flèche */
+  transform: translateX(-50%);
+  border-width: 10px; /* Taille de la flèche */
+  border-style: solid;
+  border-color: transparent transparent rgba(0, 0, 0, 0.85) transparent;
+}
