@@ -7,6 +7,7 @@ const Donation = () => {
   const [selectedAmount, setSelectedAmount] = useState(75);
   const [currency, setCurrency] = useState("EUR");
   const [tooltip, setTooltip] = useState(null);
+  const [coverFees, setCoverFees] = useState(false); 
 
   const conversionRates = {
     USD: 1.1,
@@ -47,17 +48,22 @@ const Donation = () => {
   const isValidAmount = selectedAmount >= minimumAmounts[currency];
 
   const handleTooltip = (content, e) => {
-    e.stopPropagation();
-    const rect = e.target.getBoundingClientRect();
+    e.stopPropagation(); 
+    const rect = e.target.getBoundingClientRect(); 
     setTooltip({
       content,
-      x: rect.left + rect.width / 2,
+      x: rect.left + rect.width / 2, 
       y: rect.bottom + window.scrollY + 10, 
     });
   };
-  
 
   const closeTooltip = () => setTooltip(null);
+
+  const handleCoverFeesToggle = () => {
+    setCoverFees(!coverFees); 
+  };
+
+  const totalAmount = coverFees ? selectedAmount * 1.05 : selectedAmount; 
 
   return (
     <div className="donation-page" onClick={closeTooltip}>
@@ -81,8 +87,7 @@ const Donation = () => {
             women striving for self-sufficiency and dignity.
           </p>
           <p className="donation-highlight">
-            Together, we can drive meaningful change and build brighter futures—
-            one life at a time.
+            Together, we can drive meaningful change and build brighter futures— one life at a time.
           </p>
         </div>
         <div className="donation-form">
@@ -157,11 +162,28 @@ const Donation = () => {
               </p>
             )}
           </div>
-          <button className="donate-button" disabled={!isValidAmount}>
-            {isMonthly ? "Donate Monthly" : "Donate Once"}
+
+          <div className="cover-fees">
+            <label>
+              <input
+                type="checkbox"
+                checked={coverFees}
+                onChange={handleCoverFeesToggle}
+              />
+              I'd like to cover the fees associated with my donation so
+              more of my donation goes directly to the cause.
+            </label>
+          </div>
+
+          <button
+            className="donate-button"
+            disabled={!isValidAmount}
+          >
+            {isMonthly
+              ? `Donate Monthly: ${currency} ${totalAmount.toFixed(2)}`
+              : `Donate Once: ${currency} ${totalAmount.toFixed(2)}`}
           </button>
 
-          {/* Questions Section */}
           <div className="questions-container">
             <p
               className="question"

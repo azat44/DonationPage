@@ -290,10 +290,31 @@ body {
 .tooltip::after {
   content: "";
   position: absolute;
-  bottom: 100%; /* Place la flèche au-dessus du tooltip */
-  left: 50%; /* Centre horizontalement la flèche */
+  bottom: 100%; 
+  left: 50%; 
   transform: translateX(-50%);
-  border-width: 10px; /* Taille de la flèche */
+  border-width: 10px; 
   border-style: solid;
   border-color: transparent transparent rgba(0, 0, 0, 0.85) transparent;
+}
+
+.cover-fees {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #333;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cover-fees input {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.cover-fees label {
+  cursor: pointer;
+  line-height: 1.5;
 }
