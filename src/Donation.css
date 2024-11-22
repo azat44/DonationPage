@@ -3,7 +3,9 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+
 }
+
 
 .donation-page {
   display: flex;
@@ -116,7 +118,7 @@ body {
   text-align: center;
   margin-right: 5px;
   width: 150px;
-  height: 50px; /* Fixed height */
+  height: 50px; 
   transition: background 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -154,7 +156,7 @@ body {
   color: black;
   transition: all 0.2s ease;
   min-width: 80px;
-  min-height: 50px; /* Fixed height */
+  min-height: 50px; 
 }
 
 .donation-option.selected {
@@ -268,22 +270,25 @@ body {
   max-width: 300px;
   word-wrap: break-word;
   white-space: pre-wrap;
-  text-align: center;
-  left: 50%; 
   transform: translateX(-50%);
-  margin-bottom: 10px; 
+  text-align: center;
+  top: 100%; 
+  left: 50%; 
+  margin-top: 10px; 
 }
 
 .tooltip::after {
   content: "";
   position: absolute;
-  top: -20px; 
+  top: -15px; 
   left: 50%;
   transform: translateX(-50%);
-  border-width: 10px;
+  border-width: 8px; 
   border-style: solid;
-  border-color: transparent transparent rgba(0, 0, 0, 0.85) transparent;
+  border-color: transparent transparent rgba(0, 0, 0, 0.85) transparent; 
 }
+
+
 
 .cover-fees {
   margin-top: 20px;
@@ -298,10 +303,12 @@ body {
   width: 16px;
   height: 16px;
   cursor: pointer;
+  margin-top: 2px; 
+  transform: translateY(2px); 
 }
 
+
 .cover-fees label {
-  cursor: pointer;
   line-height: 1.5;
 }
 
@@ -311,8 +318,36 @@ body {
   margin-right: 8px;
   vertical-align: middle;
   transition: transform 0.3s ease;
+  margin-top:-3px
+
 }
 
 .animate-logo {
   transform: scale(1.2) rotate(15deg);
+}
+
+.arev-link {
+  color: orange; 
+  text-decoration: none; 
+  font-weight: bold; 
+}
+
+.arev-link:hover {
+  text-decoration: underline; 
+  color: darkorange; 
+}
+
+.header {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+}
+
+.arev-logo {
+  width: 240px; 
+  height: auto;
+  margin-left: -5px; 
+  margin-top: -36px; 
+
 }

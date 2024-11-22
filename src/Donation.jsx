@@ -61,9 +61,10 @@ const Donation = () => {
     setTooltip({
       content,
       x: rect.left + rect.width / 2,
-      y: rect.bottom + window.scrollY + 10,
+      y: rect.bottom + window.scrollY + 0 ,
     });
   };
+  
 
   const closeTooltip = () => setTooltip(null);
 
@@ -80,6 +81,15 @@ const Donation = () => {
 
   return (
     <div className="donation-page" onClick={closeTooltip}>
+    <header className="header">
+        <a href="https://www.arevsociety.org" target="_blank" rel="noopener noreferrer">
+          <img
+            src={require("./Arev_Society_Logo.webp")}
+            alt="Arev Society Logo"
+            className="arev-logo"
+          />
+        </a>
+      </header>
       <div className="donation-container">
         <div className="donation-info">
           <img
@@ -177,15 +187,20 @@ const Donation = () => {
           </div>
 
           <div className="cover-fees">
-            <label>
-              <input
-                type="checkbox"
-                checked={coverFees}
-                onChange={handleCoverFeesToggle}
-              />
-              I'd like to cover the fees associated with my donation so more of my donation goes directly to the cause. <strong>Arev Society</strong>.
-            </label>
-          </div>
+          <label>
+            <input
+              type="checkbox"
+              checked={coverFees}
+              onChange={handleCoverFeesToggle}
+            />
+            I'd like to cover the fees associated with my donation so more of my donation goes directly to the <strong>
+<a href="https://www.arevsociety.org" className="arev-link">
+                 Arev Society
+              </a>
+            </strong>.
+          </label>
+        </div>
+
 
           <button className="donate-button" disabled={!isValidAmount}>
             {isMonthly
@@ -194,39 +209,41 @@ const Donation = () => {
           </button>
 
           <div className="questions-container">
+          <p
+            className="question"
+            onClick={(e) =>
+              handleTooltip(
+                "Yes, we protect your information using industry-standard TLS/SSL encryption.\n\nWe process all payments through Stripe, a leading payment processor trusted by millions of businesses worldwide.\n\nYour sensitive payment information is sent directly to Stripe's PCI-compliant servers using encrypted connections. Our website never stores your credit card details.",
+                e
+              )
+            }
+          >
+            Is my donation secure?
+          </p>
             <p
               className="question"
               onClick={(e) =>
                 handleTooltip(
-                  "Yes, we use industry-standard TLS/SSL encryption and process payments through Stripe.",
-                  e
-                )
-              }
-            >
-              Is my donation secure?
-            </p>
-            <p
-              className="question"
-              onClick={(e) =>
-                handleTooltip(
-                  "US donations are tax-deductible as per our 501(c)(3) status. For international donations, consult your local regulations.",
+                  "For US donors: Your contribution is tax-deductible as we are a registered 501(c)(3) tax exempt charity. The Arev Society is a 501(c)(3) not-for-profit organization. Our EIN number is 32-05 12 318.\n\nWe'll email you a donation receipt for your records. Please keep this, as it is your official record to claim this donation as a tax deduction.\n\nFor international donors: Tax benefits vary by country. Please check your local tax regulations or consult with a tax professional regarding deductibility.",
                   e
                 )
               }
             >
               Is this donation tax-deductible?
             </p>
+
             <p
               className="question"
               onClick={(e) =>
                 handleTooltip(
-                  "You can cancel your recurring donation anytime through donor support at av@arevsociety.org.",
+                  "Sure, you can cancel or modify your recurring donation at any time.\n\nFor any requests pertaining to your recurring donations, such as a change in amount or payment date, updating your payment method, or cancellation, please contact our donor support team at av@arevsociety.org and we'll assist you right away.",
                   e
                 )
               }
             >
               Can I cancel my recurring donation?
             </p>
+
           </div>
         </div>
         {tooltip && (
