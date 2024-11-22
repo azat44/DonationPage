@@ -116,7 +116,8 @@ body {
   text-align: center;
   margin-right: 5px;
   width: 150px;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  height: 50px; /* Fixed height */
+  transition: background 0.2s ease, box-shadow 0.2s ease;
 }
 
 .donation-tab:last-child {
@@ -153,8 +154,7 @@ body {
   color: black;
   transition: all 0.2s ease;
   min-width: 80px;
-  min-height: 50px;
-  box-sizing: border-box;
+  min-height: 50px; /* Fixed height */
 }
 
 .donation-option.selected {
@@ -162,11 +162,6 @@ body {
   color: black;
   border: 2px solid blue;
   font-weight: bold;
-}
-
-.donation-option,
-.donation-tab {
-  min-height: 20px;
 }
 
 .donation-custom-amount-container {
@@ -202,7 +197,6 @@ body {
   font-size: 1rem;
   max-width: 350px;
   cursor: pointer;
-  transition: border-color 0.5s ease, box-shadow 0.2s ease;
 }
 
 .currency-select:hover,
@@ -246,14 +240,6 @@ body {
 .secure-icon {
   font-size: 1.8rem;
   color: orange;
-  padding-top: 5px;
-}
-
-.error-message {
-  font-size: 0.9rem;
-  color: #ff4d4d;
-  margin-top: 5px;
-  text-align: left;
 }
 
 .questions-container {
@@ -269,7 +255,6 @@ body {
   color: #007bff;
   cursor: pointer;
   text-decoration: underline;
-  margin: 0;
 }
 
 .tooltip {
@@ -283,17 +268,19 @@ body {
   max-width: 300px;
   word-wrap: break-word;
   white-space: pre-wrap;
-  transform: translateX(-50%);
   text-align: center;
+  left: 50%; 
+  transform: translateX(-50%);
+  margin-bottom: 10px; 
 }
 
 .tooltip::after {
   content: "";
   position: absolute;
-  bottom: 100%; 
-  left: 50%; 
+  top: -20px; 
+  left: 50%;
   transform: translateX(-50%);
-  border-width: 10px; 
+  border-width: 10px;
   border-style: solid;
   border-color: transparent transparent rgba(0, 0, 0, 0.85) transparent;
 }
@@ -302,7 +289,6 @@ body {
   margin-top: 20px;
   font-size: 0.9rem;
   color: #333;
-  text-align: left;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -317,4 +303,16 @@ body {
 .cover-fees label {
   cursor: pointer;
   line-height: 1.5;
+}
+
+.eternity-logo {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  vertical-align: middle;
+  transition: transform 0.3s ease;
+}
+
+.animate-logo {
+  transform: scale(1.2) rotate(15deg);
 }

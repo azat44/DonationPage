@@ -7,7 +7,9 @@ const Donation = () => {
   const [selectedAmount, setSelectedAmount] = useState(75);
   const [currency, setCurrency] = useState("EUR");
   const [tooltip, setTooltip] = useState(null);
-  const [coverFees, setCoverFees] = useState(false); 
+  const [coverFees, setCoverFees] = useState(false);
+  const [showPopup, setShowPopup] = useState(false); 
+  const [animateLogo, setAnimateLogo] = useState(false); 
 
   const conversionRates = {
     USD: 1.1,
@@ -30,6 +32,12 @@ const Donation = () => {
     return Math.round(converted);
   };
 
+  const handleMonthlyClick = () => {
+    setIsMonthly(true);
+    setAnimateLogo(true);
+    setTimeout(() => setAnimateLogo(false), 300); 
+  };
+
   const handleCurrencyChange = (e) => {
     const newCurrency = e.target.value;
     const convertedAmount = getRoundedAmount(
@@ -48,22 +56,27 @@ const Donation = () => {
   const isValidAmount = selectedAmount >= minimumAmounts[currency];
 
   const handleTooltip = (content, e) => {
-    e.stopPropagation(); 
-    const rect = e.target.getBoundingClientRect(); 
+    e.stopPropagation();
+    const rect = e.target.getBoundingClientRect();
     setTooltip({
       content,
-      x: rect.left + rect.width / 2, 
-      y: rect.bottom + window.scrollY + 10, 
+      x: rect.left + rect.width / 2,
+      y: rect.bottom + window.scrollY + 10,
     });
   };
 
   const closeTooltip = () => setTooltip(null);
 
   const handleCoverFeesToggle = () => {
-    setCoverFees(!coverFees); 
+    setCoverFees(!coverFees);
   };
 
-  const totalAmount = coverFees ? selectedAmount * 1.05 : selectedAmount; 
+  const handleLogoClick = (e) => {
+    e.preventDefault();
+    setShowPopup(true);
+  };
+
+  const totalAmount = coverFees ? selectedAmount * 1.05 : selectedAmount;
 
   return (
     <div className="donation-page" onClick={closeTooltip}>
@@ -73,11 +86,6 @@ const Donation = () => {
             src={require("./Arev_Society_Donation_Refugee.webp")}
             alt="Arev Society Donation Refugee"
             className="donation-image"
-          />
-          <img
-            src={require("./Arev_Society_Logo.webp")}
-            alt="Logo"
-            className="donation-logo"
           />
           <h2 className="donation-info-title">Make an Impact: Empower Lives</h2>
           <p className="donation-subtitle">
@@ -104,8 +112,13 @@ const Donation = () => {
             </button>
             <button
               className={`donation-tab ${isMonthly ? "active" : ""}`}
-              onClick={() => setIsMonthly(true)}
+              onClick={handleMonthlyClick}
             >
+              <img
+                src={require("./Arev_Society_Nonprofit-PNG-Eternity.png")}
+                alt="Eternity Logo"
+                className={`eternity-logo ${animateLogo ? "animate-logo" : ""}`}
+              />
               Monthly
             </button>
           </div>
@@ -170,15 +183,11 @@ const Donation = () => {
                 checked={coverFees}
                 onChange={handleCoverFeesToggle}
               />
-              I'd like to cover the fees associated with my donation so
-              more of my donation goes directly to the cause.
+              I'd like to cover the fees associated with my donation so more of my donation goes directly to the cause. <strong>Arev Society</strong>.
             </label>
           </div>
 
-          <button
-            className="donate-button"
-            disabled={!isValidAmount}
-          >
+          <button className="donate-button" disabled={!isValidAmount}>
             {isMonthly
               ? `Donate Monthly: ${currency} ${totalAmount.toFixed(2)}`
               : `Donate Once: ${currency} ${totalAmount.toFixed(2)}`}
@@ -189,7 +198,7 @@ const Donation = () => {
               className="question"
               onClick={(e) =>
                 handleTooltip(
-                  "Yes, we use industry-standard SSL technology to keep your information secure.",
+                  "Yes, we use industry-standard TLS/SSL encryption and process payments through Stripe.",
                   e
                 )
               }
@@ -200,7 +209,7 @@ const Donation = () => {
               className="question"
               onClick={(e) =>
                 handleTooltip(
-                  "Your gift is tax-deductible as per your local regulations.",
+                  "US donations are tax-deductible as per our 501(c)(3) status. For international donations, consult your local regulations.",
                   e
                 )
               }
@@ -211,7 +220,7 @@ const Donation = () => {
               className="question"
               onClick={(e) =>
                 handleTooltip(
-                  "You can cancel your recurring donation anytime through your account settings.",
+                  "You can cancel your recurring donation anytime through donor support at av@arevsociety.org.",
                   e
                 )
               }
@@ -232,6 +241,15 @@ const Donation = () => {
           </div>
         )}
       </div>
+
+      {showPopup && (
+        <div className="modal">
+          <div className="modal-content">
+            <p>We’d love to hear from you! Please leave us a message before continuing.</p>
+            <button onClick={() => setShowPopup(false)}>Close</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
