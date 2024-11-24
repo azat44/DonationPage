@@ -60,10 +60,14 @@ const Donation = () => {
     const rect = e.target.getBoundingClientRect();
     setTooltip({
       content,
-      x: rect.left + rect.width / 2,
-      y: rect.bottom + window.scrollY + 0 ,
+      x: rect.left + rect.width / 2, 
+      y: rect.top + window.scrollY - 250, 
     });
   };
+  
+  
+  
+  
   
 
   const closeTooltip = () => setTooltip(null);

@@ -259,6 +259,7 @@ body {
   text-decoration: underline;
 }
 
+
 .tooltip {
   position: absolute;
   background: rgba(0, 0, 0, 0.85);
@@ -267,26 +268,28 @@ body {
   border-radius: 5px;
   font-size: 0.9rem;
   z-index: 1000;
-  max-width: 300px;
+  width: 300px; 
   word-wrap: break-word;
-  white-space: pre-wrap;
+  white-space: normal; 
   transform: translateX(-50%);
   text-align: center;
-  top: 100%; 
-  left: 50%; 
-  margin-top: 10px; 
+  bottom: auto;
+  left: 50%;
+  top: -50px;
 }
 
 .tooltip::after {
   content: "";
   position: absolute;
-  top: -15px; 
+  top: 100%;
   left: 50%;
   transform: translateX(-50%);
-  border-width: 8px; 
+  border-width: 8px;
   border-style: solid;
-  border-color: transparent transparent rgba(0, 0, 0, 0.85) transparent; 
+  border-color: rgba(0, 0, 0, 0.85) transparent transparent transparent;
 }
+
+
 
 
 
@@ -323,7 +326,7 @@ body {
 }
 
 .animate-logo {
-  transform: scale(1.2) rotate(15deg);
+  transform: scale(1.6) rotate(15deg);
 }
 
 .arev-link {
@@ -350,4 +353,68 @@ body {
   margin-left: -5px; 
   margin-top: -36px; 
 
+}
+
+.donation-info p, 
+.donation-info .donation-info-title, 
+.donation-info .donation-subtitle, 
+.donation-info .donation-highlight {
+  text-align: justify; 
+}
+
+
+.donation-info p, 
+.donation-info .donation-info-title, 
+.donation-info .donation-subtitle, 
+.donation-info .donation-highlight {
+  text-align: justify; 
+}
+
+@media (max-width: 1440px) {
+  .donation-container {
+    flex-direction: column; 
+    max-width: 100%;
+    padding: 10px;
+  }
+
+  .donation-info, .donation-form {
+    width: 100%; 
+    padding: 20px;
+  }
+
+  .donation-info .donation-info-title {
+    font-size: 1.2rem; 
+  }
+
+  .donation-subtitle, .donation-highlight, .donation-info p {
+    font-size: 0.9rem; 
+    text-align: justify; 
+  }
+
+  .donation-image {
+    width: 100%; 
+    margin-bottom: 15px;
+  }
+
+  .donation-tabs {
+    flex-wrap: wrap; 
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .donation-option {
+    min-width: 60px; 
+    min-height: 40px;
+    font-size: 0.9rem;
+  }
+
+  .donate-button {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+
+  .questions-container {
+    flex-direction: column; 
+    gap: 10px;
+  }
 }
