@@ -10,6 +10,8 @@ const Donation = () => {
   const [coverFees, setCoverFees] = useState(false);
   const [showPopup, setShowPopup] = useState(false); 
   const [animateLogo, setAnimateLogo] = useState(false); 
+  const [shakeInput, setShakeInput] = useState(false);
+
 
   const conversionRates = {
     USD: 1.1,
@@ -65,15 +67,19 @@ const Donation = () => {
     });
   };
   
-  
-  
-  
-  
-
   const closeTooltip = () => setTooltip(null);
 
   const handleCoverFeesToggle = () => {
     setCoverFees(!coverFees);
+  };
+
+  const handleDonationClick = () => {
+    if (!isValidAmount) {
+      setShakeInput(true);
+      setTimeout(() => setShakeInput(false), 500); 
+    } else {
+      console.log("Donation submitted:", selectedAmount, currency);
+    }
   };
 
   const handleLogoClick = (e) => {
@@ -154,40 +160,30 @@ const Donation = () => {
                   : `€${getRoundedAmount(amount, "EUR")}`}
               </button>
             ))}
-            <div className="donation-custom-amount-container">
-              <span className="currency-symbol">
-                {currency === "USD" ? "$" : currency === "GBP" ? "£" : "€"}
-              </span>
-              <input
-                type="text"
-                className={`donation-custom-amount ${
-                  !isValidAmount ? "invalid" : ""
-                }`}
-                placeholder="Other amount"
-                value={selectedAmount || ""}
-                onChange={handleCustomAmountChange}
-              />
-              <select
-                className="currency-select"
-                value={currency}
-                onChange={handleCurrencyChange}
-              >
-                <option value="EUR">EUR</option>
-                <option value="USD">USD</option>
-                <option value="GBP">GBP</option>
-              </select>
-            </div>
-            {!isValidAmount && (
-              <p className="error-message">
-                The minimum donation amount is{" "}
-                {currency === "USD"
-                  ? `$${minimumAmounts.USD}`
-                  : currency === "GBP"
-                  ? `£${minimumAmounts.GBP}`
-                  : `€${minimumAmounts.EUR}`}
-                .
-              </p>
-            )}
+<div className="donation-custom-amount-container">
+  <span className="currency-symbol">
+    {currency === "USD" ? "$" : currency === "GBP" ? "£" : "€"}
+  </span>
+  <input
+    type="text"
+    className={`donation-custom-amount ${
+      !isValidAmount && shakeInput ? "invalid" : ""
+    }`}
+    placeholder="Enter amount"
+    value={selectedAmount || ""}
+    onChange={handleCustomAmountChange}
+  />
+  <select
+    className="currency-select"
+    value={currency}
+    onChange={handleCurrencyChange}
+  >
+    <option value="EUR">EUR</option>
+    <option value="USD">USD</option>
+    <option value="GBP">GBP</option>
+  </select>
+</div>
+
           </div>
 
           <div className="cover-fees">
@@ -206,11 +202,13 @@ const Donation = () => {
         </div>
 
 
-          <button className="donate-button" disabled={!isValidAmount}>
-            {isMonthly
-              ? `Donate Monthly: ${currency} ${totalAmount.toFixed(2)}`
-              : `Donate Once: ${currency} ${totalAmount.toFixed(2)}`}
-          </button>
+        <button
+          className="donate-button"
+          onClick={handleDonationClick}
+        >
+          {isMonthly ? "Donate Monthly" : "Donate Once"}
+        </button>
+
 
           <div className="questions-container">
           <p
