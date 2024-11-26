@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Donation.css";
 import "./DonationDetails.css";
 import { GrSecure } from "react-icons/gr";
+import { FaArrowLeft } from "react-icons/fa";
 
 const Donation = () => {
   const [isMonthly, setIsMonthly] = useState(false);
@@ -84,6 +85,10 @@ const Donation = () => {
     } else {
       setStep(2);
     }
+  };
+
+  const goBack = () => {
+    setStep(1); 
   };
   
 
@@ -236,32 +241,20 @@ const Donation = () => {
 
           {step === 2 && (
             <div className="donation-details-form">
-              <h2>Enter your details</h2>
-              <form>
-                <input type="text" placeholder="First name" required />
-                <input type="text" placeholder="Last name" required />
-                <input type="email" placeholder="Email address" required />
-                <input type="tel" placeholder="Phone number (optional)" />
-                <button type="submit" className="submit-button">
-                  Submit Donation
-                </button>
-              </form>
+            <div className="back-button" onClick={goBack}>
+              <FaArrowLeft />
             </div>
-          )}
-
-{step === 3 && (
-            <div className="donation-details-form">
-              <h2>Enter your details</h2>
-              <form>
-                <input type="text" placeholder="First name" required />
-                <input type="text" placeholder="Last name" required />
-                <input type="email" placeholder="Email address" required />
-                <input type="tel" placeholder="Phone number (optional)" />
-                <button type="submit" className="submit-button">
-                  Submit Donation
-                </button>
-              </form>
-            </div>
+            <h2 className="donation-details-title">Enter your details</h2>
+            <form>  
+              <input type="text" placeholder="First name" required />
+              <input type="text" placeholder="Last name" required />
+              <input type="email" placeholder="Email address" required />
+              <input type="tel" placeholder="Phone number (optional)" />
+              <button type="submit" className="submit-button">
+                Submit Donation
+              </button>
+            </form>
+          </div>
           )}
         </div>
       </div>

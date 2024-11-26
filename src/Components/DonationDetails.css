@@ -1,4 +1,3 @@
-/* Formulaire global */
 form {
     display: flex;
     flex-direction: column;
@@ -11,7 +10,6 @@ form {
     height: auto;
   }
   
-  /* Inputs */
   form input[type="text"],
   form input[type="email"],
   form input[type="tel"] {
@@ -25,7 +23,7 @@ form {
   }
   
   form input:focus {
-    border-color: #007bff;
+    border-color: blue;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
     outline: none;
   }
@@ -35,38 +33,40 @@ form {
     font-size: 0.9rem;
   }
   
-  /* Titre "Enter your details" */
-  form h2 {
-    color: #007bff; /* Bleu */
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    margin-top: -20px; /* Monte le titre */
+  .donation-details-title {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    text-align: center;
+    color: blue;
   }
   
-  /* Bouton Submit */
+  form h2 {
+    color: #007bff;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    margin-top: -20px;
+  }
+  
   form button.submit-button {
-    padding: 0.8rem 1.5rem;
-    background-color: blue;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 350px;
+    padding: 15px;
+    background: blue;
     color: white;
-    font-size: 1.1rem;
-    font-weight: bold;
     border: none;
     border-radius: 5px;
+    font-size: 1rem;
     cursor: pointer;
-    margin-top: 2rem; /* Déplace le bouton plus bas */
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background 0.3s ease-in-out;
   }
   
   form button.submit-button:hover {
     background-color: #0056b3;
-    transform: scale(1.05);
   }
   
-  form button.submit-button:active {
-    transform: scale(1);
-  }
+
   
-  /* Container des options de don */
   .donation-option {
     display: flex;
     align-items: center;
@@ -95,7 +95,6 @@ form {
     font-weight: bold;
   }
   
-  /* Container principal */
   .donation-container {
     display: flex;
     align-items: center;
@@ -107,7 +106,6 @@ form {
     gap: 1rem;
   }
   
-  /* Informations sur les dons */
   .donation-info {
     flex: 1;
     padding: 20px;
@@ -126,27 +124,30 @@ form {
     align-items: center;
   }
   
-  /* Bouton retour */
   .back-button {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    color: red;
+    color: blue;
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
     text-decoration: none;
     transition: color 0.3s ease;
+    margin-bottom: 1rem; 
   }
   
   .back-button:hover {
     color: #0056b3;
   }
   
-  /* Conteneur des cases à cocher */
+  .back-button svg {
+    font-size: 2rem;
+    margin-left:-100px;
+    margin-top:-50px
+  }
+  
+  
   form .checkbox-container {
     display: flex;
     align-items: center;

@@ -240,8 +240,9 @@ body {
 }
 
 .secure-icon {
-  font-size: 1.8rem;
+  font-size: 2rem;
   color: orange;
+  margin-top:5px
 }
 
 .questions-container {
