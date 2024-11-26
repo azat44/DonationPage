@@ -1,0 +1,161 @@
+/* Formulaire global */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 400px;
+    margin: 0 auto;
+    font-family: 'Arial', sans-serif;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+  }
+  
+  /* Inputs */
+  form input[type="text"],
+  form input[type="email"],
+  form input[type="tel"] {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 2px solid lightgray;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: white;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  form input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
+  }
+  
+  form input::placeholder {
+    color: #aaa;
+    font-size: 0.9rem;
+  }
+  
+  /* Titre "Enter your details" */
+  form h2 {
+    color: #007bff; /* Bleu */
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    margin-top: -20px; /* Monte le titre */
+  }
+  
+  /* Bouton Submit */
+  form button.submit-button {
+    padding: 0.8rem 1.5rem;
+    background-color: blue;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 2rem; /* Déplace le bouton plus bas */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  form button.submit-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+  }
+  
+  form button.submit-button:active {
+    transform: scale(1);
+  }
+  
+  /* Container des options de don */
+  .donation-option {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    background: white;
+    border: 2px solid lightgray;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: black;
+    transition: all 0.2s ease;
+    min-width: 80px;
+    min-height: 50px;
+  }
+  
+  .donation-option:hover {
+    box-shadow: 0 0 5px blue;
+  }
+  
+  .donation-option.selected {
+    background: rgba(0, 123, 255, 0.1);
+    color: black;
+    border: 2px solid blue;
+    font-weight: bold;
+  }
+  
+  /* Container principal */
+  .donation-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    gap: 1rem;
+  }
+  
+  /* Informations sur les dons */
+  .donation-info {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  
+  .donation-form {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Bouton retour */
+  .back-button {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: red;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .back-button:hover {
+    color: #0056b3;
+  }
+  
+  /* Conteneur des cases à cocher */
+  form .checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: #555;
+  }
+  
+  form .checkbox-container input[type="checkbox"] {
+    accent-color: #007bff;
+  }
+  

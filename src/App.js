@@ -1,12 +1,15 @@
-import Donation from "./Donation";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Donation from "./Components/Donation";
 
-
-function App() {
+const App = () => {
   return (
-    <div>
-      <Donation />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Donation />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
