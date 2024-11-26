@@ -8,10 +8,9 @@ const Donation = () => {
   const [currency, setCurrency] = useState("EUR");
   const [tooltip, setTooltip] = useState(null);
   const [coverFees, setCoverFees] = useState(false);
-  const [showPopup, setShowPopup] = useState(false); 
-  const [animateLogo, setAnimateLogo] = useState(false); 
+  const [showPopup, setShowPopup] = useState(false);
+  const [animateLogo, setAnimateLogo] = useState(false);
   const [shakeInput, setShakeInput] = useState(false);
-
 
   const conversionRates = {
     USD: 1.1,
@@ -29,15 +28,13 @@ const Donation = () => {
 
   const getRoundedAmount = (amount, currency) => {
     const converted = amount * conversionRates[currency];
-    if (currency === "USD") return Math.round(converted / 5) * 5;
-    if (currency === "GBP") return Math.round(converted / 5) * 5;
-    return Math.round(converted);
+    return Math.round(converted / 5) * 5;
   };
 
   const handleMonthlyClick = () => {
     setIsMonthly(true);
     setAnimateLogo(true);
-    setTimeout(() => setAnimateLogo(false), 300); 
+    setTimeout(() => setAnimateLogo(false), 300);
   };
 
   const handleCurrencyChange = (e) => {
@@ -62,39 +59,55 @@ const Donation = () => {
     const rect = e.target.getBoundingClientRect();
     setTooltip({
       content,
-      x: rect.left + rect.width / 2, 
-      y: rect.top + window.scrollY - 250, 
+      x: rect.left + rect.width / 2,
+      y: rect.top + window.scrollY - 250,
     });
   };
-  
+
   const closeTooltip = () => setTooltip(null);
 
-  const handleCoverFeesToggle = () => {
+  const handleCoverFeesToggle = (e) => {
+    const cursorPosition = document.querySelector(".donation-custom-amount")
+      ?.selectionStart; // Capturez la position du curseur
     setCoverFees(!coverFees);
+
+    // Calculez le montant total avec ou sans frais
+    const updatedAmount = !coverFees
+      ? (selectedAmount * 1.05).toFixed(2)
+      : (selectedAmount / 1.05).toFixed(2);
+    setSelectedAmount(updatedAmount);
+
+    // Rétablissez la position du curseur
+    setTimeout(() => {
+      const inputField = document.querySelector(".donation-custom-amount");
+      if (inputField && cursorPosition) {
+        inputField.setSelectionRange(cursorPosition, cursorPosition);
+      }
+    }, 0);
   };
 
   const handleDonationClick = () => {
     if (!isValidAmount) {
       setShakeInput(true);
-      setTimeout(() => setShakeInput(false), 500); 
+  
+      setTimeout(() => {
+        setShakeInput(false); 
+      }, 500);
     } else {
       console.log("Donation submitted:", selectedAmount, currency);
     }
   };
-
-  const handleLogoClick = (e) => {
-    e.preventDefault();
-    setShowPopup(true);
-  };
+  
 
   const totalAmount = coverFees ? selectedAmount * 1.05 : selectedAmount;
+
 
   return (
     <div className="donation-page" onClick={closeTooltip}>
     <header className="header">
         <a href="https://www.arevsociety.org" target="_blank" rel="noopener noreferrer">
           <img
-            src={require("./Arev_Society_Logo.webp")}
+            src={require("./Images/Arev_Society_Logo.webp")}
             alt="Arev Society Logo"
             className="arev-logo"
           />
@@ -103,7 +116,7 @@ const Donation = () => {
       <div className="donation-container">
         <div className="donation-info">
           <img
-            src={require("./Arev_Society_Donation_Refugee.webp")}
+            src={require("./Images/Arev_Society_Donation_Refugee.webp")}
             alt="Arev Society Donation Refugee"
             className="donation-image"
           />
@@ -135,7 +148,7 @@ const Donation = () => {
               onClick={handleMonthlyClick}
             >
               <img
-                src={require("./Arev_Society_Nonprofit-PNG-Eternity.png")}
+                src={require(".//Images/Arev Society_Nonprofit-PNG-Eternity.png")}
                 alt="Eternity Logo"
                 className={`eternity-logo ${animateLogo ? "animate-logo" : ""}`}
               />
@@ -160,29 +173,29 @@ const Donation = () => {
                   : `€${getRoundedAmount(amount, "EUR")}`}
               </button>
             ))}
-<div className="donation-custom-amount-container">
-  <span className="currency-symbol">
-    {currency === "USD" ? "$" : currency === "GBP" ? "£" : "€"}
-  </span>
-  <input
-    type="text"
-    className={`donation-custom-amount ${
-      !isValidAmount && shakeInput ? "invalid" : ""
-    }`}
-    placeholder="Enter amount"
-    value={selectedAmount || ""}
-    onChange={handleCustomAmountChange}
-  />
-  <select
-    className="currency-select"
-    value={currency}
-    onChange={handleCurrencyChange}
-  >
-    <option value="EUR">EUR</option>
-    <option value="USD">USD</option>
-    <option value="GBP">GBP</option>
-  </select>
-</div>
+          <div className="donation-custom-amount-container">
+            <span className="currency-symbol">
+              {currency === "USD" ? "$" : currency === "GBP" ? "£" : "€"}
+            </span>
+            <input
+            type="text"
+            className={`donation-custom-amount ${
+              !isValidAmount && shakeInput ? "invalid" : isValidAmount ? "" : "invalid-static"
+            }`}
+            placeholder="Enter amount"
+            value={selectedAmount}
+            onChange={handleCustomAmountChange}
+            />
+            <select
+              className="currency-select"
+              value={currency}
+              onChange={handleCurrencyChange}
+            >
+              <option value="EUR">EUR</option>
+              <option value="USD">USD</option>
+              <option value="GBP">GBP</option>
+            </select>
+          </div>
 
           </div>
 
@@ -194,7 +207,7 @@ const Donation = () => {
               onChange={handleCoverFeesToggle}
             />
             I'd like to cover the fees associated with my donation so more of my donation goes directly to the <strong>
-<a href="https://www.arevsociety.org" className="arev-link">
+            <a href="https://www.arevsociety.org" className="arev-link">
                  Arev Society
               </a>
             </strong>.
