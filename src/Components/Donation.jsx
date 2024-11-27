@@ -100,19 +100,19 @@ const Donation = () => {
   const validateStep2 = () => {
     const newErrors = {};
     if (!step2Data.firstName) {
-      newErrors.firstName = "First name is required.";
+      newErrors.firstName = true; 
     }
     if (!step2Data.lastName) {
-      newErrors.lastName = "Last name is required.";
+      newErrors.lastName = true; 
     }
     if (!step2Data.email) {
-      newErrors.email = "Email is required.";
+      newErrors.email = true; 
     } else if (!/\S+@\S+\.\S+/.test(step2Data.email)) {
-      newErrors.email = "Invalid email format.";
+      newErrors.email = "Invalid email format."; 
     }
     return newErrors;
   };
-
+  
   const handleStep2Submit = (e) => {
     e.preventDefault(); 
     const validationErrors = validateStep2();
@@ -300,9 +300,6 @@ const Donation = () => {
                     setStep2Data({ ...step2Data, firstName: e.target.value })
                   }
                 />
-                {errors.firstName && (
-                  <span className="error-message"></span>
-                )}
 
                 <input
                   type="text"
@@ -316,9 +313,6 @@ const Donation = () => {
                     setStep2Data({ ...step2Data, lastName: e.target.value })
                   }
                 />
-                {errors.lastName && (
-                  <span className="error-message"></span>
-                )}
 
                 <input
                   type="email"
@@ -332,8 +326,23 @@ const Donation = () => {
                     setStep2Data({ ...step2Data, email: e.target.value })
                   }
                 />
-                {errors.email && (
+                {typeof errors.email === "string" && (
                   <span className="error-message">{errors.email}</span>
+                )}
+
+                <PhoneInput
+                  country={"fr"}
+                  value={step2Data.phone}
+                  onChange={(value) => setStep2Data({ ...step2Data, phone: value })}
+                  placeholder="Phone number (optional)"
+                  enableSearch={true}
+                  className={`phone-input ${errors.phone ? "error" : ""} ${
+                    shakeInput ? "shake" : ""
+                  }`}
+                />
+
+                {errors.phone && (
+                  <span className="error-message">{errors.phone}</span>
                 )}
 
                 <button type="submit" className="submit-button">
@@ -343,13 +352,17 @@ const Donation = () => {
             </div>
           )}
 
+
         {step === 3 && (
           <div className="step3-container">
-            <h2 className="step3-title">Enter your address</h2>
             <div className="step3-back-button" onClick={() => setStep(2)}>
               <FaArrowLeft />
+              
             </div>
+            <h2 className="step3-title">Enter your address</h2>
+
             <form>
+              
               <input
                 type="text"
                 className="step3-input"

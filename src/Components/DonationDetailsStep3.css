@@ -1,6 +1,4 @@
-/* DonationStep3.css */
 
-/* Conteneur principal */
 .step3-container {
     display: flex;
     flex-direction: column;
@@ -13,7 +11,6 @@
     height: auto;
   }
   
-  /* Champs de saisie */
   .step3-input {
     width: 100%;
     padding: 0.8rem 1rem;
@@ -35,7 +32,6 @@
     font-size: 0.9rem;
   }
   
-  /* Sélection (select) */
   .step3-select {
     width: 100%;
     padding: 0.8rem 1rem;
@@ -52,7 +48,6 @@
     outline: none;
   }
   
-  /* Bouton */
   .step3-button {
     margin-top: 20px;
     width: 100%;
@@ -71,7 +66,6 @@
     background-color: #0056b3;
   }
   
-  /* Bouton retour */
   .step3-back-button {
     display: flex;
     align-items: center;
@@ -91,5 +85,15 @@
   
   .step3-back-button svg {
     font-size: 2rem;
+    margin-left:-250px;
+    margin-top:-16px
   }
   
+  .step3-title{
+    font-size: 1.8rem;
+    text-align: center;
+    color: blue;
+    margin-top:11px;
+
+
+  }
