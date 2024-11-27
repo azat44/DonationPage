@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import "./Donation.css";
 import "./DonationDetails.css";
+import "./DonationDetailsStep3.css";
 import { GrSecure } from "react-icons/gr";
 import { FaArrowLeft } from "react-icons/fa";
+import "react-phone-input-2/lib/style.css";
+import PhoneInput from "react-phone-input-2";
 
 const Donation = () => {
   const [isMonthly, setIsMonthly] = useState(false);
@@ -13,6 +16,13 @@ const Donation = () => {
   const [animateLogo, setAnimateLogo] = useState(false);
   const [shakeInput, setShakeInput] = useState(false);
   const [step, setStep] = useState(1);
+  const [phone, setPhone] = useState("");
+  const [step2Data, setStep2Data] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+  });
+  const [errors, setErrors] = useState({});
 
   const conversionRates = {
     USD: 1.1,
@@ -87,10 +97,42 @@ const Donation = () => {
     }
   };
 
-  const goBack = () => {
-    setStep(1); 
+  const validateStep2 = () => {
+    const newErrors = {};
+    if (!step2Data.firstName) {
+      newErrors.firstName = "First name is required.";
+    }
+    if (!step2Data.lastName) {
+      newErrors.lastName = "Last name is required.";
+    }
+    if (!step2Data.email) {
+      newErrors.email = "Email is required.";
+    } else if (!/\S+@\S+\.\S+/.test(step2Data.email)) {
+      newErrors.email = "Invalid email format.";
+    }
+    return newErrors;
   };
-  
+
+  const handleStep2Submit = (e) => {
+    e.preventDefault(); 
+    const validationErrors = validateStep2();
+    if (Object.keys(validationErrors).length === 0) {
+      setErrors({});
+      setStep(3); 
+    } else {
+      setErrors(validationErrors);
+      setShakeInput(true); 
+      setTimeout(() => setShakeInput(false), 500); 
+    }
+  };
+
+  const goBack = () => {
+    setStep(step - 1);
+  };
+
+  const validateStep3 = () => {
+    alert("Validation for step 3 passed!");
+  };
 
   return (
     <div className="donation-page" onClick={closeTooltip}>
@@ -241,23 +283,118 @@ const Donation = () => {
 
           {step === 2 && (
             <div className="donation-details-form">
-            <div className="back-button" onClick={goBack}>
+              <h2 className="donation-details-title">Enter your details</h2>
+              <div className="back-button" onClick={goBack}>
+                <FaArrowLeft />
+              </div>
+              <form onSubmit={handleStep2Submit}>
+                <input
+                  type="text"
+                  name="firstName"
+                  className={`donation-input ${errors.firstName ? "error" : ""} ${
+                    shakeInput ? "shake" : ""
+                  }`}
+                  placeholder="First name"
+                  value={step2Data.firstName}
+                  onChange={(e) =>
+                    setStep2Data({ ...step2Data, firstName: e.target.value })
+                  }
+                />
+                {errors.firstName && (
+                  <span className="error-message"></span>
+                )}
+
+                <input
+                  type="text"
+                  name="lastName"
+                  className={`donation-input ${errors.lastName ? "error" : ""} ${
+                    shakeInput ? "shake" : ""
+                  }`}
+                  placeholder="Last name"
+                  value={step2Data.lastName}
+                  onChange={(e) =>
+                    setStep2Data({ ...step2Data, lastName: e.target.value })
+                  }
+                />
+                {errors.lastName && (
+                  <span className="error-message"></span>
+                )}
+
+                <input
+                  type="email"
+                  name="email"
+                  className={`donation-input ${errors.email ? "error" : ""} ${
+                    shakeInput ? "shake" : ""
+                  }`}
+                  placeholder="Email address"
+                  value={step2Data.email}
+                  onChange={(e) =>
+                    setStep2Data({ ...step2Data, email: e.target.value })
+                  }
+                />
+                {errors.email && (
+                  <span className="error-message">{errors.email}</span>
+                )}
+
+                <button type="submit" className="submit-button">
+                  Continue
+                </button>
+              </form>
+            </div>
+          )}
+
+        {step === 3 && (
+          <div className="step3-container">
+            <h2 className="step3-title">Enter your address</h2>
+            <div className="step3-back-button" onClick={() => setStep(2)}>
               <FaArrowLeft />
             </div>
-            <h2 className="donation-details-title">Enter your details</h2>
-            <form>  
-              <input type="text" placeholder="First name" required />
-              <input type="text" placeholder="Last name" required />
-              <input type="email" placeholder="Email address" required />
-              <input type="tel" placeholder="Phone number (optional)" />
-              <button type="submit" className="submit-button">
-                Submit Donation
+            <form>
+              <input
+                type="text"
+                className="step3-input"
+                placeholder="Street address"
+                required
+              />
+              <input
+                type="text"
+                className="step3-input"
+                placeholder="Apartment / suite / floor"
+              />
+              <input
+                type="text"
+                className="step3-input"
+                placeholder="City"
+                required
+              />
+              <input
+                type="text"
+                className="step3-input"
+                placeholder="Zip code"
+                required
+              />
+              <select className="step3-select" required>
+                <option value="France">France</option>
+                <option value="United States">United States</option>
+                <option value="United Kingdom">United Kingdom</option>
+                <option value="Germany">Germany</option>
+                <option value="Canada">Canada</option>
+              </select>
+              <button
+                type="submit"
+                className="step3-button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  alert("Address submitted successfully!");
+                }}
+              >
+                Continue
               </button>
             </form>
           </div>
-          )}
-        </div>
+        )}
       </div>
+   </div>
     </div>
   );
 };

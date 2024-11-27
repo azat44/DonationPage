@@ -1,0 +1,95 @@
+/* DonationStep3.css */
+
+/* Conteneur principal */
+.step3-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 400px;
+    margin: 0 auto;
+    font-family: 'Arial', sans-serif;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+  }
+  
+  /* Champs de saisie */
+  .step3-input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 2px solid lightgray;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: white;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .step3-input:focus {
+    border-color: blue;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
+  }
+  
+  .step3-input::placeholder {
+    color: #aaa;
+    font-size: 0.9rem;
+  }
+  
+  /* Sélection (select) */
+  .step3-select {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 2px solid lightgray;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: white;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .step3-select:focus {
+    border-color: blue;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
+  }
+  
+  /* Bouton */
+  .step3-button {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 350px;
+    padding: 15px;
+    background: blue;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .step3-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Bouton retour */
+  .step3-back-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: blue;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    margin-bottom: 1rem;
+  }
+  
+  .step3-back-button:hover {
+    color: #0056b3;
+  }
+  
+  .step3-back-button svg {
+    font-size: 2rem;
+  }
+  
