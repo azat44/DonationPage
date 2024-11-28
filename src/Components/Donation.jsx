@@ -334,13 +334,31 @@ const Donation = () => {
                   country={"fr"}
                   value={step2Data.phone}
                   onChange={(value) => setStep2Data({ ...step2Data, phone: value })}
-                  placeholder="Phone number (optional)"
-                  enableSearch={true}
-                  className={`phone-input ${errors.phone ? "error" : ""} ${
-                    shakeInput ? "shake" : ""
-                  }`}
+                  containerClass="phone-input-container"
+                  buttonClass="flag-dropdown"
                 />
+                <input
+                  type="tel"
+                  placeholder="Phone number (optional)"
+                  className="custom-phone-input"
+                  value={step2Data.phone}
+                  maxLength={16} 
+                  onChange={(e) => {
+                    let value = e.target.value;
 
+                    value = value.replace(/[^\d+]/g, "");
+
+                    if (!value.startsWith("+")) {
+                      value = "+" + value;
+                    }
+
+                    if (value.length > 16) {
+                      value = value.slice(0, 16); 
+                    }
+
+                    setStep2Data({ ...step2Data, phone: value });
+                  }}
+                />
                 {errors.phone && (
                   <span className="error-message">{errors.phone}</span>
                 )}

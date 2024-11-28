@@ -186,4 +186,38 @@ form {
       transform: translateX(10px);
     }
   }
+  .phone-input {
+    padding: 0.8rem 1rem;
+    border: 2px solid lightgray;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: white;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
   
+  .react-tel-input input {
+    display: none !important;
+  }
+
+  .flag-dropdown {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 35px; 
+    margin-left: -60px; 
+    transform: translateY(3px); 
+  }
+
+  .flag-dropdown {
+    border: none !important; 
+    background: transparent !important; 
+    box-shadow: none !important; 
+  }
+  
+  .flag-dropdown img {
+    display: block; 
+    margin: 0;
+    padding: 0;
+  }
+
+ 
