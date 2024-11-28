@@ -6,10 +6,12 @@ import { GrSecure } from "react-icons/gr";
 import { FaArrowLeft } from "react-icons/fa";
 import "react-phone-input-2/lib/style.css";
 import PhoneInput from "react-phone-input-2";
+import countries from "./countries.json";
+
 
 const Donation = () => {
   const [isMonthly, setIsMonthly] = useState(false);
-  const [selectedAmount, setSelectedAmount] = useState(75);
+  const [selectedAmount, setSelectedAmount] = useState(""); 
   const [currency, setCurrency] = useState("EUR");
   const [tooltip, setTooltip] = useState(null);
   const [coverFees, setCoverFees] = useState(false);
@@ -100,29 +102,29 @@ const Donation = () => {
   const validateStep2 = () => {
     const newErrors = {};
     if (!step2Data.firstName) {
-      newErrors.firstName = true; 
+      newErrors.firstName = true;
     }
     if (!step2Data.lastName) {
-      newErrors.lastName = true; 
+      newErrors.lastName = true;
     }
     if (!step2Data.email) {
-      newErrors.email = true; 
+      newErrors.email = true;
     } else if (!/\S+@\S+\.\S+/.test(step2Data.email)) {
-      newErrors.email = "Invalid email format."; 
+      newErrors.email = "Invalid email format.";
     }
     return newErrors;
   };
-  
+
   const handleStep2Submit = (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     const validationErrors = validateStep2();
     if (Object.keys(validationErrors).length === 0) {
       setErrors({});
-      setStep(3); 
+      setStep(3);
     } else {
       setErrors(validationErrors);
-      setShakeInput(true); 
-      setTimeout(() => setShakeInput(false), 500); 
+      setShakeInput(true);
+      setTimeout(() => setShakeInput(false), 500);
     }
   };
 
@@ -133,6 +135,11 @@ const Donation = () => {
   const validateStep3 = () => {
     alert("Validation for step 3 passed!");
   };
+
+const [isAnonymous, setIsAnonymous] = useState(false);
+
+
+  
 
   return (
     <div className="donation-page" onClick={closeTooltip}>
@@ -226,9 +233,12 @@ const Donation = () => {
                         ? ""
                         : "invalid-static"
                     }`}
-                    placeholder="Enter amount"
+                    placeholder="Custom Amount" 
                     value={selectedAmount}
-                    onChange={handleCustomAmountChange}
+                    onChange={(e) => {
+                      const amount = parseInt(e.target.value.replace(/[^\d]/g, ""), 10) || "";
+                      setSelectedAmount(amount);
+                    }}
                   />
                   <select
                     className="currency-select"
@@ -240,6 +250,9 @@ const Donation = () => {
                     <option value="GBP">GBP</option>
                   </select>
                 </div>
+
+
+
               </div>
               <div className="cover-fees">
                 <label>
@@ -371,59 +384,67 @@ const Donation = () => {
           )}
 
 
-        {step === 3 && (
-          <div className="step3-container">
-            <div className="step3-back-button" onClick={() => setStep(2)}>
-              <FaArrowLeft />
-              
-            </div>
-            <h2 className="step3-title">Enter your address</h2>
-
-            <form>
-              
-              <input
-                type="text"
-                className="step3-input"
-                placeholder="Street address"
-                required
-              />
-              <input
-                type="text"
-                className="step3-input"
-                placeholder="Apartment / suite / floor"
-              />
-              <input
-                type="text"
-                className="step3-input"
-                placeholder="City"
-                required
-              />
-              <input
-                type="text"
-                className="step3-input"
-                placeholder="Zip code"
-                required
-              />
-              <select className="step3-select" required>
-                <option value="France">France</option>
-                <option value="United States">United States</option>
-                <option value="United Kingdom">United Kingdom</option>
-                <option value="Germany">Germany</option>
-                <option value="Canada">Canada</option>
-              </select>
-              <button
-                type="submit"
-                className="step3-button"
-                onClick={(e) => {
-                  e.preventDefault();
-                  alert("Address submitted successfully!");
-                }}
-              >
-                Continue
-              </button>
-            </form>
+      {step === 3 && (
+        <div className="step3-container">
+          <div className="step3-back-button" onClick={() => setStep(2)}>
+            <FaArrowLeft />
           </div>
-        )}
+          <h2 className="step3-title">Enter your address</h2>
+
+          <form>
+            <input
+              type="text"
+              className="step3-input"
+              placeholder="Street address"
+              required
+            />
+            <input
+              type="text"
+              className="step3-input"
+              placeholder="Apartment / suite / floor"
+            />
+            <input
+              type="text"
+              className="step3-input"
+              placeholder="City"
+              required
+            />
+            <input
+              type="text"
+              className="step3-input"
+              placeholder="Zip code"
+              required
+            />
+
+            <div style={{ marginTop: "20px" }}>
+            <select
+            id="country-select"
+            className="step3-select"
+            required
+            onChange={(e) => console.log(e.target.value)}
+          >
+
+                {countries.map((country) => (
+                  <option key={country["alpha-2"]} value={country["alpha-2"]}>
+                    {country.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <button
+              type="submit"
+              className="step3-button"
+              onClick={(e) => {
+                e.preventDefault();
+                alert("Address submitted successfully!");
+              }}
+            >
+              Continue
+            </button>
+          </form>
+        </div>
+      )}
       </div>
    </div>
     </div>
