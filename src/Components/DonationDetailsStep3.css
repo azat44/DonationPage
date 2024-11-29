@@ -5,7 +5,7 @@ form,
   gap: 1rem;
   max-width: 400px; 
   margin: 0 auto;
-  font-family: 'Arial', sans-serif;
+  font-family: 'Rubik', sans-serif;
   justify-content: center;
   align-items: center;
   height: auto;
@@ -14,10 +14,10 @@ form,
 form input[type="text"],
 form input[type="email"],
 form input[type="tel"],
-.step3-input,
-.step3-select {
+.step3-input
+ {
   width: 100%;
-  max-width: 250px; 
+  max-width: 200px; 
   padding: 0.8rem 1rem;
   border: 2px solid lightgray;
   border-radius: 5px;
@@ -77,7 +77,7 @@ form .donation-container,
  {
   font-size: 2rem;
   margin-left: -244.5px;
-  margin-top: -10px;
+  margin-top: -30px;
 }
 
 .step3-title,
@@ -93,11 +93,37 @@ form .donation-container,
   animation: shake 0.3s ease-in-out;
 }
 
-.error-message {
-  color: red;
-  font-size: 0.85rem;
-  margin-top: -0.5rem;
-  margin-bottom: 0.5rem;
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  20%, 60% {
+    transform: translateX(-10px);
+  }
+  40%, 80% {
+    transform: translateX(10px);
+  }
+}
+
+.shake {
+  animation: shake 0.3s ease-in-out;
+}
+
+.step3-select{
+  width: 120%;
+  max-width: 240px; 
+  padding: 0.8rem 1rem;
+  border: 2px solid lightgray;
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: white;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+}
+
+.step3-input.error {
+  border-color: red; 
+  animation: shake 0.3s ease-in-out; 
 }
 
 @keyframes shake {

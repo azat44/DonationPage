@@ -1,10 +1,12 @@
+
+
 form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   max-width: 400px;
   margin: 0 auto;
-  font-family: 'Arial', sans-serif;
+  font-family: 'Rubik', sans-serif;
   justify-content: center;
   align-items: center;
   height: auto;
@@ -43,7 +45,6 @@ form h2 {
   margin-top: 11px;
 }
 
-/* Submit Button */
 form button.submit-button {
   margin-top: 20px;
   width: 100%;
@@ -62,7 +63,6 @@ form button.submit-button:hover {
   background-color: #0056b3;
 }
 
-/* Donation Options */
 .donation-option {
   display: flex;
   align-items: center;
@@ -91,7 +91,6 @@ form button.submit-button:hover {
   font-weight: bold;
 }
 
-/* Container Styling */
 .donation-container {
   display: flex;
   align-items: center;
@@ -141,7 +140,6 @@ form button.submit-button:hover {
 }
 
 
-/* Checkbox Container */
 form .checkbox-container {
   display: flex;
   align-items: center;
@@ -154,7 +152,6 @@ form .checkbox-container input[type="checkbox"] {
   accent-color: #007bff;
 }
 
-/* Error Handling */
 .donation-input.error {
   border-color: red;
 }
@@ -166,7 +163,6 @@ form .checkbox-container input[type="checkbox"] {
   margin-bottom: 0.5rem;
 }
 
-/* Animation */
 .shake {
   animation: shake 0.3s ease-in-out;
 }
@@ -183,7 +179,6 @@ form .checkbox-container input[type="checkbox"] {
   }
 }
 
-/* Phone Input */
 .phone-input-container {
   display: flex;
   flex-direction: column;
@@ -224,3 +219,4 @@ form .checkbox-container input[type="checkbox"] {
   margin: 0;
   padding: 0;
 }
+

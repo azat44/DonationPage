@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "./Donation.css";
 import "./DonationDetails.css";
 import "./DonationDetailsStep3.css";
+import "./DonationDetailsStep4.css";
+
 import { GrSecure } from "react-icons/gr";
 import { FaArrowLeft } from "react-icons/fa";
 import "react-phone-input-2/lib/style.css";
@@ -25,6 +27,20 @@ const Donation = () => {
     email: "",
   });
   const [errors, setErrors] = useState({});
+  const [step3Errors, setStep3Errors] = useState({});
+  const [step3Data, setStep3Data] = useState({
+    streetAddress: "",
+    apartment: "",
+    city: "",
+    zipCode: "",
+    country: "",
+  });
+  const [isAnonymous, setIsAnonymous] = useState(false);
+  const [step4Data, setStep4Data] = useState({
+    cardNumber: "",
+    expiryDate: "",
+    cvv: "",
+  });
 
   const conversionRates = {
     USD: 1.1,
@@ -133,11 +149,45 @@ const Donation = () => {
   };
 
   const validateStep3 = () => {
-    alert("Validation for step 3 passed!");
+    const errors = {};
+  
+    if (!step3Data.streetAddress || step3Data.streetAddress.trim() === "") {
+      errors.streetAddress = true; 
+    }
+  
+    if (!step3Data.apartment || step3Data.apartment.trim() === "") {
+      errors.apartment = true; 
+    }
+  
+    const cityRegex = /^[a-zA-Z\u00C0-\u017F\s]+$/; 
+    if (!step3Data.city || !cityRegex.test(step3Data.city.trim())) {
+      errors.city = true;
+    }
+  
+    const zipCodeRegex = /^[0-9]{4,10}$/; 
+    if (!step3Data.zipCode || !zipCodeRegex.test(step3Data.zipCode.trim())) {
+      errors.zipCode = true;
+    }
+  
+    return errors;
   };
+  
+  
+  
+  
+  const handleStep3Submit = (e) => {
+    e.preventDefault();
+    const errors = validateStep3();
 
-const [isAnonymous, setIsAnonymous] = useState(false);
-
+    if (Object.keys(errors).length === 0) {
+      setStep3Errors({});
+      setStep(4); 
+    } else {
+      setStep3Errors(errors);
+      setShakeInput(true); 
+      setTimeout(() => setShakeInput(false), 500); 
+    }
+  };
 
   
 
@@ -384,67 +434,108 @@ const [isAnonymous, setIsAnonymous] = useState(false);
           )}
 
 
-      {step === 3 && (
-        <div className="step3-container">
-          <div className="step3-back-button" onClick={() => setStep(2)}>
-            <FaArrowLeft />
-          </div>
-          <h2 className="step3-title">Enter your address</h2>
+          {step === 3 && (
+            <div className="step3-container">
+              <div className="step3-back-button" onClick={() => setStep(2)}>
+                <FaArrowLeft />
+              </div>
+              <h2 className="step3-title">Enter your address</h2>
 
-          <form>
-            <input
-              type="text"
-              className="step3-input"
-              placeholder="Street address"
-              required
-            />
-            <input
-              type="text"
-              className="step3-input"
-              placeholder="Apartment / suite / floor"
-            />
-            <input
-              type="text"
-              className="step3-input"
-              placeholder="City"
-              required
-            />
-            <input
-              type="text"
-              className="step3-input"
-              placeholder="Zip code"
-              required
-            />
+              <form onSubmit={handleStep3Submit}>
+                <input
+                  type="text"
+                  className={`step3-input ${step3Errors.streetAddress ? "error shake" : ""}`}
+                  placeholder="Street address"
+                  value={step3Data.streetAddress}
+                  onChange={(e) =>
+                    setStep3Data({ ...step3Data, streetAddress: e.target.value })
+                  }
+                />
 
-            <div style={{ marginTop: "20px" }}>
-            <select
-            id="country-select"
-            className="step3-select"
-            required
-            onChange={(e) => console.log(e.target.value)}
-          >
+                <input
+                  type="text"
+                  className={`step3-input ${step3Errors.apartment ? "error shake" : ""}`}
+                  placeholder="Apartment / suite / floor"
+                  value={step3Data.apartment}
+                  onChange={(e) =>
+                    setStep3Data({ ...step3Data, apartment: e.target.value })
+                  }
+                />
 
-                {countries.map((country) => (
-                  <option key={country["alpha-2"]} value={country["alpha-2"]}>
-                    {country.name}
-                  </option>
-                ))}
-              </select>
+                <input
+                  type="text"
+                  className={`step3-input ${step3Errors.city ? "error shake" : ""}`}
+                  placeholder="City"
+                  value={step3Data.city}
+                  onChange={(e) =>
+                    setStep3Data({ ...step3Data, city: e.target.value })
+                  }
+                />
+
+                <input
+                  type="text"
+                  className={`step3-input ${step3Errors.zipCode ? "error shake" : ""}`}
+                  placeholder="Zip code"
+                  value={step3Data.zipCode}
+                  onChange={(e) =>
+                    setStep3Data({ ...step3Data, zipCode: e.target.value })
+                  }
+                />
+
+                <select
+                  id="country-select"
+                  className="step3-select"
+                  value={step3Data.country}
+                  onChange={(e) => setStep3Data({ ...step3Data, country: e.target.value })}
+                >
+                  <option value="">Select your country</option>
+                  {countries.map((country) => (
+                    <option key={country["alpha-2"]} value={country["alpha-2"]}>
+                      {country.name}
+                    </option>
+                  ))}
+                </select>
+
+                <button type="submit" className="step3-button">
+                  Continue to Payment
+                </button>
+              </form>
             </div>
+          )}
 
-            <button
-              type="submit"
-              className="step3-button"
-              onClick={(e) => {
-                e.preventDefault();
-                alert("Address submitted successfully!");
-              }}
-            >
-              Continue
-            </button>
-          </form>
-        </div>
-      )}
+
+
+        {step === 4 && (
+          <div className="step4-container">
+            <div className="step4-back-button" onClick={() => setStep(3)}>
+              <FaArrowLeft />
+            </div>
+            <h2 className="step4-title">You donate</h2>
+            <p className="step4-amount">
+              {selectedAmount} {currency}/month
+            </p>
+            <div className="step4-payment-options">
+              <button type="button" className="payment-button credit-card">
+                Credit Card
+              </button>
+              <button type="button" className="payment-button paypal">
+                <img
+                  src={require("../Images/paypal.svg").default}
+                  alt="PayPal"
+                  className="payment-logo"
+                />
+              </button>
+              <button type="button" className="payment-button google-pay">
+                <img
+                  src=""
+                  alt="Google Pay"
+                  className="payment-logo"
+                />
+              </button>
+            </div>
+          </div>
+        )}
+
       </div>
    </div>
     </div>

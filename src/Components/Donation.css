@@ -1,11 +1,14 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Rubik', sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 
 }
 
+p {
+  font-family: 'Rubik', sans-serif;
+}
 
 .donation-page {
   display: flex;
