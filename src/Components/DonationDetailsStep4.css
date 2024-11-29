@@ -9,7 +9,7 @@
     max-width: 400px;
     margin: 0 auto;
     font-family: 'Rubik', sans-serif;
-}
+    }
   
   .step4-back-button {
     display: flex;
@@ -27,7 +27,7 @@
   .step4-back-button svg {
     font-size: 2rem;
     margin-left: -244.5px;
-    margin-top: -146px;
+    margin-top: -125px;
   }
   
   .step4-back-button:hover {
