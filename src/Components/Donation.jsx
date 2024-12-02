@@ -3,6 +3,7 @@ import "./Donation.css";
 import "./DonationDetails.css";
 import "./DonationDetailsStep3.css";
 import "./DonationDetailsStep4.css";
+import "./DonationDetailsStep5.css";
 
 import { GrSecure } from "react-icons/gr";
 import { FaArrowLeft } from "react-icons/fa";
@@ -172,9 +173,6 @@ const Donation = () => {
     return errors;
   };
   
-  
-  
-  
   const handleStep3Submit = (e) => {
     e.preventDefault();
     const errors = validateStep3();
@@ -188,6 +186,42 @@ const Donation = () => {
       setTimeout(() => setShakeInput(false), 500); 
     }
   };
+
+  const [cardType, setCardType] = useState(null);
+
+  const detectCardType = (number) => {
+    const cardTypes = {
+      visa: /^4[0-9]{12}(?:[0-9]{3})?$/,
+      mastercard: /^5[1-5][0-9]{14}$/,
+      amex: /^3[47][0-9]{13}$/,
+      discover: /^6(?:011|5[0-9]{2})[0-9]{12}$/,
+    };
+
+    for (const [type, pattern] of Object.entries(cardTypes)) {
+      if (pattern.test(number)) {
+        return type;
+      }
+    }
+    return null;
+  };
+
+  const handleCardNumberChange = (e) => {
+    const number = e.target.value;
+    setCardType(detectCardType(number));
+    setStep4Data({ ...step4Data, cardNumber: number });
+  };
+
+  const handleExpirationChange = (e) => {
+    const value = e.target.value.replace(/[^0-9/]/g, ""); 
+    setStep4Data({ ...step4Data, expiryDate: value });
+  };
+  
+  const handleCVCChange = (e) => {
+    const value = e.target.value.replace(/[^0-9]/g, ""); 
+    setStep4Data({ ...step4Data, cvv: value });
+  };
+  
+
 
   
 
@@ -503,38 +537,107 @@ const Donation = () => {
             </div>
           )}
 
-
-
-        {step === 4 && (
-          <div className="step4-container">
-            <div className="step4-back-button" onClick={() => setStep(3)}>
-              <FaArrowLeft />
+          {step === 4 && (
+            <div className="step4-container">
+              <div className="step4-back-button" onClick={() => setStep(3)}>
+                <FaArrowLeft />
+              </div>
+              <h2 className="step4-title">You donate</h2>
+              <p className="step4-amount">
+                {selectedAmount} {currency}/month
+              </p>
+              <div className="step4-payment-options">
+                <button
+                  type="button"
+                  className="payment-button credit-card"
+                  onClick={() => setStep(5)} 
+                >
+                  Credit Card
+                </button>
+                <button type="button" className="payment-button paypal">
+                  <img
+                    src={require("../Images/paypal.svg").default}
+                    alt="PayPal"
+                    className="payment-logo"
+                  />
+                </button>
+              </div>
             </div>
-            <h2 className="step4-title">You donate</h2>
-            <p className="step4-amount">
-              {selectedAmount} {currency}/month
-            </p>
-            <div className="step4-payment-options">
-              <button type="button" className="payment-button credit-card">
-                Credit Card
-              </button>
-              <button type="button" className="payment-button paypal">
-                <img
-                  src={require("../Images/paypal.svg").default}
-                  alt="PayPal"
-                  className="payment-logo"
-                />
-              </button>
-              <button type="button" className="payment-button google-pay">
-                <img
-                  src=""
-                  alt="Google Pay"
-                  className="payment-logo"
-                />
-              </button>
-            </div>
-          </div>
+          )}
+
+{step === 5 && (
+  <div className="step5-container">
+    <div className="step5-back-button" onClick={() => setStep(4)}>
+      <FaArrowLeft />
+    </div>
+    <h2 className="step5-title">Credit Card</h2>
+    <p className="step5-instruction">
+      Please provide your card details to continue with your donation.
+    </p>
+    <form className="step5-form">
+      <div className="card-input-container">
+        <input
+          type="text"
+          placeholder="Card number"
+          className="step5-input"
+          maxLength="19" 
+          value={step4Data.cardNumber}
+          onChange={(e) => {
+            const value = e.target.value
+              .replace(/\D/g, '') 
+              .replace(/(.{4})/g, '$1 ') 
+              .trim();
+            setStep4Data({ ...step4Data, cardNumber: value });
+            setCardType(detectCardType(value.replace(/\s/g, ''))); 
+          }}
+        />
+        {cardType && (
+          <img
+            src={
+              cardType === 'visa'
+                ? require('../Images/visa.jpg')
+                : cardType === 'mastercard'
+                ? require('../Images/mastercard.jpg')
+                : cardType === 'amex'
+                ? require('../Images/amex.png')
+                : null
+            }
+            alt={cardType || 'Card Logo'}
+            className="card-logo"
+          />
         )}
+      </div>
+
+      <div className="expiry-cvc-container">
+        <input
+          type="text"
+          placeholder="MM/YY"
+          className="step5-input expiry-input"
+          maxLength="5"
+          value={step4Data.expiryDate}
+          onChange={(e) =>
+            setStep4Data({ ...step4Data, expiryDate: e.target.value })
+          }
+        />
+        <input
+          type="text"
+          placeholder="CVC"
+          className="step5-input cvc-input"
+          maxLength="4" 
+          value={step4Data.cvv}
+          onChange={(e) =>
+            setStep4Data({ ...step4Data, cvv: e.target.value })
+          }
+        />
+      </div>
+      <button type="submit" className="step5-submit-button">
+        Donate {selectedAmount} {currency}/month
+      </button>
+    </form>
+  </div>
+)}
+
+
 
       </div>
    </div>

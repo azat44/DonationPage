@@ -1,0 +1,134 @@
+.step5-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    max-width: 400px;
+    margin: 0 auto;
+    font-family: 'Rubik', sans-serif;
+  }
+  
+  .step5-back-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: blue;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    margin-bottom: 1rem;
+  }
+  
+  .step5-back-button svg {
+    font-size: 2rem;
+    margin-left: -244.5px;
+    margin-top: -149px;
+  }
+  
+  .step5-back-icon {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s ease;
+  }
+  
+  .step5-back-button:hover .step5-back-icon {
+    transform: scale(1.1);
+  }
+  
+  .step5-back-button:hover {
+    color: #0056b3;
+  }
+  
+  .step5-title {
+    font-size: 1.8rem;
+    color: blue;
+    text-align: center;
+    margin-top: -50px;
+  }
+  
+  .step5-instruction {
+    font-size: 1rem;
+    color: black;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .step5-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .step5-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-family: 'Rubik', sans-serif;
+  }
+  
+  .step5-input:focus {
+    border-color: blue;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
+  .card-input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .card-logo {
+    width: 40px; 
+    height: auto;
+    display: inline-block;
+    margin-left: 10px; 
+  }
+  
+  
+  .expiry-cvc-container {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+  }
+  
+  .expiry-input,
+  .cvc-input {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  
+  .expiry-input:focus,
+  .cvc-input:focus {
+    border-color: blue;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
+  .step5-submit-button {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 300px;
+    padding: 15px;
+    background: blue;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .step5-submit-button:hover {
+    background: #0056b3;
+  }
+  

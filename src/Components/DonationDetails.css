@@ -42,7 +42,7 @@ form h2 {
   font-size: 1.8rem;
   text-align: center;
   color: blue;
-  margin-top: 11px;
+  margin-bottom: 50px;
 }
 
 form button.submit-button {
@@ -136,7 +136,7 @@ form button.submit-button:hover {
   margin: 0; 
   transform: translateY(-2px); 
   margin-left:-107px;
-  margin-top:-229px;
+  margin-top:-255px;
 }
 
 
