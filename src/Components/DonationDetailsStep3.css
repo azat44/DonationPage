@@ -80,6 +80,9 @@ form .donation-container,
   margin-top: -30px;
 }
 
+.step3-back-button:hover {
+  color: orange;
+}
 .step3-title,
 .donation-details-title {
   font-size: 1.8rem;

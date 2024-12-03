@@ -25,18 +25,18 @@
   .step4-back-button svg {
     font-size: 2rem;
     margin-left: -244.5px;
-    margin-top: -464px;
+    margin-top: -466px;
   }
   
   .step4-back-button:hover {
-    color: #0056b3;
+    color: orange;
   }
   
   .step4-title {
     font-size: 1.8rem;
     text-align: center;
     color: blue;
-    margin-top:-230px
+    margin-top:-231px
   }
   
   .step4-amount {
