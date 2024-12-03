@@ -10,6 +10,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import "react-phone-input-2/lib/style.css";
 import PhoneInput from "react-phone-input-2";
 import countries from "./countries.json";
+import { CSSTransition } from "react-transition-group";
 
 
 const Donation = () => {
@@ -311,7 +312,11 @@ const handleMonthlyClick = () => {
               disabled={selectedAmount < minimumAmount}
             />
               I'd like to cover the fees associated with my donation so more of my
-              donation goes directly to the <strong>Arev Society</strong>.
+              donation goes directly to the   
+              <a href="https://www.arevsociety.org" target="_blank" rel="noopener noreferrer" 
+                style={{ color: 'orange' }}>   
+                <strong>   Arev Society</strong>
+              </a>.
             </label>
           </div>
 

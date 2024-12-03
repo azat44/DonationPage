@@ -76,7 +76,7 @@ form button.submit-button:hover {
   font-size: 1rem;
   color: black;
   transition: all 0.2s ease;
-  min-width: 80px;
+  min-width: 100px;
   min-height: 50px;
 }
 
