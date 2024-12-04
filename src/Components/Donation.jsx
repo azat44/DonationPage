@@ -10,7 +10,10 @@ import { FaArrowLeft } from "react-icons/fa";
 import "react-phone-input-2/lib/style.css";
 import PhoneInput from "react-phone-input-2";
 import countries from "./countries.json";
-import { CSSTransition } from "react-transition-group";
+
+
+import arevLogo from '../Images/Arev_Society_Nonprofit-PNG-Eternity.png';
+
 
 
 const Donation = () => {
@@ -29,7 +32,6 @@ const Donation = () => {
   const [step3Errors, setStep3Errors] = useState({});
   const [step3Data, setStep3Data] = useState({
     streetAddress: "",
-    apartment: "",
     city: "",
     zipCode: "",
     country: "",
@@ -42,7 +44,7 @@ const Donation = () => {
   const [cardType, setCardType] = useState(null);
 
   const minimumAmount = 5;
-  const donationOptions = [400, 200, 120, 75, 55, 35];
+  const donationOptions = [1000, 500, 400, 200, 100, 50];
 
 const handleMonthlyClick = () => {
   setIsMonthly(true); 
@@ -108,9 +110,6 @@ const handleMonthlyClick = () => {
     const errors = {};
     if (!step3Data.streetAddress || step3Data.streetAddress.trim() === "") {
       errors.streetAddress = true; 
-    }
-    if (!step3Data.apartment || step3Data.apartment.trim() === "") {
-      errors.apartment = true; 
     }
     const cityRegex = /^[a-zA-Z\u00C0-\u017F\s]+$/; 
     if (!step3Data.city || !cityRegex.test(step3Data.city.trim())) {
@@ -304,20 +303,18 @@ const handleMonthlyClick = () => {
           </div>
 
           <div className="cover-fees">
-            <label>
-            <input
-              type="checkbox"
-              checked={coverFees}
-              onChange={handleCoverFeesToggle}
-              disabled={selectedAmount < minimumAmount}
-            />
-              I'd like to cover the fees associated with my donation so more of my
-              donation goes directly to the   
-              <a href="https://www.arevsociety.org" target="_blank" rel="noopener noreferrer" 
-                style={{ color: 'orange' }}>   
-                <strong>   Arev Society</strong>
-              </a>.
-            </label>
+          <label>
+          <input
+            type="checkbox"
+            checked={coverFees}
+            onChange={handleCoverFeesToggle}
+            disabled={selectedAmount < minimumAmount}
+          />
+          I'd like to cover the fees associated with my donation so more of my
+          donation goes directly to the <strong><span style={{ color: 'orange' }}>Arev Society</span></strong>.
+        </label>
+
+
           </div>
 
           <button className="donate-button" onClick={handleDonationClick}>
@@ -348,166 +345,159 @@ const handleMonthlyClick = () => {
       )}
 
 
-{step === 2 && (
-            <div className="donation-details-form">
-              <h2 className="donation-details-title">Enter your details</h2>
-              <div className="back-button" onClick={goBack}>
-                <FaArrowLeft />
-              </div>
-              <form onSubmit={handleStep2Submit}>
-                <input
-                  type="text"
-                  name="firstName"
-                  className={`donation-input ${errors.firstName ? "error" : ""} ${
-                    shakeInput ? "shake" : ""
-                  }`}
-                  placeholder="First name"
-                  value={step2Data.firstName}
-                  onChange={(e) =>
-                    setStep2Data({ ...step2Data, firstName: e.target.value })
-                  }
-                />
-
-                <input
-                  type="text"
-                  name="lastName"
-                  className={`donation-input ${errors.lastName ? "error" : ""} ${
-                    shakeInput ? "shake" : ""
-                  }`}
-                  placeholder="Last name"
-                  value={step2Data.lastName}
-                  onChange={(e) =>
-                    setStep2Data({ ...step2Data, lastName: e.target.value })
-                  }
-                />
-
-                <input
-                  type="email"
-                  name="email"
-                  className={`donation-input ${errors.email ? "error" : ""} ${
-                    shakeInput ? "shake" : ""
-                  }`}
-                  placeholder="Email address"
-                  value={step2Data.email}
-                  onChange={(e) =>
-                    setStep2Data({ ...step2Data, email: e.target.value })
-                  }
-                />
-                {typeof errors.email === "string" && (
-                  <span className="error-message">{errors.email}</span>
-                )}
-
-                <PhoneInput
-                  country={"fr"}
-                  value={step2Data.phone}
-                  onChange={(value) => setStep2Data({ ...step2Data, phone: value })}
-                  containerClass="phone-input-container"
-                  buttonClass="flag-dropdown"
-                />
-                <input
-                  type="tel"
-                  placeholder="Phone number (optional)"
-                  className="custom-phone-input"
-                  value={step2Data.phone}
-                  maxLength={16} 
-                  onChange={(e) => {
-                    let value = e.target.value;
-
-                    value = value.replace(/[^\d+]/g, "");
-
-                    if (!value.startsWith("+")) {
-                      value = "+" + value;
-                    }
-
-                    if (value.length > 16) {
-                      value = value.slice(0, 16); 
-                    }
-
-                    setStep2Data({ ...step2Data, phone: value });
-                  }}
-                />
-                {errors.phone && (
-                  <span className="error-message">{errors.phone}</span>
-                )}
-
-                <button type="submit" className="submit-button">
-                  Continue
-                </button>
-              </form>
-            </div>
-          )}
+      {step === 2 && (
+        <div className="donation-details-form">
+          <img
+            src={arevLogo}
+            alt="Arev Society Logo"
+            className="donation-logo"
+          />
+          <h2 className="donation-details-title">Enter your details</h2>
+          <div className="back-button" onClick={goBack}>
+            <FaArrowLeft />
+          </div>
+          <form onSubmit={handleStep2Submit}>
+            <input
+              type="text"
+              name="firstName"
+              className={`donation-input ${errors.firstName ? "error" : ""} ${
+                shakeInput ? "shake" : ""
+              }`}
+              placeholder="First name"
+              value={step2Data.firstName}
+              onChange={(e) =>
+                setStep2Data({ ...step2Data, firstName: e.target.value })
+              }
+            />
+            <input
+              type="text"
+              name="lastName"
+              className={`donation-input ${errors.lastName ? "error" : ""} ${
+                shakeInput ? "shake" : ""
+              }`}
+              placeholder="Last name"
+              value={step2Data.lastName}
+              onChange={(e) =>
+                setStep2Data({ ...step2Data, lastName: e.target.value })
+              }
+            />
+            <input
+              type="email"
+              name="email"
+              className={`donation-input ${errors.email ? "error" : ""} ${
+                shakeInput ? "shake" : ""
+              }`}
+              placeholder="Email address"
+              value={step2Data.email}
+              onChange={(e) =>
+                setStep2Data({ ...step2Data, email: e.target.value })
+              }
+            />
+            {typeof errors.email === "string" && (
+              <span className="error-message">{errors.email}</span>
+            )}
+            <PhoneInput
+              country={"fr"}
+              value={step2Data.phone}
+              onChange={(value) =>
+                setStep2Data({ ...step2Data, phone: value })
+              }
+              containerClass="phone-input-container"
+              buttonClass="flag-dropdown"
+            />
+            <input
+              type="tel"
+              placeholder="Phone number (optional)"
+              className="custom-phone-input"
+              value={step2Data.phone}
+              maxLength={16}
+              onChange={(e) => {
+                let value = e.target.value;
+                value = value.replace(/[^\d+]/g, "");
+                if (value.length > 16) {
+                  value = value.slice(0, 16);
+                }
+                setStep2Data({ ...step2Data, phone: value });
+              }}
+            />
+            {errors.phone && (
+              <span className="error-message">{errors.phone}</span>
+            )}
+            <button type="submit" className="submit-button">
+              Continue
+            </button>
+          </form>
+        </div>
+      )}
 
 
 
 
-          {step === 3 && (
-            <div className="step3-container">
-              <div className="step3-back-button" onClick={() => setStep(2)}>
-                <FaArrowLeft />
-              </div>
-              <h2 className="step3-title">Enter your address</h2>
 
-              <form onSubmit={handleStep3Submit}>
-                <input
-                  type="text"
-                  className={`step3-input ${step3Errors.streetAddress ? "error shake" : ""}`}
-                  placeholder="Street address"
-                  value={step3Data.streetAddress}
-                  onChange={(e) =>
-                    setStep3Data({ ...step3Data, streetAddress: e.target.value })
-                  }
-                />
+    {step === 3 && (
+      <div className="step3-container">
+        <img
+          src={arevLogo}
+          alt="Arev Society Logo"
+          className="donation-logo"
+        />
+        <div className="step3-back-button" onClick={() => setStep(2)}>
+          <FaArrowLeft />
+        </div>
+        <h2 className="step3-title">Enter your address</h2>
 
-                <input
-                  type="text"
-                  className={`step3-input ${step3Errors.apartment ? "error shake" : ""}`}
-                  placeholder="Apartment / suite / floor"
-                  value={step3Data.apartment}
-                  onChange={(e) =>
-                    setStep3Data({ ...step3Data, apartment: e.target.value })
-                  }
-                />
+        <form onSubmit={handleStep3Submit}>
+          <input
+            type="text"
+            className={`step3-input ${step3Errors.streetAddress ? "error shake" : ""}`}
+            placeholder="Street address"
+            value={step3Data.streetAddress}
+            onChange={(e) =>
+              setStep3Data({ ...step3Data, streetAddress: e.target.value })
+            }
+          />
 
-                <input
-                  type="text"
-                  className={`step3-input ${step3Errors.city ? "error shake" : ""}`}
-                  placeholder="City"
-                  value={step3Data.city}
-                  onChange={(e) =>
-                    setStep3Data({ ...step3Data, city: e.target.value })
-                  }
-                />
+          <input
+            type="text"
+            className={`step3-input ${step3Errors.city ? "error shake" : ""}`}
+            placeholder="City"
+            value={step3Data.city}
+            onChange={(e) =>
+              setStep3Data({ ...step3Data, city: e.target.value })
+            }
+          />
 
-                <input
-                  type="text"
-                  className={`step3-input ${step3Errors.zipCode ? "error shake" : ""}`}
-                  placeholder="Zip code"
-                  value={step3Data.zipCode}
-                  onChange={(e) =>
-                    setStep3Data({ ...step3Data, zipCode: e.target.value })
-                  }
-                />
+          <input
+            type="text"
+            className={`step3-input ${step3Errors.zipCode ? "error shake" : ""}`}
+            placeholder="Zip code"
+            value={step3Data.zipCode}
+            onChange={(e) =>
+              setStep3Data({ ...step3Data, zipCode: e.target.value })
+            }
+          />
 
-                <select
-                  id="country-select"
-                  className="step3-select"
-                  value={step3Data.country}
-                  onChange={(e) => setStep3Data({ ...step3Data, country: e.target.value })}
-                >
-                  <option value="">Select your country</option>
-                  {countries.map((country) => (
-                    <option key={country["alpha-2"]} value={country["alpha-2"]}>
-                      {country.name}
-                    </option>
-                  ))}
-                </select>
+          <select
+            id="country-select"
+            className="step3-select"
+            value={step3Data.country}
+            onChange={(e) => setStep3Data({ ...step3Data, country: e.target.value })}
+          >
+            <option value="">Select your country</option>
+            {countries.map((country) => (
+              <option key={country["alpha-2"]} value={country["alpha-2"]}>
+                {country.name}
+              </option>
+            ))}
+          </select>
 
-                <button type="submit" className="step3-button">
-                  Continue to Payment
-                </button>
-              </form>
-            </div>
-          )}
+          <button type="submit" className="step3-button">
+            Continue to Payment
+          </button>
+        </form>
+      </div>
+    )}
+
 
         {step === 4 && (
           <div className="step4-container">
@@ -515,6 +505,7 @@ const handleMonthlyClick = () => {
               <FaArrowLeft />
             </div>
             <h2 className="step4-title">You donate</h2>
+            
             <p className="step4-amount">
               {selectedAmount} $/month
             </p> 

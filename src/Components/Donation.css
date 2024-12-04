@@ -11,7 +11,6 @@ p {
 }
 
 .donation-page {
-  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,8 +20,6 @@ p {
 }
 
 .donation-container {
-  position: relative; /* Permet aux enfants d’être positionnés correctement */
-  overflow: hidden; /* Cache les éléments qui sortent de l'écran pendant les animations */
   display: flex;
   background: white;
   border-radius: 10px;
@@ -34,8 +31,6 @@ p {
 }
 
 .donation-info {
-  position: relative; /* Permet aux enfants d’être positionnés correctement */
-  overflow: hidden; /* Cache les éléments qui sortent de l'écran pendant les animations */
   flex: 1;
   padding: 30px;
   background-color: #f5f5f5;
@@ -46,7 +41,9 @@ p {
 }
 
 .donation-logo {
-  width: 120px;
+  display: block; 
+  margin: 0 auto; 
+  width: 80px; 
 }
 
 .donation-info .donation-info-title {
@@ -91,8 +88,6 @@ p {
 }
 
 .donation-form {
-  position: relative; /* Permet aux enfants d’être positionnés correctement */
-  overflow: hidden; /* Cache les éléments qui sortent de l'écran pendant les animations */
   flex: 1;
   padding: 30px;
   display: flex;
@@ -405,7 +400,6 @@ p {
     transform: translateX(5px);
   }
 }
-
 
 
 
