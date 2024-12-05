@@ -4,10 +4,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1.5rem;
+  gap: 2rem; /* Espacement uniforme entre les éléments */
   max-width: 400px;
   margin: 0 auto;
-  }
+  padding: 20px; /* Ajoute un espacement interne pour tout le conteneur */
+}
+
 
 .step4-back-button {
   display: flex;
@@ -24,20 +26,15 @@
 
 .step4-back-button svg {
   font-size: 2rem;
-  margin-left: -244.5px;
-  margin-top: -466px;
+  margin-left: -244px;
+  margin-top: -101px;
 }
 
 .step4-back-button:hover {
   color: orange;
 }
 
-.step4-title {
-  font-size: 1.8rem;
-  text-align: center;
-  color: blue;
-  margin-top:-231px
-}
+
 
 .step4-amount {
   font-size: 1.5rem;
@@ -54,14 +51,17 @@
 }
 
 .payment-button {
+  margin-top: 20px;
   width: 100%;
-  max-width: 300px;
+  max-width: 300px; 
   padding: 15px;
+  background: blue;
+  color: white;
   border: none;
   border-radius: 5px;
   font-size: 1rem;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background 0.3s ease-in-out;
 }
 
 .payment-button.credit-card {
@@ -91,3 +91,31 @@
   display: block;
   margin: 0 auto;
 }
+
+.secure-title-container4 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px; 
+}
+
+.secure-icon4 {
+  font-size: 2rem;
+  color: orange;
+  margin-top:7px
+}
+
+.secure-title4 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  text-align: center;
+  color: blue;
+}
+
+.donation-logo4 {
+  display: block; 
+  margin: 20px auto;
+  width: 80px; 
+}
+

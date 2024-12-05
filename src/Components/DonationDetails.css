@@ -42,13 +42,12 @@ form h2 {
   font-size: 1.8rem;
   text-align: center;
   color: blue;
-  margin-bottom: 50px;
+  margin-bottom: 5px;
 }
 
 form button.submit-button {
-  margin-top: 20px;
   width: 100%;
-  max-width: 350px;
+  max-width: 240px; 
   padding: 15px;
   background: blue;
   color: white;
@@ -76,7 +75,7 @@ form button.submit-button:hover {
   font-size: 1rem;
   color: black;
   transition: all 0.2s ease;
-  min-width: 80px;
+  min-width: 100px;
   min-height: 50px;
 }
 
@@ -135,8 +134,8 @@ form button.submit-button:hover {
   font-size: 2rem; 
   margin: 0; 
   transform: translateY(-2px); 
-  margin-left:-107px;
-  margin-top:-255px;
+  margin-left:-106.5px;
+  margin-top:-270px;
 }
 
 
@@ -203,7 +202,7 @@ form .checkbox-container input[type="checkbox"] {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 35px; 
+  margin-top: 20px; 
   margin-left: -40px; 
   transform: translateY(3px); 
 

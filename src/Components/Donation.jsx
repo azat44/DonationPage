@@ -492,7 +492,7 @@ const handleMonthlyClick = () => {
           </select>
 
           <button type="submit" className="step3-button">
-            Continue to Payment
+            Continue
           </button>
         </form>
       </div>
@@ -501,10 +501,18 @@ const handleMonthlyClick = () => {
 
         {step === 4 && (
           <div className="step4-container">
+          <img
+            src={arevLogo}
+            alt="Arev Society Logo"
+            className="donation-logo4"
+          />
             <div className="step4-back-button" onClick={() => setStep(3)}>
               <FaArrowLeft />
             </div>
-            <h2 className="step4-title">You donate</h2>
+            <div className="secure-title-container4">
+              <GrSecure className="secure-icon4" />
+              <h3 className="secure-title4">Secure donation</h3>
+          </div>
             
             <p className="step4-amount">
               {selectedAmount} $/month

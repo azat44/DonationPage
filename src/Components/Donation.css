@@ -44,6 +44,7 @@ p {
   display: block; 
   margin: 0 auto; 
   width: 80px; 
+  margin-top:-30px
 }
 
 .donation-info .donation-info-title {
@@ -399,6 +400,10 @@ p {
   50% {
     transform: translateX(5px);
   }
+}
+
+.custom-phone-input{
+  margin-top:-15px
 }
 
 
