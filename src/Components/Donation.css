@@ -323,8 +323,8 @@ p {
 }
 
 .eternity-logo {
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   margin-right: 8px;
   vertical-align: middle;
   transition: transform 0.3s ease;
@@ -333,7 +333,7 @@ p {
 }
 
 .animate-logo {
-  transform: scale(1.6) rotate(15deg);
+  transform: scale(1.4) rotate(15deg);
 }
 
 .arev-link {

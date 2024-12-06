@@ -501,11 +501,14 @@ const handleMonthlyClick = () => {
 
         {step === 4 && (
           <div className="step4-container">
-          <img
-            src={arevLogo}
-            alt="Arev Society Logo"
-            className="donation-logo4"
-          />
+          <div className="parent-container">
+            <img
+              src={arevLogo}
+              alt="Arev Society Logo"
+              className="donation-logo4"
+            />
+          </div>
+
             <div className="step4-back-button" onClick={() => setStep(3)}>
               <FaArrowLeft />
             </div>
@@ -539,6 +542,13 @@ const handleMonthlyClick = () => {
 
           {step === 5 && (
             <div className="step5-container">
+            <div className="parent-container">
+              <img
+                src={arevLogo}
+                alt="Arev Society Logo"
+                className="donation-logo4"
+              />
+          </div>
               <div className="step5-back-button" onClick={() => setStep(4)}>
                 <FaArrowLeft />
               </div>
@@ -571,7 +581,7 @@ const handleMonthlyClick = () => {
                           : cardType === 'mastercard'
                           ? require('../Images/mastercard.jpg')
                           : cardType === 'amex'
-                          ? require('../Images/amex.png')
+                          ? require('../Images/amex.webp')
                           : null
                       }
                       alt="Card Logo"

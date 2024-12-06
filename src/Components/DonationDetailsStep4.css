@@ -4,10 +4,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2rem; /* Espacement uniforme entre les éléments */
+  gap: 2rem; 
   max-width: 400px;
   margin: 0 auto;
-  padding: 20px; /* Ajoute un espacement interne pour tout le conteneur */
+  padding: 20px; 
+  margin-top:-90px;
+  align-self: center;
 }
 
 
@@ -27,7 +29,7 @@
 .step4-back-button svg {
   font-size: 2rem;
   margin-left: -244px;
-  margin-top: -101px;
+  margin-top: -422px;
 }
 
 .step4-back-button:hover {
@@ -93,29 +95,35 @@
 }
 
 .secure-title-container4 {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  justify-content: center;
-  margin-top: 20px; 
+  display: inline-flex; 
+  align-items: center; 
+  justify-content: center; 
+  width: 100%; 
+  margin-top: -150px; 
+  gap: 5px; 
 }
 
 .secure-icon4 {
-  font-size: 2rem;
+  font-size: 1.5rem; 
   color: orange;
-  margin-top:7px
+  margin: 0; 
 }
 
 .secure-title4 {
-  font-size: 1.8rem;
-  margin-bottom: 20px;
-  text-align: center;
+  font-size: 1.8rem; 
+  margin: 0; 
   color: blue;
+  text-align: center;
+}
+
+
+.parent-container {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
 }
 
 .donation-logo4 {
-  display: block; 
-  margin: 20px auto;
   width: 80px; 
+  padding-bottom: 105.5px; 
 }
-
