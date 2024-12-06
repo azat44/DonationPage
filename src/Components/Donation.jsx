@@ -427,80 +427,119 @@ const handleMonthlyClick = () => {
               Continue
             </button>
           </form>
+
+          {/* Tooltips Section */}
+          <div className="questions-container">
+            <span
+              className="question"
+              onClick={(e) => handleTooltip("Learn how your donations are secured.", e)}
+            >
+              Is my donation secure?
+            </span>
+            <span
+              className="question"
+              onClick={(e) => handleTooltip("Find out about tax-deductible benefits.", e)}
+            >
+              Is this donation tax-deductible?
+            </span>
+            <span
+              className="question"
+              onClick={(e) => handleTooltip("Learn about canceling recurring donations.", e)}
+            >
+              Can I cancel my recurring donation?
+            </span>
+          </div>
+        </div>
+      )}
+
+      {step === 3 && (
+        <div className="step3-container">
+          <img
+            src={arevLogo}
+            alt="Arev Society Logo"
+            className="donation-logo"
+          />
+          <div className="step3-back-button" onClick={() => setStep(2)}>
+            <FaArrowLeft />
+          </div>
+          <h2 className="step3-title">Enter your address</h2>
+
+          <form onSubmit={handleStep3Submit}>
+            <input
+              type="text"
+              className={`step3-input ${step3Errors.streetAddress ? "error shake" : ""}`}
+              placeholder="Street address"
+              value={step3Data.streetAddress}
+              onChange={(e) =>
+                setStep3Data({ ...step3Data, streetAddress: e.target.value })
+              }
+            />
+
+            <input
+              type="text"
+              className={`step3-input ${step3Errors.city ? "error shake" : ""}`}
+              placeholder="City"
+              value={step3Data.city}
+              onChange={(e) =>
+                setStep3Data({ ...step3Data, city: e.target.value })
+              }
+            />
+
+            <input
+              type="text"
+              className={`step3-input ${step3Errors.zipCode ? "error shake" : ""}`}
+              placeholder="Zip code"
+              value={step3Data.zipCode}
+              onChange={(e) =>
+                setStep3Data({ ...step3Data, zipCode: e.target.value })
+              }
+            />
+
+            <select
+              id="country-select"
+              className="step3-select"
+              value={step3Data.country}
+              onChange={(e) => setStep3Data({ ...step3Data, country: e.target.value })}
+            >
+              <option value="">Select your country</option>
+              {countries.map((country) => (
+                <option key={country["alpha-2"]} value={country["alpha-2"]}>
+                  {country.name}
+                </option>
+              ))}
+            </select>
+
+            <button type="submit" className="step3-button">
+              Continue
+            </button>
+          </form>
+
+          <div className="questions-container">
+            <span
+              className="question"
+              onClick={(e) => handleTooltip("Learn how your donations are secured.", e)}
+            >
+              Is my donation secure?
+            </span>
+            <span
+              className="question"
+              onClick={(e) => handleTooltip("Find out about tax-deductible benefits.", e)}
+            >
+              Is this donation tax-deductible?
+            </span>
+            <span
+              className="question"
+              onClick={(e) => handleTooltip("Learn about canceling recurring donations.", e)}
+            >
+              Can I cancel my recurring donation?
+            </span>
+          </div>
         </div>
       )}
 
 
-
-
-
-    {step === 3 && (
-      <div className="step3-container">
-        <img
-          src={arevLogo}
-          alt="Arev Society Logo"
-          className="donation-logo"
-        />
-        <div className="step3-back-button" onClick={() => setStep(2)}>
-          <FaArrowLeft />
-        </div>
-        <h2 className="step3-title">Enter your address</h2>
-
-        <form onSubmit={handleStep3Submit}>
-          <input
-            type="text"
-            className={`step3-input ${step3Errors.streetAddress ? "error shake" : ""}`}
-            placeholder="Street address"
-            value={step3Data.streetAddress}
-            onChange={(e) =>
-              setStep3Data({ ...step3Data, streetAddress: e.target.value })
-            }
-          />
-
-          <input
-            type="text"
-            className={`step3-input ${step3Errors.city ? "error shake" : ""}`}
-            placeholder="City"
-            value={step3Data.city}
-            onChange={(e) =>
-              setStep3Data({ ...step3Data, city: e.target.value })
-            }
-          />
-
-          <input
-            type="text"
-            className={`step3-input ${step3Errors.zipCode ? "error shake" : ""}`}
-            placeholder="Zip code"
-            value={step3Data.zipCode}
-            onChange={(e) =>
-              setStep3Data({ ...step3Data, zipCode: e.target.value })
-            }
-          />
-
-          <select
-            id="country-select"
-            className="step3-select"
-            value={step3Data.country}
-            onChange={(e) => setStep3Data({ ...step3Data, country: e.target.value })}
-          >
-            <option value="">Select your country</option>
-            {countries.map((country) => (
-              <option key={country["alpha-2"]} value={country["alpha-2"]}>
-                {country.name}
-              </option>
-            ))}
-          </select>
-
-          <button type="submit" className="step3-button">
-            Continue
-          </button>
-        </form>
-      </div>
-    )}
-
-
-        {step === 4 && (
-          <div className="step4-container">
+      {step === 4 && (
+        <div className="step4-container">
           <div className="parent-container">
             <img
               src={arevLogo}
@@ -509,120 +548,163 @@ const handleMonthlyClick = () => {
             />
           </div>
 
-            <div className="step4-back-button" onClick={() => setStep(3)}>
-              <FaArrowLeft />
-            </div>
-            <div className="secure-title-container4">
-              <GrSecure className="secure-icon4" />
-              <h3 className="secure-title4">Secure donation</h3>
+          <div className="step4-back-button" onClick={() => setStep(3)}>
+            <FaArrowLeft />
           </div>
-            
-            <p className="step4-amount">
-              {selectedAmount} $/month
-            </p> 
-            <div className="step4-payment-options">
-              <button
-                type="button"
-                className="payment-button credit-card"
-                onClick={() => setStep(5)}
-              >
-                Credit Card
-              </button>
-              <button type="button" className="payment-button paypal">
-                <img
-                  src={require("../Images/paypal.svg").default}
-                  alt="PayPal"
-                  className="payment-logo"
-                />
-              </button>
-            </div>
+
+          <div className="secure-title-container4">
+            <GrSecure className="secure-icon4" />
+            <h3 className="secure-title4">Secure donation</h3>
           </div>
-        )}
 
+          <p className="step4-amount">{selectedAmount} $/month</p>
 
-          {step === 5 && (
-            <div className="step5-container">
-            <div className="parent-container">
+          <div className="step4-payment-options">
+            <button
+              type="button"
+              className="payment-button credit-card"
+              onClick={() => setStep(5)}
+            >
+              Credit Card
+            </button>
+            <button type="button" className="payment-button paypal">
               <img
-                src={arevLogo}
-                alt="Arev Society Logo"
-                className="donation-logo4"
+                src={require("../Images/paypal.svg").default}
+                alt="PayPal"
+                className="payment-logo"
               />
+            </button>
           </div>
-              <div className="step5-back-button" onClick={() => setStep(4)}>
-                <FaArrowLeft />
-              </div>
-              <h2 className="step5-title">Credit Card</h2>
-              <p className="step5-instruction">
-                Please provide your card details to continue with your donation.
-              </p>
-              <form className="step5-form">
-                <div className="card-input-container">
-                  <input
-                    type="text"
-                    placeholder="Card number"
-                    className={`step5-input`}
-                    maxLength="19"
-                    value={step4Data.cardNumber}
-                    onChange={(e) => {
-                      const value = e.target.value
-                        .replace(/\D/g, '')
-                        .replace(/(.{4})/g, '$1 ')
-                        .trim();
-                      setStep4Data({ ...step4Data, cardNumber: value });
-                      setCardType(detectCardType(value.replace(/\s/g, '').slice(0, 2))); 
-                    }}
-                  />
-                  {cardType && (
-                    <img
-                      src={
-                        cardType === 'visa'
-                          ? require('../Images/visa.jpg')
-                          : cardType === 'mastercard'
-                          ? require('../Images/mastercard.jpg')
-                          : cardType === 'amex'
-                          ? require('../Images/amex.webp')
-                          : null
-                      }
-                      alt="Card Logo"
-                      className="card-logo"
-                    />
-                  )}
-                </div>
 
-                <div className="expiry-cvc-container">
-                  <input
-                    type="text"
-                    placeholder="MM/YY"
-                    className="expiry-input"
-                    maxLength="5"
-                    value={step4Data.expiryDate}
-                    onChange={(e) => {
-                      let value = e.target.value.replace(/[^0-9]/g, '');
-                      if (value.length > 2) {
-                        value = `${value.slice(0, 2)}/${value.slice(2, 4)}`; 
-                      }
-                      setStep4Data({ ...step4Data, expiryDate: value });
-                    }}
-                  />
-                  <input
-                    type="text"
-                    placeholder="CVC"
-                    className="cvc-input"
-                    maxLength="3" 
-                    value={step4Data.cvv}
-                    onChange={(e) => {
-                      const value = e.target.value.replace(/[^0-9]/g, '').slice(0, 3);
-                      setStep4Data({ ...step4Data, cvv: value });
-                    }}
-                  />
-                </div>
-                <button type="submit" className="step5-submit-button">
-                Donate {selectedAmount} $/month
-              </button>
-              </form>
-            </div>
-          )}
+          <div className="questions-container">
+            <span
+              className="question"
+              onClick={(e) => handleTooltip("Learn how your donations are secured.", e)}
+            >
+              Is my donation secure?
+            </span>
+            <span
+              className="question"
+              onClick={(e) => handleTooltip("Find out about tax-deductible benefits.", e)}
+            >
+              Is this donation tax-deductible?
+            </span>
+            <span
+              className="question"
+              onClick={(e) => handleTooltip("Learn about canceling recurring donations.", e)}
+            >
+              Can I cancel my recurring donation?
+            </span>
+          </div>
+        </div>
+      )}
+
+
+    {step === 5 && (
+      <div className="step5-container">
+        <div className="parent-container">
+          <img
+            src={arevLogo}
+            alt="Arev Society Logo"
+            className="donation-logo4"
+          />
+        </div>
+        <div className="step5-back-button" onClick={() => setStep(4)}>
+          <FaArrowLeft />
+        </div>
+        <h2 className="step5-title">Credit Card</h2>
+        <p className="step5-instruction">
+          Please provide your card details to continue with your donation.
+        </p>
+        <form className="step5-form">
+          <div className="card-input-container">
+            <input
+              type="text"
+              placeholder="Card number"
+              className={`step5-input`}
+              maxLength="19"
+              value={step4Data.cardNumber}
+              onChange={(e) => {
+                const value = e.target.value
+                  .replace(/\D/g, '')
+                  .replace(/(.{4})/g, '$1 ')
+                  .trim();
+                setStep4Data({ ...step4Data, cardNumber: value });
+                setCardType(detectCardType(value.replace(/\s/g, '').slice(0, 2)));
+              }}
+            />
+            {cardType && (
+              <img
+                src={
+                  cardType === 'visa'
+                    ? require('../Images/visa.jpg')
+                    : cardType === 'mastercard'
+                    ? require('../Images/mastercard.jpg')
+                    : cardType === 'amex'
+                    ? require('../Images/amex.webp')
+                    : null
+                }
+                alt="Card Logo"
+                className="card-logo"
+              />
+            )}
+          </div>
+
+          <div className="expiry-cvc-container">
+            <input
+              type="text"
+              placeholder="MM/YY"
+              className="expiry-input"
+              maxLength="5"
+              value={step4Data.expiryDate}
+              onChange={(e) => {
+                let value = e.target.value.replace(/[^0-9]/g, '');
+                if (value.length > 2) {
+                  value = `${value.slice(0, 2)}/${value.slice(2, 4)}`;
+                }
+                setStep4Data({ ...step4Data, expiryDate: value });
+              }}
+            />
+            <input
+              type="text"
+              placeholder="CVC"
+              className="cvc-input"
+              maxLength="3"
+              value={step4Data.cvv}
+              onChange={(e) => {
+                const value = e.target.value.replace(/[^0-9]/g, '').slice(0, 3);
+                setStep4Data({ ...step4Data, cvv: value });
+              }}
+            />
+          </div>
+          <button type="submit" className="step5-submit-button">
+            Donate {selectedAmount} $/month
+          </button>
+        </form>
+
+        <div className="questions-container">
+          <span
+            className="question"
+            onClick={(e) => handleTooltip("Learn how your donations are secured.", e)}
+          >
+            Is my donation secure?
+          </span>
+          <span
+            className="question"
+            onClick={(e) => handleTooltip("Find out about tax-deductible benefits.", e)}
+          >
+            Is this donation tax-deductible?
+          </span>
+          <span
+            className="question"
+            onClick={(e) => handleTooltip("Learn about canceling recurring donations.", e)}
+          >
+            Can I cancel my recurring donation?
+          </span>
+        </div>
+      </div>
+    )}
+
 
 
 

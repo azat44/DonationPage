@@ -3,10 +3,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
-  max-width: 400px;
   margin: 0 auto;
-  padding: 20px;
   font-family: 'Rubik', sans-serif;
 }
 
@@ -25,8 +22,8 @@
 
 .step5-back-button svg {
   font-size: 2rem;
-  margin-left: -244px;
-  margin-top: -389px;
+  margin-left: -246px;
+  margin-top: -351px;
 }
 
 .step5-back-button:hover {

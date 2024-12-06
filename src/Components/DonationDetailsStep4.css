@@ -5,10 +5,7 @@
   align-items: center;
   justify-content: center;
   gap: 2rem; 
-  max-width: 400px;
   margin: 0 auto;
-  padding: 20px; 
-  margin-top:-90px;
   align-self: center;
 }
 
@@ -28,7 +25,7 @@
 
 .step4-back-button svg {
   font-size: 2rem;
-  margin-left: -244px;
+  margin-left: -246px;
   margin-top: -422px;
 }
 
@@ -46,7 +43,6 @@
 }
 
 .step4-payment-options {
-  display: flex;
   flex-direction: column;
   gap: 1rem;
   width: 100%;

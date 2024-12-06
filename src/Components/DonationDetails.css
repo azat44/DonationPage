@@ -134,8 +134,8 @@ form button.submit-button:hover {
   font-size: 2rem; 
   margin: 0; 
   transform: translateY(-2px); 
-  margin-left:-106.5px;
-  margin-top:-270px;
+  margin-left:-10px;
+  margin-top:-200px;
 }
 
 
@@ -203,7 +203,7 @@ form .checkbox-container input[type="checkbox"] {
   align-items: center;
   justify-content: center;
   margin-top: 20px; 
-  margin-left: -40px; 
+  margin-left: 40px; 
   transform: translateY(3px); 
 
 }

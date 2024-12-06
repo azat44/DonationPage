@@ -2,7 +2,6 @@ form,
 .step3-container {
   display: flex;
   flex-direction: column;
-  max-width: 400px; 
   margin: 0 auto;
   font-family: 'Rubik', sans-serif;
   justify-content: center;
@@ -73,8 +72,8 @@ form .donation-container,
 .step3-back-button svg
  {
   font-size: 2rem;
-  margin-left: -244px;
-  margin-top: -145px;
+  margin-left: -246px;
+  margin-top: -77px;
 }
 
 .step3-back-button:hover {
