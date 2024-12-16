@@ -4,15 +4,15 @@ import "./DonationDetails.css";
 import "./DonationDetailsStep3.css";
 import "./DonationDetailsStep4.css";
 import "./DonationDetailsStep5.css";
-
+import "./Popup.css";
 import { GrSecure } from "react-icons/gr";
 import { FaArrowLeft } from "react-icons/fa";
 import "react-phone-input-2/lib/style.css";
 import PhoneInput from "react-phone-input-2";
 import countries from "./countries.json";
-
-
+import { IoCloseSharp } from "react-icons/io5";
 import arevLogo from '../Images/Arev_Society_Nonprofit-PNG-Eternity.png';
+
 
 
 
@@ -210,6 +210,16 @@ const handleMonthlyClick = () => {
     });
   };
 
+  const handleCloseDonationPage = () => {
+    window.location.href = "/"; 
+
+  };
+
+
+  const [showPopup, setShowPopup] = useState(false);
+  const [email, setEmail] = useState(""); // Pour l'input email
+  const [isError, setIsError] = useState(false); // Pour la gestion de l'erreur et l'effet shake
+
   return (
     <div className="donation-page" onClick={closeTooltip}>
       <header className="header">
@@ -242,68 +252,69 @@ const handleMonthlyClick = () => {
         </div>
 
         <div className="donation-form">
-        {step === 1 && (
+          {step === 1 && (
         <>
-          <div className="secure-title-container">
-            <GrSecure className="secure-icon" />
-            <h3 className="secure-title">Secure donation</h3>
-          </div>
+      <div className="secure-title-container">
+        <GrSecure className="secure-icon" />
+        <h3 className="secure-title">Secure donation</h3>
+      </div>
 
-          <div className="donation-tabs">
-            <button
-              className={`donation-tab ${!isMonthly ? "active" : ""}`}
-              onClick={() => setIsMonthly(false)}
-            >
-              Give once
-            </button>
-            <button
-              className={`donation-tab ${isMonthly ? "active" : ""}`}
-              onClick={handleMonthlyClick}
-            >
-              <img
-                src={require("../Images/Arev_Society_Nonprofit-PNG-Eternity.png")}
-                alt="Eternity Logo"
-                className={`eternity-logo ${animateLogo ? "animate-logo" : ""}`}
-              />
-              Monthly
-            </button>
-          </div>
+      <div className="donation-tabs">
+        <button
+          className={`donation-tab ${!isMonthly ? "active" : ""}`}
+          onClick={() => setIsMonthly(false)}
+        >
+          Give once
+        </button>
+        <button
+          className={`donation-tab ${isMonthly ? "active" : ""}`}
+          onClick={handleMonthlyClick}
+        >
+          <img
+            src={require("../Images/Arev_Society_Nonprofit-PNG-Eternity.png")}
+            alt="Eternity Logo"
+            className={`eternity-logo ${animateLogo ? "animate-logo" : ""}`}
+          />
+          Monthly
+        </button>
+      </div>
 
-          <div className="donation-options">
-            {donationOptions.map((amount) => (
-              <button
-                key={amount}
-                className={`donation-option ${
-                  selectedAmount === amount ? "selected" : ""
-                }`}
-                onClick={() => setSelectedAmount(amount)}
-              >
-                ${amount}
-              </button>
-            ))}
-            <div className="donation-custom-amount-container">
-              <span className="currency-symbol">$</span>
-              <input
-                type="text"
-                className={`donation-custom-amount ${
-                  !isValidAmount && shakeInput
-                    ? "invalid"
-                    : isValidAmount
-                    ? ""
-                    : "invalid-static"
-                }`}
-                placeholder="Custom Amount"
-                value={selectedAmount}
-                onChange={(e) => {
-                  const amount = parseInt(e.target.value.replace(/[^\d]/g, ""), 10) || "";
-                  setSelectedAmount(amount);
-                }}
-              />
-            </div>
-          </div>
+      <div className="donation-options">
+        {donationOptions.map((amount) => (
+          <button
+            key={amount}
+            className={`donation-option ${
+              selectedAmount === amount ? "selected" : ""
+            }`}
+            onClick={() => setSelectedAmount(amount)}
+          >
+            ${amount}
+          </button>
+        ))}
+        <div className="donation-custom-amount-container">
+          <span className="currency-symbol">$</span>
+          <input
+            type="text"
+            className={`donation-custom-amount ${
+              !isValidAmount && shakeInput
+                ? "invalid"
+                : isValidAmount
+                ? ""
+                : "invalid-static"
+            }`}
+            placeholder="Custom Amount"
+            value={selectedAmount}
+            onChange={(e) => {
+              const amount =
+                parseInt(e.target.value.replace(/[^\d]/g, ""), 10) || "";
+              setSelectedAmount(amount);
+            }}
+          />
+        </div>
+      </div>
 
-          <div className="cover-fees">
-          <label>
+      <div className="cover-fees">
+        <label>
           <input
             type="checkbox"
             checked={coverFees}
@@ -311,146 +322,202 @@ const handleMonthlyClick = () => {
             disabled={selectedAmount < minimumAmount}
           />
           I'd like to cover the fees associated with my donation so more of my
-          donation goes directly to the <strong><span style={{ color: 'orange' }}>Arev Society</span></strong>.
+          donation goes directly to the{" "}
+          <strong>
+            <span style={{ color: "orange" }}>Arev Society</span>
+          </strong>
+          .
         </label>
+      </div>
 
+      <button className="donate-button" onClick={handleDonationClick}>
+        {isMonthly ? "Donate Monthly" : "Donate Once"}
+      </button>
 
+      <div className="questions-container">
+        <span
+          className="question"
+          onClick={(e) => handleTooltip("Learn how your donations are secured.", e)}
+        >
+          Is my donation secure?
+        </span>
+        <span
+          className="question"
+          onClick={(e) =>
+            handleTooltip("Find out about tax-deductible benefits.", e)
+          }
+        >
+          Is this donation tax-deductible?
+        </span>
+        <span
+          className="question"
+          onClick={(e) =>
+            handleTooltip("Learn about canceling recurring donations.", e)
+          }
+        >
+          Can I cancel my recurring donation?
+        </span>
+      </div>
+    </>
+  )}
+
+        {step === 2 && (
+          <>
+        {showPopup && (
+          <div className="popup-overlay" onClick={() => setShowPopup(false)}>
+            <div className="popup-container" onClick={(e) => e.stopPropagation()}>
+              <div className="popup-header">
+                <h3>Maybe next time?</h3>
+                <button className="popup-close" onClick={() => setShowPopup(false)}>
+                  <IoCloseSharp />
+                </button>
+              </div>
+              <p className="popup-text">
+                Please leave your email address below, and we'll send you a gentle reminder later.
+              </p>
+              <input
+                type="email"
+                placeholder="Email address"
+                className={`popup-input ${isError ? "error" : ""}`}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <div className="popup-buttons">
+                <button
+                  className="popup-btn remind-btn"
+                  onClick={() => {
+                    if (email.includes("@")) {
+                      setShowPopup(false);
+                    } else {
+                      setIsError(true);
+                      setTimeout(() => setIsError(false), 500); 
+                    }
+                  }}
+                >
+                  Remind me later
+                </button>
+                <button
+                  className="popup-btn no-thanks-btn"
+                  onClick={() => setShowPopup(false)}
+                >
+                  No, thanks
+                </button>
+              </div>
+            </div>
           </div>
+        )}
+          
+          <div className="donation-details-form">
+            <img
+              src={arevLogo}
+              alt="Arev Society Logo"
+              className="donation-logo"
+            />
+            <h2 className="donation-details-title">Enter your details</h2>
+            <div className="back-button" onClick={goBack}>
+              <FaArrowLeft />
+            </div>
 
-          <button className="donate-button" onClick={handleDonationClick}>
-            {isMonthly ? "Donate Monthly" : "Donate Once"}
-          </button>
+            <div className="close-button" onClick={() => setShowPopup(true)}>
+              <IoCloseSharp />
+            </div>
 
-          <div className="questions-container">
-            <span
-              className="question"
-              onClick={(e) => handleTooltip("Learn how your donations are secured.", e)}
-            >
-              Is my donation secure?
-            </span>
-            <span
-              className="question"
-              onClick={(e) => handleTooltip("Find out about tax-deductible benefits.", e)}
-            >
-              Is this donation tax-deductible?
-            </span>
-            <span
-              className="question"
-              onClick={(e) => handleTooltip("Learn about canceling recurring donations.", e)}
-            >
-              Can I cancel my recurring donation?
-            </span>
+            <form onSubmit={handleStep2Submit}>
+              <input
+                type="text"
+                name="firstName"
+                className={`donation-input ${errors.firstName ? "error" : ""} ${
+                  shakeInput ? "shake" : ""
+                }`}
+                placeholder="First name"
+                value={step2Data.firstName}
+                onChange={(e) =>
+                  setStep2Data({ ...step2Data, firstName: e.target.value })
+                }
+              />
+              <input
+                type="text"
+                name="lastName"
+                className={`donation-input ${errors.lastName ? "error" : ""} ${
+                  shakeInput ? "shake" : ""
+                }`}
+                placeholder="Last name"
+                value={step2Data.lastName}
+                onChange={(e) =>
+                  setStep2Data({ ...step2Data, lastName: e.target.value })
+                }
+              />
+              <input
+                type="email"
+                name="email"
+                className={`donation-input ${errors.email ? "error" : ""} ${
+                  shakeInput ? "shake" : ""
+                }`}
+                placeholder="Email address"
+                value={step2Data.email}
+                onChange={(e) =>
+                  setStep2Data({ ...step2Data, email: e.target.value })
+                }
+              />
+              {typeof errors.email === "string" && (
+                <span className="error-message">{errors.email}</span>
+              )}
+              <PhoneInput
+                country={"fr"}
+                value={step2Data.phone}
+                onChange={(value) =>
+                  setStep2Data({ ...step2Data, phone: value })
+                }
+                containerClass="phone-input-container"
+                buttonClass="flag-dropdown"
+              />
+              <input
+                type="tel"
+                placeholder="Phone number (optional)"
+                className="custom-phone-input"
+                value={step2Data.phone}
+                maxLength={16}
+                onChange={(e) => {
+                  let value = e.target.value;
+                  value = value.replace(/[^\d+]/g, "");
+                  if (value.length > 16) {
+                    value = value.slice(0, 16);
+                  }
+                  setStep2Data({ ...step2Data, phone: value });
+                }}
+              />
+              {errors.phone && (
+                <span className="error-message">{errors.phone}</span>
+              )}
+              <button type="submit" className="submit-button">
+                Continue
+              </button>
+            </form>
+
+            <div className="questions-container">
+              <span
+                className="question"
+                onClick={(e) => handleTooltip("Learn how your donations are secured.", e)}
+              >
+                Is my donation secure?
+              </span>
+              <span
+                className="question"
+                onClick={(e) => handleTooltip("Find out about tax-deductible benefits.", e)}
+              >
+                Is this donation tax-deductible?
+              </span>
+              <span
+                className="question"
+                onClick={(e) => handleTooltip("Learn about canceling recurring donations.", e)}
+              >
+                Can I cancel my recurring donation?
+              </span>
+            </div>
           </div>
         </>
       )}
 
-
-      {step === 2 && (
-        <div className="donation-details-form">
-          <img
-            src={arevLogo}
-            alt="Arev Society Logo"
-            className="donation-logo"
-          />
-          <h2 className="donation-details-title">Enter your details</h2>
-          <div className="back-button" onClick={goBack}>
-            <FaArrowLeft />
-          </div>
-          <form onSubmit={handleStep2Submit}>
-            <input
-              type="text"
-              name="firstName"
-              className={`donation-input ${errors.firstName ? "error" : ""} ${
-                shakeInput ? "shake" : ""
-              }`}
-              placeholder="First name"
-              value={step2Data.firstName}
-              onChange={(e) =>
-                setStep2Data({ ...step2Data, firstName: e.target.value })
-              }
-            />
-            <input
-              type="text"
-              name="lastName"
-              className={`donation-input ${errors.lastName ? "error" : ""} ${
-                shakeInput ? "shake" : ""
-              }`}
-              placeholder="Last name"
-              value={step2Data.lastName}
-              onChange={(e) =>
-                setStep2Data({ ...step2Data, lastName: e.target.value })
-              }
-            />
-            <input
-              type="email"
-              name="email"
-              className={`donation-input ${errors.email ? "error" : ""} ${
-                shakeInput ? "shake" : ""
-              }`}
-              placeholder="Email address"
-              value={step2Data.email}
-              onChange={(e) =>
-                setStep2Data({ ...step2Data, email: e.target.value })
-              }
-            />
-            {typeof errors.email === "string" && (
-              <span className="error-message">{errors.email}</span>
-            )}
-            <PhoneInput
-              country={"fr"}
-              value={step2Data.phone}
-              onChange={(value) =>
-                setStep2Data({ ...step2Data, phone: value })
-              }
-              containerClass="phone-input-container"
-              buttonClass="flag-dropdown"
-            />
-            <input
-              type="tel"
-              placeholder="Phone number (optional)"
-              className="custom-phone-input"
-              value={step2Data.phone}
-              maxLength={16}
-              onChange={(e) => {
-                let value = e.target.value;
-                value = value.replace(/[^\d+]/g, "");
-                if (value.length > 16) {
-                  value = value.slice(0, 16);
-                }
-                setStep2Data({ ...step2Data, phone: value });
-              }}
-            />
-            {errors.phone && (
-              <span className="error-message">{errors.phone}</span>
-            )}
-            <button type="submit" className="submit-button">
-              Continue
-            </button>
-          </form>
-
-          {/* Tooltips Section */}
-          <div className="questions-container">
-            <span
-              className="question"
-              onClick={(e) => handleTooltip("Learn how your donations are secured.", e)}
-            >
-              Is my donation secure?
-            </span>
-            <span
-              className="question"
-              onClick={(e) => handleTooltip("Find out about tax-deductible benefits.", e)}
-            >
-              Is this donation tax-deductible?
-            </span>
-            <span
-              className="question"
-              onClick={(e) => handleTooltip("Learn about canceling recurring donations.", e)}
-            >
-              Can I cancel my recurring donation?
-            </span>
-          </div>
-        </div>
-      )}
 
       {step === 3 && (
         <div className="step3-container">
@@ -462,8 +529,13 @@ const handleMonthlyClick = () => {
           <div className="step3-back-button" onClick={() => setStep(2)}>
             <FaArrowLeft />
           </div>
-          <h2 className="step3-title">Enter your address</h2>
 
+
+
+          <h2 className="step3-title">Enter your address</h2>
+          <div className="close-button2" onClick={handleCloseDonationPage}>
+            <IoCloseSharp />
+          </div>
           <form onSubmit={handleStep3Submit}>
             <input
               type="text"
@@ -552,6 +624,10 @@ const handleMonthlyClick = () => {
             <FaArrowLeft />
           </div>
 
+          <div className="close-button3" onClick={handleCloseDonationPage}>
+            <IoCloseSharp />
+          </div>
+
           <div className="secure-title-container4">
             <GrSecure className="secure-icon4" />
             <h3 className="secure-title4">Secure donation</h3>
@@ -609,9 +685,15 @@ const handleMonthlyClick = () => {
             className="donation-logo4"
           />
         </div>
+
         <div className="step5-back-button" onClick={() => setStep(4)}>
           <FaArrowLeft />
         </div>
+
+        <div className="close-button4" onClick={handleCloseDonationPage}>
+            <IoCloseSharp />
+          </div>
+
         <h2 className="step5-title">Credit Card</h2>
         <p className="step5-instruction">
           Please provide your card details to continue with your donation.
