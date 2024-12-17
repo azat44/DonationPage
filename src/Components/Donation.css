@@ -267,34 +267,6 @@ p {
 }
 
 
-.tooltip {
-  position: absolute;
-  background: rgba(0, 0, 0, 0.85);
-  color: white;
-  padding: 10px;
-  border-radius: 5px;
-  font-size: 0.9rem;
-  z-index: 1000;
-  width: 300px; 
-  word-wrap: break-word;
-  white-space: normal; 
-  transform: translateX(-50%);
-  text-align: center;
-  bottom: auto;
-  left: 50%;
-  top: -50px;
-}
-
-.tooltip::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  border-width: 8px;
-  border-style: solid;
-  border-color: rgba(0, 0, 0, 0.85) transparent transparent transparent;
-}
 
 
 
@@ -510,6 +482,56 @@ p {
   margin-top:-380px;
 }
 
+.question-wrapper {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.question {
+  color: blue;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.tooltip-content {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 10px; 
+  width: 200px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 1rem;
+  z-index: 1000;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.tooltip-content::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 8px;
+  border-style: solid;
+  border-color: #ffffff transparent transparent transparent;
+}
+
+.tooltip-content strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.tooltip-content p {
+  margin: 0;
+  color: #555;
+}
 
 
 

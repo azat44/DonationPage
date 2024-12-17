@@ -128,3 +128,27 @@
 .step5-submit-button:hover {
   background: #0056b3;
 }
+
+.step5-input.error,
+.expiry-input.error,
+.cvc-input.error {
+  border: 2px solid red; /* Bordure rouge */
+}
+
+.step5-input.shake,
+.expiry-input.shake,
+.cvc-input.shake {
+  animation: shake 0.3s ease;
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25%, 75% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+}
