@@ -1,4 +1,4 @@
-import React, { useState, useEffect  } from "react";
+import React, { useState, useEffect, useRef  } from "react";
 import "./Donation.css";
 import "./DonationDetails.css";
 import "./DonationDetailsStep3.css";
@@ -26,6 +26,10 @@ const Donation = () => {
   const [coverFees, setCoverFees] = useState(false);
   const [shakeInput, setShakeInput] = useState(false);
   const [step, setStep] = useState(1);
+  const [activeQuestion, setActiveQuestion] = useState(null); 
+  const [hasSeenPopup, setHasSeenPopup] = useState(false); 
+
+
   const [step2Data, setStep2Data] = useState({
     firstName: "",
     lastName: "",
@@ -204,12 +208,23 @@ const handleMonthlyClick = () => {
 
   const [animateLogo, setAnimateLogo] = useState(false);
 
-  const [activeQuestion, setActiveQuestion] = useState(null);
-
   const toggleQuestion = (question) => {
     setActiveQuestion((prev) => (prev === question ? null : question));
   };
-  
+
+  const handleClickOutside = (e) => {
+    if (!e.target.closest(".question-wrapper")) {
+      setActiveQuestion(null);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
 
   const handleCloseDonationPage = () => {
     window.location.href = "/"; 
@@ -269,18 +284,79 @@ const handleMonthlyClick = () => {
     Aos.init({ duration: 1000, once: true });
   }, []);
 
+  const handleLogoClick = (e) => {
+    if (!hasSeenPopup) {
+      e.preventDefault(); 
+      setShowPopup(true); 
+      setHasSeenPopup(true); 
+    }
+  };
+
   
 
   return (
     <div className="donation-page" onClick={closeTooltip} >
       <header className="header">
-        <a href="https://www.arevsociety.org" target="_blank" rel="noopener noreferrer">
-          <img
-            src={require("../Images/Arev_Society_Logo.webp")}
-            alt="Arev Society Logo"
-            className="arev-logo"
-          />
-        </a>
+      <a
+        href="https://www.arevsociety.org"
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={handleLogoClick}
+      >
+        <img
+          src={require("../Images/Arev_Society_Logo.webp")}
+          alt="Arev Society Logo"
+          className="arev-logo"
+        />
+      </a>
+
+      {showPopup && (
+        <div className="popup-overlay" onClick={() => setShowPopup(false)}>
+          <div className="popup-container" onClick={(e) => e.stopPropagation()}>
+            <div className="popup-header">
+              <h3>Maybe next time?</h3>
+              <button
+                className="popup-close"
+                onClick={() => setShowPopup(false)}
+              >
+                X
+              </button>
+            </div>
+            <p className="popup-text">
+              Please leave your email address below, and we'll send you a gentle
+              reminder later.
+            </p>
+            <input
+              type="email"
+              placeholder="Email address"
+              className={`popup-input ${isError ? "error shake" : ""}`}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <div className="popup-buttons">
+              <button
+                className="popup-btn remind-btn"
+                onClick={() => {
+                  if (email.includes("@")) {
+                    setShowPopup(false);
+                  } else {
+                    setIsError(true);
+                    setTimeout(() => setIsError(false), 500);
+                  }
+                }}
+              >
+                Remind me later
+              </button>
+              <button
+                className="popup-btn no-thanks-btn"
+                onClick={() => setShowPopup(false)}
+              >
+                No, thanks
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       </header>
 
       <div className="donation-container">
@@ -387,57 +463,83 @@ const handleMonthlyClick = () => {
             </button>
 
             <div className="questions-container">
-              <div className="question-wrapper">
-                <span className="question" onClick={() => toggleQuestion("secure")}>
-                  Is my donation secure?
-                </span>
-                {activeQuestion === "secure" && (
-                  <div className="tooltip-content">
-                    <strong>Is my donation secure?</strong>
-                    <p>
-                      Yes, we use industry-standard SSL technology to keep your
-                      information secure. We partner with trusted payment processors to
-                      ensure your data safety.
-                    </p>
-                  </div>
-                )}
+            <div className="question-wrapper">
+            <span
+              className="question"
+              onClick={() => toggleQuestion("secure")}
+            >
+              Is my donation secure?
+            </span>
+            {activeQuestion === "secure" && (
+              <div className="tooltip-content">
+                <strong>Is my donation secure?</strong>
+                <p>
+                  Yes, we protect your information using industry-standard TLS/SSL encryption.
+                </p>
+                <p>
+                  We process all payments through Stripe, a leading payment processor trusted by
+                  millions of businesses worldwide.
+                </p>
+                <p>
+                  Your sensitive payment information is sent directly to Stripe's PCI-compliant servers
+                  using encrypted connections. Our website never stores your credit card details.
+                </p>
               </div>
+            )}
+          </div>
 
-              <div className="question-wrapper">
-                <span
-                  className="question"
-                  onClick={() => toggleQuestion("taxDeductible")}
-                >
-                  Is this donation tax-deductible?
-                </span>
-                {activeQuestion === "taxDeductible" && (
-                  <div className="tooltip-content">
-                    <strong>Is this donation tax-deductible?</strong>
-                    <p>
-                      Your gift is tax-deductible as per local regulations. We will
-                      email you a receipt for your records.
-                    </p>
-                  </div>
-                )}
-              </div>
 
-              <div className="question-wrapper">
-                <span
-                  className="question"
-                  onClick={() => toggleQuestion("cancelRecurring")}
-                >
-                  Can I cancel my recurring donation?
-                </span>
-                {activeQuestion === "cancelRecurring" && (
-                  <div className="tooltip-content">
-                    <strong>Can I cancel my recurring donation?</strong>
-                    <p>
-                      Yes, you can cancel your recurring donation anytime via your
-                      account settings or by contacting support.
-                    </p>
-                  </div>
-                )}
+            <div className="question-wrapper">
+            <span
+              className="question"
+              onClick={() => toggleQuestion("taxDeductible")}
+            >
+              Is this donation tax-deductible?
+            </span>
+            {activeQuestion === "taxDeductible" && (
+              <div className="tooltip-content">
+                <strong>Is this donation tax-deductible?</strong>
+                <p>
+                  <strong>For US donors:</strong> Your contribution is tax-deductible as we are a 
+                  registered 501(c)(3) tax-exempt charity. The Arev Society is a 501(c)(3) 
+                  not-for-profit organization. Our EIN number is <strong>32-05 12 318</strong>.
+                </p>
+                <p>
+                  We'll email you a donation receipt for your records. Please keep this, as it 
+                  is your official record to claim this donation as a tax deduction.
+                </p>
+                <p>
+                  <strong>For international donors:</strong> Tax benefits vary by country. Please check 
+                  your local tax regulations or consult with a tax professional regarding deductibility.
+                </p>
               </div>
+            )}
+          </div>
+
+
+            <div className="question-wrapper">
+              <span
+                className="question"
+                onClick={() => toggleQuestion("cancelRecurring")}
+              >
+                Can I cancel my recurring donation?
+              </span>
+              {activeQuestion === "cancelRecurring" && (
+                <div className="tooltip-content">
+                  <strong>Can I cancel my recurring donation?</strong>
+                  <p>
+                    Sure, you can cancel or modify your recurring donation at any time.
+                  </p>
+                  <p>
+                    For any requests pertaining to your recurring donations, such as a change 
+                    in amount or payment date, updating your payment method, or cancellation, 
+                    please contact our donor support team at 
+                    <strong>av@arevsociety.org</strong>and we'll assist you right away.
+                  </p>
+                </div>
+              )}
+            </div>
+
             </div>
           </>
         )}
@@ -490,11 +592,11 @@ const handleMonthlyClick = () => {
         )}
           
           <div className="donation-details-form" data-aos="fade-up" data-aos-duration="1000">
-            <img
-              src={arevLogo}
-              alt="Arev Society Logo"
-              className="donation-logo"
-            />
+              <img
+                src={arevLogo}
+                alt="Arev Society Logo"
+                className="donation-logo"
+              />
             <h2 className="donation-details-title">Enter your details</h2>
             <div className="back-button" onClick={goBack}>
               <FaArrowLeft />
