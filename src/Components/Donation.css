@@ -533,7 +533,45 @@ p {
   color: #555;
 }
 
+.step-container {
+  position: relative; 
+  min-height: 500px; 
+  overflow: hidden;  
+}
 
+.step {
+  position: absolute; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.step-active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.step-exit {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+.step-container {
+  animation: fadeInUp 0.5s ease-in-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 @media (max-width: 1440px) {
   .donation-container {

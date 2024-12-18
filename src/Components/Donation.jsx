@@ -12,12 +12,15 @@ import PhoneInput from "react-phone-input-2";
 import countries from "./countries.json";
 import { IoCloseSharp } from "react-icons/io5";
 import arevLogo from '../Images/Arev_Society_Nonprofit-PNG-Eternity.png';
+import Aos from 'aos';
+import 'aos/dist/aos.css';
 
 
 
 
 const Donation = () => {
   const [isMonthly, setIsMonthly] = useState(false);
+  const [animationClass, setAnimationClass] = useState("step-enter");
   const [selectedAmount, setSelectedAmount] = useState(""); 
   const [tooltip, setTooltip] = useState(null);
   const [coverFees, setCoverFees] = useState(false);
@@ -248,8 +251,6 @@ const handleMonthlyClick = () => {
     return errors;
   };
   
-  
-  
   const handleStep5Submit = (e) => {
     e.preventDefault();
     const errors = validateStep5();
@@ -264,9 +265,14 @@ const handleMonthlyClick = () => {
     }
   };
   
+  useEffect(() => {
+    Aos.init({ duration: 1000, once: true });
+  }, []);
+
+  
 
   return (
-    <div className="donation-page" onClick={closeTooltip}>
+    <div className="donation-page" onClick={closeTooltip} >
       <header className="header">
         <a href="https://www.arevsociety.org" target="_blank" rel="noopener noreferrer">
           <img
@@ -284,7 +290,7 @@ const handleMonthlyClick = () => {
             alt="Arev Society Donation Refugee"
             className="donation-image"
           />
-          <h2 className="donation-info-title">Make an Impact: Empower Lives</h2>
+          <h2 className="donation-info-title" >Make an Impact: Empower Lives</h2>
           <p className="donation-subtitle">
             Your donation can create a transformative impact today. <br />
             By supporting the Arev Society, you help empower vulnerable
@@ -296,10 +302,11 @@ const handleMonthlyClick = () => {
           </p>
         </div>
 
-          <div className="donation-form">
-                {step === 1 && (
-              <>
-            <div className="secure-title-container">
+          <div className="donation-form" data-aos="fade-up" data-aos-duration="1000">
+            
+          {step === 1 && (
+          <>
+            <div className="secure-title-container" >
               <GrSecure className="secure-icon" />
               <h3 className="secure-title">Secure donation</h3>
             </div>
@@ -380,65 +387,66 @@ const handleMonthlyClick = () => {
             </button>
 
             <div className="questions-container">
-            <div className="question-wrapper">
-              <span
-                className="question"
-                onClick={() => toggleQuestion("secure")}
-              >
-                Is my donation secure?
-              </span>
-              {activeQuestion === "secure" && (
-                <div className="tooltip-content">
-                  <strong>Is my donation secure?</strong>
-                  <p>
-                    Yes, we use industry-standard SSL technology to keep your information secure. 
-                    We partner with trusted payment processors to ensure your data safety.
-                  </p>
-                </div>
-              )}
-            </div>
+              <div className="question-wrapper">
+                <span className="question" onClick={() => toggleQuestion("secure")}>
+                  Is my donation secure?
+                </span>
+                {activeQuestion === "secure" && (
+                  <div className="tooltip-content">
+                    <strong>Is my donation secure?</strong>
+                    <p>
+                      Yes, we use industry-standard SSL technology to keep your
+                      information secure. We partner with trusted payment processors to
+                      ensure your data safety.
+                    </p>
+                  </div>
+                )}
+              </div>
 
-            <div className="question-wrapper">
-              <span
-                className="question"
-                onClick={() => toggleQuestion("taxDeductible")}
-              >
-                Is this donation tax-deductible?
-              </span>
-              {activeQuestion === "taxDeductible" && (
-                <div className="tooltip-content">
-                  <strong>Is this donation tax-deductible?</strong>
-                  <p>
-                    Your gift is tax-deductible as per local regulations. We will email you a receipt for your records.
-                  </p>
-                </div>
-              )}
-            </div>
+              <div className="question-wrapper">
+                <span
+                  className="question"
+                  onClick={() => toggleQuestion("taxDeductible")}
+                >
+                  Is this donation tax-deductible?
+                </span>
+                {activeQuestion === "taxDeductible" && (
+                  <div className="tooltip-content">
+                    <strong>Is this donation tax-deductible?</strong>
+                    <p>
+                      Your gift is tax-deductible as per local regulations. We will
+                      email you a receipt for your records.
+                    </p>
+                  </div>
+                )}
+              </div>
 
-            <div className="question-wrapper">
-              <span
-                className="question"
-                onClick={() => toggleQuestion("cancelRecurring")}
-              >
-                Can I cancel my recurring donation?
-              </span>
-              {activeQuestion === "cancelRecurring" && (
-                <div className="tooltip-content">
-                  <strong>Can I cancel my recurring donation?</strong>
-                  <p>
-                    Yes, you can cancel your recurring donation anytime via your account settings or by contacting support.
-                  </p>
-                </div>
-              )}
+              <div className="question-wrapper">
+                <span
+                  className="question"
+                  onClick={() => toggleQuestion("cancelRecurring")}
+                >
+                  Can I cancel my recurring donation?
+                </span>
+                {activeQuestion === "cancelRecurring" && (
+                  <div className="tooltip-content">
+                    <strong>Can I cancel my recurring donation?</strong>
+                    <p>
+                      Yes, you can cancel your recurring donation anytime via your
+                      account settings or by contacting support.
+                    </p>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
           </>
         )}
+
 
         {step === 2 && (
           <>
         {showPopup && (
-          <div className="popup-overlay" onClick={() => setShowPopup(false)}>
+          <div className="popup-overlay" onClick={() => setShowPopup(false)} >
             <div className="popup-container" onClick={(e) => e.stopPropagation()}>
               <div className="popup-header">
                 <h3>Maybe next time?</h3>
@@ -481,7 +489,7 @@ const handleMonthlyClick = () => {
           </div>
         )}
           
-          <div className="donation-details-form">
+          <div className="donation-details-form" data-aos="fade-up" data-aos-duration="1000">
             <img
               src={arevLogo}
               alt="Arev Society Logo"
@@ -672,7 +680,7 @@ const handleMonthlyClick = () => {
             </div>
           )}
 
-          <div className="step3-container">
+          <div className="step3-container" data-aos="fade-up" data-aos-duration="1000">
             <img
               src={arevLogo}
               alt="Arev Society Logo"
@@ -836,7 +844,7 @@ const handleMonthlyClick = () => {
             </div>
           )}
 
-          <div className="step4-container">
+          <div className="step4-container" data-aos="fade-up" data-aos-duration="1000">
             <div className="parent-container">
               <img
                 src={arevLogo}
@@ -981,7 +989,7 @@ const handleMonthlyClick = () => {
             </div>
           )}
 
-          <div className="step5-container">
+          <div className="step5-container" data-aos="fade-up" data-aos-duration="1000">
             <div className="parent-container">
               <img
                 src={arevLogo}
