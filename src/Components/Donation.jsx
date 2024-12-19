@@ -547,22 +547,26 @@ const handleMonthlyClick = () => {
 
         {step === 2 && (
           <>
-        {showPopup && (
-          <div className="popup-overlay" onClick={() => setShowPopup(false)} >
+        {showPopup && !hasSeenPopup && ( 
+          <div className="popup-overlay" onClick={() => setShowPopup(false)}>
             <div className="popup-container" onClick={(e) => e.stopPropagation()}>
               <div className="popup-header">
                 <h3>Maybe next time?</h3>
-                <button className="popup-close" onClick={() => setShowPopup(false)}>
-                  <IoCloseSharp />
+                <button
+                  className="popup-close"
+                  onClick={() => setShowPopup(false)}
+                >
+                  X
                 </button>
               </div>
               <p className="popup-text">
-                Please leave your email address below, and we'll send you a gentle reminder later.
+                Please leave your email address below, and we'll send you a gentle
+                reminder later.
               </p>
               <input
                 type="email"
                 placeholder="Email address"
-                className={`popup-input ${isError ? "error" : ""}`}
+                className={`popup-input ${isError ? "error shake" : ""}`}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -574,7 +578,7 @@ const handleMonthlyClick = () => {
                       setShowPopup(false);
                     } else {
                       setIsError(true);
-                      setTimeout(() => setIsError(false), 500); 
+                      setTimeout(() => setIsError(false), 500);
                     }
                   }}
                 >
@@ -590,6 +594,7 @@ const handleMonthlyClick = () => {
             </div>
           </div>
         )}
+
           
           <div className="donation-details-form" data-aos="fade-up" data-aos-duration="1000">
               <img
@@ -680,39 +685,58 @@ const handleMonthlyClick = () => {
 
             <div className="questions-container">
             <div className="question-wrapper">
-              <span
-                className="question"
-                onClick={() => toggleQuestion("secure")}
-              >
-                Is my donation secure?
-              </span>
-              {activeQuestion === "secure" && (
-                <div className="tooltip-content">
-                  <strong>Is my donation secure?</strong>
-                  <p>
-                    Yes, we use industry-standard SSL technology to keep your information secure. 
-                    We partner with trusted payment processors to ensure your data safety.
-                  </p>
-                </div>
-              )}
-            </div>
+            <span
+              className="question"
+              onClick={() => toggleQuestion("secure")}
+            >
+              Is my donation secure?
+            </span>
+            {activeQuestion === "secure" && (
+              <div className="tooltip-content">
+                <strong>Is my donation secure?</strong>
+                <p>
+                  Yes, we protect your information using industry-standard TLS/SSL encryption.
+                </p>
+                <p>
+                  We process all payments through Stripe, a leading payment processor trusted by
+                  millions of businesses worldwide.
+                </p>
+                <p>
+                  Your sensitive payment information is sent directly to Stripe's PCI-compliant servers
+                  using encrypted connections. Our website never stores your credit card details.
+                </p>
+              </div>
+            )}
+          </div>
+
 
             <div className="question-wrapper">
-              <span
-                className="question"
-                onClick={() => toggleQuestion("taxDeductible")}
-              >
-                Is this donation tax-deductible?
-              </span>
-              {activeQuestion === "taxDeductible" && (
-                <div className="tooltip-content">
-                  <strong>Is this donation tax-deductible?</strong>
-                  <p>
-                    Your gift is tax-deductible as per local regulations. We will email you a receipt for your records.
-                  </p>
-                </div>
-              )}
-            </div>
+            <span
+              className="question"
+              onClick={() => toggleQuestion("taxDeductible")}
+            >
+              Is this donation tax-deductible?
+            </span>
+            {activeQuestion === "taxDeductible" && (
+              <div className="tooltip-content">
+                <strong>Is this donation tax-deductible?</strong>
+                <p>
+                  <strong>For US donors:</strong> Your contribution is tax-deductible as we are a 
+                  registered 501(c)(3) tax-exempt charity. The Arev Society is a 501(c)(3) 
+                  not-for-profit organization. Our EIN number is <strong>32-05 12 318</strong>.
+                </p>
+                <p>
+                  We'll email you a donation receipt for your records. Please keep this, as it 
+                  is your official record to claim this donation as a tax deduction.
+                </p>
+                <p>
+                  <strong>For international donors:</strong> Tax benefits vary by country. Please check 
+                  your local tax regulations or consult with a tax professional regarding deductibility.
+                </p>
+              </div>
+            )}
+          </div>
+
 
             <div className="question-wrapper">
               <span
@@ -725,12 +749,19 @@ const handleMonthlyClick = () => {
                 <div className="tooltip-content">
                   <strong>Can I cancel my recurring donation?</strong>
                   <p>
-                    Yes, you can cancel your recurring donation anytime via your account settings or by contacting support.
+                    Sure, you can cancel or modify your recurring donation at any time.
+                  </p>
+                  <p>
+                    For any requests pertaining to your recurring donations, such as a change 
+                    in amount or payment date, updating your payment method, or cancellation, 
+                    please contact our donor support team at 
+                    <strong>av@arevsociety.org</strong>and we'll assist you right away.
                   </p>
                 </div>
               )}
             </div>
-          </div>
+
+            </div>
           </div>
         </>
       )}
@@ -738,17 +769,21 @@ const handleMonthlyClick = () => {
 
       {step === 3 && (
         <>
-          {showPopup && (
+          {showPopup && !hasSeenPopup && ( 
             <div className="popup-overlay" onClick={() => setShowPopup(false)}>
               <div className="popup-container" onClick={(e) => e.stopPropagation()}>
                 <div className="popup-header">
                   <h3>Maybe next time?</h3>
-                  <button className="popup-close" onClick={() => setShowPopup(false)}>
-                    <IoCloseSharp />
+                  <button
+                    className="popup-close"
+                    onClick={() => setShowPopup(false)}
+                  >
+                    X
                   </button>
                 </div>
                 <p className="popup-text">
-                  Please leave your email address below, and we'll send you a gentle reminder later.
+                  Please leave your email address below, and we'll send you a gentle
+                  reminder later.
                 </p>
                 <input
                   type="email"
@@ -781,6 +816,7 @@ const handleMonthlyClick = () => {
               </div>
             </div>
           )}
+
 
           <div className="step3-container" data-aos="fade-up" data-aos-duration="1000">
             <img
@@ -845,39 +881,58 @@ const handleMonthlyClick = () => {
 
             <div className="questions-container">
             <div className="question-wrapper">
-              <span
-                className="question"
-                onClick={() => toggleQuestion("secure")}
-              >
-                Is my donation secure?
-              </span>
-              {activeQuestion === "secure" && (
-                <div className="tooltip-content">
-                  <strong>Is my donation secure?</strong>
-                  <p>
-                    Yes, we use industry-standard SSL technology to keep your information secure. 
-                    We partner with trusted payment processors to ensure your data safety.
-                  </p>
-                </div>
-              )}
-            </div>
+            <span
+              className="question"
+              onClick={() => toggleQuestion("secure")}
+            >
+              Is my donation secure?
+            </span>
+            {activeQuestion === "secure" && (
+              <div className="tooltip-content">
+                <strong>Is my donation secure?</strong>
+                <p>
+                  Yes, we protect your information using industry-standard TLS/SSL encryption.
+                </p>
+                <p>
+                  We process all payments through Stripe, a leading payment processor trusted by
+                  millions of businesses worldwide.
+                </p>
+                <p>
+                  Your sensitive payment information is sent directly to Stripe's PCI-compliant servers
+                  using encrypted connections. Our website never stores your credit card details.
+                </p>
+              </div>
+            )}
+          </div>
+
 
             <div className="question-wrapper">
-              <span
-                className="question"
-                onClick={() => toggleQuestion("taxDeductible")}
-              >
-                Is this donation tax-deductible?
-              </span>
-              {activeQuestion === "taxDeductible" && (
-                <div className="tooltip-content">
-                  <strong>Is this donation tax-deductible?</strong>
-                  <p>
-                    Your gift is tax-deductible as per local regulations. We will email you a receipt for your records.
-                  </p>
-                </div>
-              )}
-            </div>
+            <span
+              className="question"
+              onClick={() => toggleQuestion("taxDeductible")}
+            >
+              Is this donation tax-deductible?
+            </span>
+            {activeQuestion === "taxDeductible" && (
+              <div className="tooltip-content">
+                <strong>Is this donation tax-deductible?</strong>
+                <p>
+                  <strong>For US donors:</strong> Your contribution is tax-deductible as we are a 
+                  registered 501(c)(3) tax-exempt charity. The Arev Society is a 501(c)(3) 
+                  not-for-profit organization. Our EIN number is <strong>32-05 12 318</strong>.
+                </p>
+                <p>
+                  We'll email you a donation receipt for your records. Please keep this, as it 
+                  is your official record to claim this donation as a tax deduction.
+                </p>
+                <p>
+                  <strong>For international donors:</strong> Tax benefits vary by country. Please check 
+                  your local tax regulations or consult with a tax professional regarding deductibility.
+                </p>
+              </div>
+            )}
+          </div>
+
 
             <div className="question-wrapper">
               <span
@@ -890,61 +945,73 @@ const handleMonthlyClick = () => {
                 <div className="tooltip-content">
                   <strong>Can I cancel my recurring donation?</strong>
                   <p>
-                    Yes, you can cancel your recurring donation anytime via your account settings or by contacting support.
+                    Sure, you can cancel or modify your recurring donation at any time.
+                  </p>
+                  <p>
+                    For any requests pertaining to your recurring donations, such as a change 
+                    in amount or payment date, updating your payment method, or cancellation, 
+                    please contact our donor support team at 
+                    <strong>av@arevsociety.org</strong>and we'll assist you right away.
                   </p>
                 </div>
               )}
             </div>
-          </div>
+
+            </div>
           </div>
         </>
       )}
 
       {step === 4 && (
         <>
-          {showPopup && (
-            <div className="popup-overlay" onClick={() => setShowPopup(false)}>
-              <div className="popup-container" onClick={(e) => e.stopPropagation()}>
-                <div className="popup-header">
-                  <h3>Maybe next time?</h3>
-                  <button className="popup-close" onClick={() => setShowPopup(false)}>
-                    <IoCloseSharp />
-                  </button>
-                </div>
-                <p className="popup-text">
-                  Please leave your email address below, and we'll send you a gentle reminder later.
-                </p>
-                <input
-                  type="email"
-                  placeholder="Email address"
-                  className={`popup-input ${isError ? "error shake" : ""}`}
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <div className="popup-buttons">
-                  <button
-                    className="popup-btn remind-btn"
-                    onClick={() => {
-                      if (email.includes("@")) {
-                        setShowPopup(false);
-                      } else {
-                        setIsError(true);
-                        setTimeout(() => setIsError(false), 500);
-                      }
-                    }}
-                  >
-                    Remind me later
-                  </button>
-                  <button
-                    className="popup-btn no-thanks-btn"
-                    onClick={() => setShowPopup(false)}
-                  >
-                    No, thanks
-                  </button>
-                </div>
+          {showPopup && !hasSeenPopup && ( 
+          <div className="popup-overlay" onClick={() => setShowPopup(false)}>
+            <div className="popup-container" onClick={(e) => e.stopPropagation()}>
+              <div className="popup-header">
+                <h3>Maybe next time?</h3>
+                <button
+                  className="popup-close"
+                  onClick={() => setShowPopup(false)}
+                >
+                  X
+                </button>
+              </div>
+              <p className="popup-text">
+                Please leave your email address below, and we'll send you a gentle
+                reminder later.
+              </p>
+              <input
+                type="email"
+                placeholder="Email address"
+                className={`popup-input ${isError ? "error shake" : ""}`}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <div className="popup-buttons">
+                <button
+                  className="popup-btn remind-btn"
+                  onClick={() => {
+                    if (email.includes("@")) {
+                      setShowPopup(false);
+                    } else {
+                      setIsError(true);
+                      setTimeout(() => setIsError(false), 500);
+                    }
+                  }}
+                >
+                  Remind me later
+                </button>
+                <button
+                  className="popup-btn no-thanks-btn"
+                  onClick={() => setShowPopup(false)}
+                >
+                  No, thanks
+                </button>
               </div>
             </div>
-          )}
+          </div>
+        )}
+
 
           <div className="step4-container" data-aos="fade-up" data-aos-duration="1000">
             <div className="parent-container">
@@ -988,41 +1055,59 @@ const handleMonthlyClick = () => {
             </div>
 
             <div className="questions-container">
+            <div className="question-wrapper">
+            <span
+              className="question"
+              onClick={() => toggleQuestion("secure")}
+            >
+              Is my donation secure?
+            </span>
+            {activeQuestion === "secure" && (
+              <div className="tooltip-content">
+                <strong>Is my donation secure?</strong>
+                <p>
+                  Yes, we protect your information using industry-standard TLS/SSL encryption.
+                </p>
+                <p>
+                  We process all payments through Stripe, a leading payment processor trusted by
+                  millions of businesses worldwide.
+                </p>
+                <p>
+                  Your sensitive payment information is sent directly to Stripe's PCI-compliant servers
+                  using encrypted connections. Our website never stores your credit card details.
+                </p>
+              </div>
+            )}
+          </div>
+
 
             <div className="question-wrapper">
-              <span
-                className="question"
-                onClick={() => toggleQuestion("secure")}
-              >
-                Is my donation secure?
-              </span>
-              {activeQuestion === "secure" && (
-                <div className="tooltip-content">
-                  <strong>Is my donation secure?</strong>
-                  <p>
-                    Yes, we use industry-standard SSL technology to keep your information secure. 
-                    We partner with trusted payment processors to ensure your data safety.
-                  </p>
-                </div>
-              )}
-            </div>
+            <span
+              className="question"
+              onClick={() => toggleQuestion("taxDeductible")}
+            >
+              Is this donation tax-deductible?
+            </span>
+            {activeQuestion === "taxDeductible" && (
+              <div className="tooltip-content">
+                <strong>Is this donation tax-deductible?</strong>
+                <p>
+                  <strong>For US donors:</strong> Your contribution is tax-deductible as we are a 
+                  registered 501(c)(3) tax-exempt charity. The Arev Society is a 501(c)(3) 
+                  not-for-profit organization. Our EIN number is <strong>32-05 12 318</strong>.
+                </p>
+                <p>
+                  We'll email you a donation receipt for your records. Please keep this, as it 
+                  is your official record to claim this donation as a tax deduction.
+                </p>
+                <p>
+                  <strong>For international donors:</strong> Tax benefits vary by country. Please check 
+                  your local tax regulations or consult with a tax professional regarding deductibility.
+                </p>
+              </div>
+            )}
+          </div>
 
-            <div className="question-wrapper">
-              <span
-                className="question"
-                onClick={() => toggleQuestion("taxDeductible")}
-              >
-                Is this donation tax-deductible?
-              </span>
-              {activeQuestion === "taxDeductible" && (
-                <div className="tooltip-content">
-                  <strong>Is this donation tax-deductible?</strong>
-                  <p>
-                    Your gift is tax-deductible as per local regulations. We will email you a receipt for your records.
-                  </p>
-                </div>
-              )}
-            </div>
 
             <div className="question-wrapper">
               <span
@@ -1035,61 +1120,73 @@ const handleMonthlyClick = () => {
                 <div className="tooltip-content">
                   <strong>Can I cancel my recurring donation?</strong>
                   <p>
-                    Yes, you can cancel your recurring donation anytime via your account settings or by contacting support.
+                    Sure, you can cancel or modify your recurring donation at any time.
+                  </p>
+                  <p>
+                    For any requests pertaining to your recurring donations, such as a change 
+                    in amount or payment date, updating your payment method, or cancellation, 
+                    please contact our donor support team at 
+                    <strong>av@arevsociety.org</strong>and we'll assist you right away.
                   </p>
                 </div>
               )}
             </div>
-          </div>
+
+            </div>
           </div>
         </>
       )}
 
       {step === 5 && (
         <>
-          {showPopup && (
-            <div className="popup-overlay" onClick={() => setShowPopup(false)}>
-              <div className="popup-container" onClick={(e) => e.stopPropagation()}>
-                <div className="popup-header">
-                  <h3>Maybe next time?</h3>
-                  <button className="popup-close" onClick={() => setShowPopup(false)}>
-                    <IoCloseSharp />
-                  </button>
-                </div>
-                <p className="popup-text">
-                  Please leave your email address below, and we'll send you a gentle reminder later.
-                </p>
-                <input
-                  type="email"
-                  placeholder="Email address"
-                  className={`popup-input ${isError ? "error shake" : ""}`}
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <div className="popup-buttons">
-                  <button
-                    className="popup-btn remind-btn"
-                    onClick={() => {
-                      if (email.includes("@")) {
-                        setShowPopup(false);
-                      } else {
-                        setIsError(true);
-                        setTimeout(() => setIsError(false), 500);
-                      }
-                    }}
-                  >
-                    Remind me later
-                  </button>
-                  <button
-                    className="popup-btn no-thanks-btn"
-                    onClick={() => setShowPopup(false)}
-                  >
-                    No, thanks
-                  </button>
-                </div>
+          {showPopup && !hasSeenPopup && ( 
+          <div className="popup-overlay" onClick={() => setShowPopup(false)}>
+            <div className="popup-container" onClick={(e) => e.stopPropagation()}>
+              <div className="popup-header">
+                <h3>Maybe next time?</h3>
+                <button
+                  className="popup-close"
+                  onClick={() => setShowPopup(false)}
+                >
+                  X
+                </button>
+              </div>
+              <p className="popup-text">
+                Please leave your email address below, and we'll send you a gentle
+                reminder later.
+              </p>
+              <input
+                type="email"
+                placeholder="Email address"
+                className={`popup-input ${isError ? "error shake" : ""}`}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <div className="popup-buttons">
+                <button
+                  className="popup-btn remind-btn"
+                  onClick={() => {
+                    if (email.includes("@")) {
+                      setShowPopup(false);
+                    } else {
+                      setIsError(true);
+                      setTimeout(() => setIsError(false), 500);
+                    }
+                  }}
+                >
+                  Remind me later
+                </button>
+                <button
+                  className="popup-btn no-thanks-btn"
+                  onClick={() => setShowPopup(false)}
+                >
+                  No, thanks
+                </button>
               </div>
             </div>
-          )}
+          </div>
+        )}
+
 
           <div className="step5-container" data-aos="fade-up" data-aos-duration="1000">
             <div className="parent-container">
@@ -1170,7 +1267,7 @@ const handleMonthlyClick = () => {
           </form>
 
           <div className="questions-container">
-          <div className="question-wrapper">
+            <div className="question-wrapper">
             <span
               className="question"
               onClick={() => toggleQuestion("secure")}
@@ -1181,14 +1278,22 @@ const handleMonthlyClick = () => {
               <div className="tooltip-content">
                 <strong>Is my donation secure?</strong>
                 <p>
-                  Yes, we use industry-standard SSL technology to keep your information secure. 
-                  We partner with trusted payment processors to ensure your data safety.
+                  Yes, we protect your information using industry-standard TLS/SSL encryption.
+                </p>
+                <p>
+                  We process all payments through Stripe, a leading payment processor trusted by
+                  millions of businesses worldwide.
+                </p>
+                <p>
+                  Your sensitive payment information is sent directly to Stripe's PCI-compliant servers
+                  using encrypted connections. Our website never stores your credit card details.
                 </p>
               </div>
             )}
           </div>
 
-          <div className="question-wrapper">
+
+            <div className="question-wrapper">
             <span
               className="question"
               onClick={() => toggleQuestion("taxDeductible")}
@@ -1199,11 +1304,22 @@ const handleMonthlyClick = () => {
               <div className="tooltip-content">
                 <strong>Is this donation tax-deductible?</strong>
                 <p>
-                  Your gift is tax-deductible as per local regulations. We will email you a receipt for your records.
+                  <strong>For US donors:</strong> Your contribution is tax-deductible as we are a 
+                  registered 501(c)(3) tax-exempt charity. The Arev Society is a 501(c)(3) 
+                  not-for-profit organization. Our EIN number is <strong>32-05 12 318</strong>.
+                </p>
+                <p>
+                  We'll email you a donation receipt for your records. Please keep this, as it 
+                  is your official record to claim this donation as a tax deduction.
+                </p>
+                <p>
+                  <strong>For international donors:</strong> Tax benefits vary by country. Please check 
+                  your local tax regulations or consult with a tax professional regarding deductibility.
                 </p>
               </div>
             )}
           </div>
+
 
             <div className="question-wrapper">
               <span
@@ -1216,12 +1332,19 @@ const handleMonthlyClick = () => {
                 <div className="tooltip-content">
                   <strong>Can I cancel my recurring donation?</strong>
                   <p>
-                    Yes, you can cancel your recurring donation anytime via your account settings or by contacting support.
+                    Sure, you can cancel or modify your recurring donation at any time.
+                  </p>
+                  <p>
+                    For any requests pertaining to your recurring donations, such as a change 
+                    in amount or payment date, updating your payment method, or cancellation, 
+                    please contact our donor support team at 
+                    <strong>av@arevsociety.org</strong>and we'll assist you right away.
                   </p>
                 </div>
               )}
             </div>
-          </div>
+
+            </div>
           </div>
         </>
       )}
