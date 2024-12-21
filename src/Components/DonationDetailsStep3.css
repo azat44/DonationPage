@@ -139,3 +139,276 @@ form .donation-container,
 .shake {
   animation: shake 0.3s ease-in-out;
 }
+
+
+
+.donation-form {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.back-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: blue;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  margin-bottom: 1rem;
+  margin-left: -10px; 
+}
+
+.back-button:hover {
+  color: orange;
+}
+
+.back-button svg {
+  font-size: 2rem; 
+  margin: 0; 
+  transform: translateY(-2px); 
+  margin-left:-10px;
+  margin-top:-201px;
+}
+
+
+form .checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+form .checkbox-container input[type="checkbox"] {
+  accent-color: #007bff;
+}
+
+.donation-input.error {
+  border-color: red;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.85rem;
+  margin-top: -0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.shake {
+  animation: shake 0.3s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  20%, 60% {
+    transform: translateX(-10px);
+  }
+  40%, 80% {
+    transform: translateX(10px);
+  }
+}
+
+.phone-input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.phone-input {
+  padding: 0.8rem 1rem;
+  border: 2px solid lightgray;
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: white;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.react-tel-input input {
+  display: none !important;
+}
+
+.flag-dropdown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px; 
+  margin-left: 40px; 
+  transform: translateY(3px); 
+
+}
+
+.flag-dropdown {
+  border: none !important; 
+  background: transparent !important; 
+  box-shadow: none !important; 
+}
+
+.flag-dropdown img {
+  display: block; 
+  margin: 0;
+  padding: 0;
+}
+
+@media (max-width: 1440px) {
+  .donation-container {
+    width: 90%;
+  }
+  .donation-info, .donation-form {
+    padding: 20px;
+  }
+  .donation-tabs {
+    flex-direction: column;
+  }
+  .donation-tab {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .donation-options {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  form {
+    max-width: 600px;
+  }
+  form input[type="text"],
+  form input[type="email"],
+  form input[type="tel"],
+  form select {
+    padding: 0.7rem 0.9rem;
+  }
+
+}
+
+@media (max-width: 768px) {
+  .donation-page {
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+  }
+  .donation-container {
+    flex-direction: column;
+    width: 100%;
+    box-shadow: none;
+  }
+  .donation-info, .donation-form {
+    width: 100%;
+    padding: 15px;
+  }
+  .donation-logo {
+    width: 60px;
+  }
+  .donation-options {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .donate-button, form button.submit-button {
+    width: 100%;
+  }
+  .close-button svg, .close-button2 svg, .close-button3 svg, .close-button4 svg {
+    margin-left: 282px;
+  }
+  .secure-icon {
+    font-size: 1.5rem;
+  }
+  .donation-tabs {
+    flex-direction: column;
+  }
+  .donation-tab {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  .donation-options, .donation-custom-amount-container {
+    grid-template-columns: 1fr;
+  }
+  .tooltip-content {
+    width: 90%;
+  }
+  form {
+    max-width: 100%;
+  }
+  form input[type="text"],
+  form input[type="email"],
+  form input[type="tel"],
+  form select {
+    padding: 0.6rem 0.8rem;
+  }
+  .step-container {
+    min-height: auto;
+  }
+
+  .back-button svg {
+    font-size: 2.1rem; 
+    margin: 0; 
+    transform: translateY(-2px); 
+    margin-top:-201px;
+  }
+
+  .react-tel-input input {
+    display: none !important;
+  }
+  
+  .flag-dropdown {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 18px; 
+    margin-left: 220px; 
+    transform: translateY(3px); 
+  }*
+  
+
+
+.step3-back-button svg
+ {
+  font-size: 2rem;
+  margin-left: -155px;
+}
+}
+
+@media only screen and (max-width: 1024px) and (orientation: landscape) {
+  .donation-page {
+    height: 100vh;
+  }
+  .donation-container {
+    width: 85%;
+    flex-direction: row;
+  }
+  .donation-info, .donation-form {
+    padding: 20px;
+  }
+  .donation-logo {
+    width: 70px;
+  }
+  .donation-options {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .donate-button, form button.submit-button {
+    width: 80%;
+  }
+  .secure-title-container {
+    flex-direction: column;
+  }
+  .cover-fees {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .cover-fees input {
+    margin-bottom: 5px;
+  }
+  form input[type="text"],
+  form input[type="email"],
+  form input[type="tel"],
+  form select {
+    padding: 0.7rem;
+  }
+}

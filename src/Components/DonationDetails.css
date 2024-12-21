@@ -220,3 +220,134 @@ form .checkbox-container input[type="checkbox"] {
   padding: 0;
 }
 
+@media (max-width: 1440px) {
+  .donation-container {
+    width: 90%;
+  }
+  .donation-info, .donation-form {
+    padding: 20px;
+  }
+  .donation-tabs {
+    flex-direction: column;
+  }
+  .donation-tab {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .donation-options {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  form {
+    max-width: 600px;
+  }
+  form input[type="text"],
+  form input[type="email"],
+  form input[type="tel"],
+  form select {
+    padding: 0.7rem 0.9rem;
+  }
+
+}
+
+@media (max-width: 768px) {
+  .donation-page {
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+  }
+  .donation-container {
+    flex-direction: column;
+    width: 100%;
+    box-shadow: none;
+  }
+  .donation-info, .donation-form {
+    width: 100%;
+    padding: 15px;
+  }
+  .donation-logo {
+    width: 60px;
+  }
+  .donation-options {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .donate-button, form button.submit-button {
+    width: 100%;
+  }
+  .close-button svg, .close-button2 svg, .close-button3 svg, .close-button4 svg {
+    margin-left: 282px;
+  }
+  .secure-icon {
+    font-size: 1.5rem;
+  }
+  .donation-tabs {
+    flex-direction: column;
+  }
+  .donation-tab {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  .donation-options, .donation-custom-amount-container {
+    grid-template-columns: 1fr;
+  }
+  .tooltip-content {
+    width: 90%;
+  }
+  form {
+    max-width: 100%;
+  }
+  form input[type="text"],
+  form input[type="email"],
+  form input[type="tel"],
+  form select {
+    padding: 0.6rem 0.8rem;
+  }
+  .step-container {
+    min-height: auto;
+  }
+
+  .back-button svg {
+    font-size: 2.1rem; 
+    margin: 0; 
+    transform: translateY(-2px); 
+    margin-top:-201px;
+  }
+}
+
+@media only screen and (max-width: 1024px) and (orientation: landscape) {
+  .donation-page {
+    height: 100vh;
+  }
+  .donation-container {
+    width: 85%;
+    flex-direction: row;
+  }
+  .donation-info, .donation-form {
+    padding: 20px;
+  }
+  .donation-logo {
+    width: 70px;
+  }
+  .donation-options {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .donate-button, form button.submit-button {
+    width: 80%;
+  }
+  .secure-title-container {
+    flex-direction: column;
+  }
+  .cover-fees {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .cover-fees input {
+    margin-bottom: 5px;
+  }
+  form input[type="text"],
+  form input[type="email"],
+  form input[type="tel"],
+  form select {
+    padding: 0.7rem;
+  }
+}

@@ -84,7 +84,7 @@
 
 
 .payment-logo {
-  width: 40%; 
+  width: 25%; 
   height: auto;
   display: block;
   margin: 0 auto;
@@ -122,4 +122,118 @@
 .donation-logo4 {
   width: 80px; 
   padding-bottom: 105.5px; 
+}
+
+@media (max-width: 1024px) {
+  .step4-container {
+    max-width: 85%;  
+    padding: 20px;
+  }
+
+  .step4-back-button {
+    font-size: 0.95rem;
+  }
+
+  .step4-back-button svg {
+    font-size: 1.8rem;
+    margin-left: -150px;
+  }
+
+  .step4-amount {
+    font-size: 1.4rem;
+  }
+
+  .payment-button {
+    max-width: 250px;
+    font-size: 0.95rem;
+  }
+
+  .secure-title4 {
+    font-size: 1.5rem;
+  }
+
+  .donation-logo4 {
+    width: 70px;
+    padding-bottom: 70px;
+  }
+}
+
+@media (max-width: 768px) {
+  .step4-container {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .step4-back-button {
+    font-size: 0.9rem;
+    flex-direction: column; 
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .step4-back-button svg {
+    font-size: 2.1rem; 
+    margin: 0; 
+    transform: translateY(-2px); 
+    margin-top:200px;
+  }
+
+  .step4-amount {
+    font-size: 1.3rem;
+    text-align: center;
+  }
+
+  .payment-button {
+    max-width: 220px;
+    width: 100%;
+    font-size: 0.9rem;
+  }
+
+  .secure-title4 {
+    font-size: 1.3rem;
+  }
+
+  .secure-title-container4 {
+    flex-direction: column;
+    margin-top: -50px;
+  }
+
+  .donation-logo4 {
+    width: 60px;
+    padding-bottom: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .step4-container {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .step4-back-button {
+    font-size: 0.85rem;
+    text-align: center;
+  }
+
+  .step4-back-button svg {
+    font-size: 1.5rem;
+  }
+
+  .step4-amount {
+    font-size: 1.2rem;
+  }
+
+  .payment-button {
+    max-width: 200px;
+    padding: 12px;
+  }
+
+  .secure-title4 {
+    font-size: 1.2rem;
+  }
+
+  .donation-logo4 {
+    width: 50px;
+    padding-bottom: 30px;
+  }
 }
