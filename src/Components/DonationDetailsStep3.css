@@ -313,8 +313,8 @@ form .checkbox-container input[type="checkbox"] {
   .donate-button, form button.submit-button {
     width: 100%;
   }
-  .close-button svg, .close-button2 svg, .close-button3 svg, .close-button4 svg {
-    margin-left: 282px;
+  .close-button svg,  .close-button4 svg {
+    margin-left: 316px;
   }
   .secure-icon {
     font-size: 1.5rem;
@@ -351,6 +351,7 @@ form .checkbox-container input[type="checkbox"] {
     margin: 0; 
     transform: translateY(-2px); 
     margin-top:-201px;
+    margin-left:30px
   }
 
   .react-tel-input input {
@@ -364,15 +365,25 @@ form .checkbox-container input[type="checkbox"] {
     margin-top: 18px; 
     margin-left: 220px; 
     transform: translateY(3px); 
-  }*
+  }
   
+    .step3-back-button svg
+    {
+      font-size: 2rem;
+      margin-left: -165px;
+    }
 
+    .close-button3 svg{
 
-.step3-back-button svg
- {
-  font-size: 2rem;
-  margin-left: -155px;
-}
+      margin-left: 282px;
+      margin-top:-421px
+    }
+
+    .close-button4 svg{
+      margin-left: 282px;
+      margin-top: -327px;
+    }
+
 }
 
 @media only screen and (max-width: 1024px) and (orientation: landscape) {
