@@ -297,7 +297,6 @@ form .checkbox-container input[type="checkbox"] {
   }
   .donation-container {
     flex-direction: column;
-    width: 100%;
     box-shadow: none;
   }
   .donation-info, .donation-form {
