@@ -790,7 +790,33 @@ p {
     justify-content: center;
     margin-top: 20px; 
     margin-left: 35px; 
+  }
+
+  .donation-tab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%; 
+    min-height: 50px; 
+    padding: 12px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    text-align: center;
+    font-weight: 600;
+    color: black;
+    background-color: white;
+  }
   
+  .donation-tab.active {
+    background: rgba(0, 123, 255, 0.1);
+    border: 2px solid blue;
+  }
+  
+  .eternity-logo {
+    width:100%;
+    height: 25px;  
+
   }
 }
 
