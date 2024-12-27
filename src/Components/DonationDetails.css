@@ -314,40 +314,147 @@ form .checkbox-container input[type="checkbox"] {
   }
 }
 
-@media only screen and (max-width: 1024px) and (orientation: landscape) {
-  .donation-page {
-    height: 100vh;
-  }
+@media (max-width: 1024px) and (orientation: landscape) {
   .donation-container {
-    width: 85%;
     flex-direction: row;
+    max-width: 85%;  
+    padding: 5px;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    transform: scale(0.85); 
   }
+
   .donation-info, .donation-form {
-    padding: 20px;
+    width: 50%;  
+    padding: 5px;
   }
-  .donation-logo {
-    width: 70px;
+
+  .donation-info-title {   
+    font-size: 1rem;  
   }
+
+  .donation-subtitle, 
+  .donation-highlight, 
+  .donation-info p {
+    font-size: 0.7rem;
+    text-align: left;
+    margin-bottom: 3px;
+  }
+
   .donation-options {
-    grid-template-columns: repeat(3, 1fr);
+    display: grid;
+    grid-template-columns: repeat(3, auto);  
+    gap: 5px;
+    justify-content: center;
+    transform: scale(0.8);  
+    margin-bottom: -20px;
   }
-  .donate-button, form button.submit-button {
-    width: 80%;
+
+  .donation-option {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border: 2px solid lightgray;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: black;
+    transition: all 0.2s ease;
+    min-width: 100px;
+    min-height: 20px;
   }
-  .secure-title-container {
-    flex-direction: column;
+
+  .donate-button {
+    font-size: 0.7rem;
+    padding: 5px;
+    width: 85%;
   }
-  .cover-fees {
-    flex-direction: column;
+
+  .donation-logo {
+    width: 40px;
+    margin: 0 auto 5px auto;
+  }
+
+  .donation-image {
+    width: 90%;
+    height: auto;
+    margin-top: 0;
+  }
+  
+  .arev-logo {
+    width: 70px;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .secure-title {
+    font-size: 1.2rem;
+  }
+
+  .questions-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     align-items: flex-start;
+    gap: 3px;
+    margin-top: 3px;
+    transform: scale(0.85);  
   }
-  .cover-fees input {
+
+  .question-wrapper {
+    width: 42%;
+    margin-bottom: 0.3rem;
+  }
+
+  .eternity-logo {
+    width: 12px;
+    height: 12px;
+  }
+
+  .donation-tabs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+    margin-bottom: -5px;
+  }
+
+  .donation-tab {
+    font-size: 0.6rem;
+    padding: 3px 6px;
+  }
+
+  .donation-custom-amount {
+    font-size: 1rem;
+    padding-right: 5px;
+    margin-top: 10px;
+  }
+
+  .secure-icon {
+    font-size: 1.3rem;
     margin-bottom: 5px;
   }
-  form input[type="text"],
-  form input[type="email"],
-  form input[type="tel"],
-  form select {
-    padding: 0.7rem;
+
+  .currency-symbol {
+    position: absolute;
+    left: 10px;
+    font-size: 1rem;
+    color: gray;
+    margin-top:10px
+  }
+
+  .donation-info, .donation-form{
+    padding: 9px;
+    margin-top: -20px;
   }
 }
+
+
+
+
+
+  
