@@ -152,8 +152,8 @@
 
 .step4-back-button svg {
   font-size: 2rem;
-  margin-left: -246px;
-  margin-top: -390px;
+  margin-left: -149px;
+  margin-top: -88px;
 }
 
 .step4-back-button:hover {
@@ -233,7 +233,7 @@
 }
 
 .secure-title4 {
-  font-size: 1.8rem; 
+  font-size: 1.2rem; 
   margin: 0; 
   color: blue;
   text-align: center;
@@ -247,8 +247,8 @@
 }
 
 .donation-logo4 {
-  width: 80px; 
-  padding-bottom: 105.5px; 
+  width: 60px; 
+  margin-bottom: -50px;
 }
 
 }
@@ -282,7 +282,7 @@
 
 .step4-back-button svg {
   font-size: 2rem;
-  margin-left: -246px;
+  margin-left: -165px;
   margin-top: -390px;
 }
 

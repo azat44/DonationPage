@@ -315,6 +315,11 @@ form .checkbox-container input[type="checkbox"] {
 }
 
 @media (max-width: 1024px) and (orientation: landscape) {
+
+  body, html {
+    overflow-y: auto;  
+  }
+
   .donation-container {
     flex-direction: row;
     max-width: 85%;  
@@ -323,6 +328,7 @@ form .checkbox-container input[type="checkbox"] {
     align-items: center;
     gap: 5px;
     transform: scale(0.85); 
+    margin-top: -50px;
   }
 
   .donation-info, .donation-form {
@@ -374,8 +380,8 @@ form .checkbox-container input[type="checkbox"] {
   }
 
   .donation-logo {
-    width: 40px;
-    margin: 0 auto 5px auto;
+    width: 60px;
+    margin-bottom: -30px;
   }
 
   .donation-image {
@@ -385,10 +391,12 @@ form .checkbox-container input[type="checkbox"] {
   }
   
   .arev-logo {
-    width: 70px;
+    width: 140px;
     height: auto;
     margin: 0 auto;
     display: block;
+    margin-left: 100px;
+    margin-top: -30px;  
   }
 
   .secure-title {
@@ -401,7 +409,7 @@ form .checkbox-container input[type="checkbox"] {
     justify-content: center;
     align-items: flex-start;
     gap: 3px;
-    margin-top: 3px;
+    margin-top: 20px;
     transform: scale(0.85);  
   }
 
@@ -425,7 +433,7 @@ form .checkbox-container input[type="checkbox"] {
 
   .donation-tab {
     font-size: 0.6rem;
-    padding: 3px 6px;
+    padding: 10px 6px;
   }
 
   .donation-custom-amount {
@@ -450,6 +458,27 @@ form .checkbox-container input[type="checkbox"] {
   .donation-info, .donation-form{
     padding: 9px;
     margin-top: -20px;
+  }
+
+  .donation-info {
+    display: none;
+  }
+
+  .cover-fees label{
+    font-size: 10px;
+  }
+
+  .donation-page{
+    overflow-y: auto;  
+    height: auto;
+  }
+
+  .close-button2 svg {
+    font-size: 3rem; 
+    margin: 0; 
+    transform: translateY(-2px); 
+    margin-left: 325px;
+    margin-top: -50px;
   }
 }
 
