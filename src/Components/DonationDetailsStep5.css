@@ -324,8 +324,8 @@
   
   .step5-back-button svg {
     font-size: 2rem;
-    margin-left: -246px;
-    margin-top: -351px;
+    margin-left: -134px;
+    margin-top: -35px;
   }
   
   .step5-back-button:hover {
@@ -333,11 +333,10 @@
   }
   
   .step5-title {
-    font-size: 1.8rem;
+    font-size: 1.2rem;
     color: blue;
     text-align: center;
     font-weight: bold;
-    margin-top: -100px;
   }
   
   .step5-instruction {
